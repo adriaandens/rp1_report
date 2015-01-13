@@ -40,7 +40,11 @@ What extra information from the client's (running) machine can be used to augmen
 	- Voordeel van op machine network traffic te intercepten is dat we rommel van andere applicaties niet zien, maar enkel het trafiek van de browser en de gespawnde subprocessen ervan.
 	- 
 
-\subsection{Generic algorithm}
+\subsection{Algorithm}
+
+\subsubsection{Design considerations}
+
+\subsubsection{Generic algorithm}
 
 - Disconnected DAGs
 
@@ -53,6 +57,8 @@ What extra information from the client's (running) machine can be used to augmen
 \subsubsection{Platform-specific challenges}
 
 Unix heeft geen handles zoals Windows maar meer files
+
+\subsubsection{Alternative approaches}
 
 \subsection{Proof of Concept}
 Speedboost tussen Cuckoo 1.2-dev en onze wijzigingen, grafiekjes maken
