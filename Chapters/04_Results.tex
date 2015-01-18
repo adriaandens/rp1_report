@@ -1,4 +1,4 @@
-In the coming chapter will the results of the research project be presented. First, will be diven into the architecture of web browsers. This will mostly be about the different process models and network stacks of the populair browsers. This was a prerequisite for the design and development of our algorithm that will be described in the second part of this chapter. In the last part of this chapter will be focussed on the results of the implemention and usage of the algorithm to detect real malware in a fast and reliable way.
+In the coming chapter will the results of the research project be presented. First, will be diven into the architecture of web browsers. This will mostly be about the different process models and network stacks of the populair browsers. This was a prerequisite for the design and development of our algorithm that will be described in the second part of this chapter. In the last part of this chapter will be focussed on the results of the implemention and usage of the algorithm to detect real malware \todo{Better description} in a fast and reliable way.
 
 \subsection{Web browser architectures}
 
@@ -44,6 +44,13 @@ What extra information from the client's (running) machine can be used to augmen
 
 \subsection{Algorithm}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=17cm]{Images/alg_tree.png}
+    \caption{An example of the graph}
+    \label{fig:alg_tree}
+\end{figure}
+
 \subsubsection{Design considerations}
 
 \subsubsection{Generic algorithm}
@@ -59,8 +66,22 @@ What extra information from the client's (running) machine can be used to augmen
 \subsubsection{Platform-specific challenges}
 
 Unix heeft geen handles zoals Windows maar meer files
+	- FD's eigenlijk
 
 \subsubsection{Alternative approaches}
 
+- pcap / mitm
+- tijd based
+- aangepaste headers
+
 \subsection{Proof of Concept}
+- Waarom Cuckoo gekozen?
+
 Speedboost tussen Cuckoo 1.2-dev en onze wijzigingen, grafiekjes maken
+
+Problemen:
+
+- Out of order openen en sluiten van handles 
+- Paralellizatie problemen
+- BSON file loggen naar de host
+- COM (CrossZoneCompare, blocking Navigate met deadlock tot gevolg, )
