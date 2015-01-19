@@ -1,5 +1,6 @@
-*.pdf
 *.aux
-*.log
-*.blg
 *.bbl
+*.blg
+*.log
+*.pdf
+*.toc

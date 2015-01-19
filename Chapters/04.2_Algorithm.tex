@@ -1,0 +1,33 @@
+% Target: 3-4 blz
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=17cm]{Images/alg_tree.png}
+    \caption{An example of the graph}
+    \label{fig:alg_tree}
+\end{figure}
+
+\subsubsection{Design considerations}
+
+\subsubsection{Generic algorithm}
+
+- Disconnected DAGs
+
+1) Hooker schrijven voor elke browser die trafiek tussen Netwerk en Browser of in de browser zelf monitort en doorgeeft aan Cuckoo
+2) DAG opstellen door de extra informatie te gebruiken in report.json
+3) DAG interpreteren, nodes met enkel uitgaande edges zijn de beginnende URL
+4) Kijken of er iets raar gebeurt in elk eiland
+5) Reporting
+
+M -> Hier mag het imo niet over cuckoo of een specifieke browser gaan?
+
+\subsubsection{Platform-specific challenges}
+
+Unix heeft geen handles zoals Windows maar meer files
+	- FD's eigenlijk
+
+\subsubsection{Alternative approaches}
+
+- pcap / mitm
+- tijd based
+- aangepaste headers

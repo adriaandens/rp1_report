@@ -1,0 +1,44 @@
+graph G {
+
+	rankdir="LR";
+
+	IETab1 [label="iexplore.exe - Tab process"];
+	IETab2 [label="iexplore.exe - Tab process"];
+	IETab3 [label="iexplore.exe - Tab process"];
+	IETab4 [label="iexplore.exe - Tab process"];
+	IETab5 [label="iexplore.exe - Tab process"];
+
+
+	"iexplore.exe" -- IETab1
+	"iexplore.exe" -- IETab2
+	"iexplore.exe" -- IETab3
+	"iexplore.exe" -- IETab4
+	"iexplore.exe" -- IETab5
+
+	IETab1 -- "Read HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer"
+	IETab1 -- "Read HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\TabbedBrowsing\\EnableTabbedBrowsing"
+
+	
+	IETab1 -- "GET http://www.example.org"
+	IETab1 -- "GET http://www.example.com"
+	IETab1 -- "GET http://www.example.net"
+
+	"GET http://www.example.com" -- "GET http://www.example.com/style.css"
+	"GET http://www.example.com" -- "GET http://www.example.com/header.jpg"
+	"GET http://www.example.com" -- "GET http://www.example.com/menu.js"
+	"GET http://www.example.com" -- "GET http://www.ads-server.com/malicious-ad.swf"
+
+	"GET http://www.ads-server.com/malicious-ad.swf" -- "flash.exe"
+	"flash.exe" -- "GET http://www.ads-server.com/crossdomain.xml"
+
+	"flash.exe" -- "hjgvhjwen.exe"
+
+	"hjgvhjwen.exe" [color=red,style=filled];
+
+	"hjgvhjwen.exe" -- "Connect to cnc.botnet.com:1337"
+
+	"hjgvhjwen.exe" -- "Write file %temp%\\svchost.exe"
+	"hjgvhjwen.exe" -- "Write HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+
+	"hjgvhjwen.exe" -- "svchost.exe"
+}

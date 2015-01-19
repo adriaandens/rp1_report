@@ -1,0 +1,53 @@
+
+In the digital world of today, malware is still a massive and growing problem. While back in the day it was used to annoy users and system administrators, nowadays it's used for extortion, cyber espionage and surveillance by criminal groups and rivalling governments. One of the main risk factors to get infected with malware is a drive-by download while visiting a normal day-to-day website because, for example, the website got hacked and infected. 
+
+In many cases\footnote{http://www.proofpoint.com/threatinsight/posts/malware-in-ad-networks-infects-visitors-and-jeopardizes-brands.php} \footnote{http://blog.fox-it.com/2013/08/01/analysis-of-malicious-advertisements-on-telegraaf-nl} \footnote{http://blog.fox-it.com/2014/01/03/malicious-advertisements-served-via-yahoo}, it was not the actual website but one of the advertisement networks that was infiltrated and which subsequently started serving malicious code hidden in innocently looking advertisement code. This is also called malvertising \cite{Li2012}.
+
+National CERT organisations are (of course) interested in an early detection of such threats. While automated systems to scan websites already exist, like Cuckoo\footnote{http://cuckoosandbox.org} and Anubis\footnote{http://anubis.iseclab.org}, one of the main difficulties is the time needed to analyse a single website and the maintenance needed to keep these systems up-to-date for the latest threats.
+
+% Zeggen dat _wij_ dit en dat gaan doen om die en dat redenen
+
+% Aanpassen aangezien we weten wat we hebben gedaan
+% Mergen in introductie sectie
+In this research project is an an algorithm created that allows multiple URLs to be opened at the same time while still being able to track all further interaction, such as unexpected HTTP requests and other malicious activity, and link them to the original request/URL. To prove that the algorithm is something feasible, a proof of concept of the algorithm has been implemented on top of the Cuckoo Sandbox.
+
+The goal during this research project was to make the algorithm fully platform agnostic, however, several technical challenges prevented this. For this reason we limited our self to Windows 7 with version 8 of the Internet Explorer browser and have we the identified issues described.
+
+The detection and identification of malicious behaviour was not part of this project. For our PoC we sticked to the detection of a well-known older and still to be determined malware family which existence is easy to detect on the system. 
+
+\subsection{Research Question}
+
+In cooperation with the Dutch National Cyber Security Center (NCSC-NL), our research project will focus on the question:
+
+\textit{How can we concurrently visit multiple URLs and still be able to determine which URL was responsible for malicious activities?}
+
+To answer the research question, multiple subquestions have been formulated:
+
+\begin{itemize}
+\item Which techniques are used by browsers to make concurrently visiting multiple URLs possible?
+\item Which APIs are used by web browsers to make HTTP requests and retrieve webpages?
+\item How can we link an HTTP request to its source URL without the modification of the used web browser?
+\item What extra information from the client's (running) machine can be used to augment the information gained from network traffic to make the tracking of malware to its source URL easier?
+\end{itemize}
+
+\subsection{Motivation?}
+
+\subsection{Related work}
+
+The growing importance and economic losses of malware resulted in many research projects in the last years. The detection and analysis of malware has been researched from several different angles \cite{auto_malware,Chang2013} and resulted in many proposed static and dynamic analysis techniques.
+
+In 2013, Le et al. \cite{Le2013} presented a framework that describes the common stages and characteristics of a drive-by download attack. They described four stages from placing the malicious content on a webpage until the execution of the malicious activity.
+
+In 2011, a paper from Canali et al. \cite{Canali2011} was released about the problematic performance of dynamic analysis and with a solution proposed in the form of ``Prophiler''. Prophiler is a filter that deploys static analysis techniques and that is able to reduce the load with more than 85\% compared to dynamic analysis. This with a comparable amount of false negatives.
+
+In the same year Rajab et al. \cite{Rajab11trendsin} gave an overview of the trends regarding web malware detection and how the malware tries to circumvent the detection. This research focused on the advantages and disadvantages of four techniques: Virtual Machine honeypots, Browser Emulation honeypots, Classification based on Domain Reputation and Anti-Virus Engines.
+
+A different approach is taken by Rossow \textit{et al.} \cite{Rossow2011}, Cortjens \textit{et al.} \cite{Cortjens2012} and Kinkhorst \textit{et al.} \cite{Kinkhorst2009}. They have focused during multiple research projects on the ability to detect and identify malware on the network layer.
+
+The predecessor of NCSC-NL started in 2007 with the development of their own system, namely the Honeyspider network \cite{honeyspider}, for the dynamic analysis of websites. This system crawled the biggest and most important websites of the Netherlands on a daily base. The downside of this system is that it requires a lot of maintenance and hence it started to become outdated.
+
+\subsection{Ethical issues}
+
+% Zinnen herschrijven die naar de toekomst verwijzen.
+Our research contains no major ethical issues as it does not include working with personally identifiable information. Malware, if any, will be run in a controlled virtual environment. After every testrun the virtual machine will be automatically destroyed.
+

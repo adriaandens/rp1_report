@@ -7,9 +7,12 @@
 \usepackage[parfill]{parskip}
 \usepackage{titlesec}
 \usepackage{geometry}
+\usepackage{todonotes}
 
-\title{Large-scale drive-by download detection: boot. visit$^n$. kill. repeat.}
-\subtitle{Master in System and Network Engineering}
+\newcommand{\horizontalrule}[1]{\rule{\linewidth}{#1}}
+
+\title{University of Amsterdam \\[1cm] \horizontalrule{1pt}\\[0.5cm]Large-scale drive-by download detection: boot. visit$^n$. kill. repeat.}
+\subtitle{Master in System and Network Engineering \\[0.5cm] \horizontalrule{1pt} \\[10cm] }
 \author{
   Adriaan Dens\\
    \texttt{adriaan.dens@os3.nl}
@@ -19,102 +22,55 @@
 }
 
 \begin{document}
+\pagenumbering{gobble}
+
 \maketitle
+
+\clearpage
+
+\section*{Abstract}
+
+\clearpage
+
+\section*{Acknowledgement}
+
+\clearpage
 
 \tableofcontents
 
-\section{Abstract}
+\clearpage
 
-\section{Acknowledgements}
+\pagenumbering{arabic}
 
 \section{Introduction}
-\input{introductie.tex}
+\input{Chapters/01_Introduction.tex}
 
-\section{Research Question}
-\input{rq.tex}
+\clearpage
 
-\section{Related work}
-\input{rw.tex}
+\section{Background}
+\input{Chapters/02_Background.tex}
 
-\section{Web browser internals}
+\clearpage
 
-Which techniques are used by browsers to make concurrently visiting multiple
-URLs possible?
-	- Tabs of course
-		- As a process
-		- As multiple threads under the browser process
+\section{Methodology}
+\input{Chapters/03_Methodology.tex}
 
-How can we link an HTTP request to its source URL without the modification of the used web browser?
-we need extra information, see vraag 4
-network is niet genoeg blablabla
-
-How do web browsers make HTTP requests and retrieve webpages? Which Operating System level APIs are used?
-	- Safari: CFNetwork and NSURLConnection(Loader) and IPC
-		1 hoofdprocess: Safari
-		1 process per tab: Safari Web Content
-		1 process voor networking: Safari Networking
-		Network stack of OS X.
-	- Internet Explorer: C API calls naar Windows libraries
-		Process per tab: is configureerbaar in settings/registry, je kan ook meerdere tabs in 1 process hebben
-		Network stack of Windows
-	- Firefox: C++ Library calls
-		Single Process (+ 1 process voor flash)
-		Own network stack Necko (nss3 voor trafiek te encrypten)
-		\url{https://developer.mozilla.org/en-US/Firefox/Releases/3.5/Updating_extensions#Getting_a_load_context_from_a_request}
-		http://stackoverflow.com/questions/10719606/is-it-possible-to-know-the-target-domwindow-for-an-httprequest
-	- Chrome: IPC 
-		1 hoofdprocess: Google Chrome die networking doet
-		1 process per tab. (Altijd 13 threads?)
-		1 process voor Flash.
-		1 process voor Audio. (4 threads)
-		Own network stack (nss3 voor trafiek te encrypten)
-		http://www.chromium.org/developers/design-documents/network-stack
-
-What extra information from the client's (running) machine can be used to augment the information gained from network trac to make the tracking of malware to its source URL easier?  
-	- The Thread ID or Process ID van tabs, PDF reader, Java applet, ...
-	- Handle bij IE
-	- File descriptors
-	- Process tree
-	- Voordeel van op machine network traffic te intercepten is dat we rommel van andere applicaties niet zien, maar enkel het trafiek van de browser en de gespawnde subprocessen ervan.
-	- 
-
-\section{Generic algorithm}
-
-- Disconnected DAGs
-
-1) Hooker schrijven voor elke browser die trafiek tussen Netwerk en Browser of in de browser zelf monitort en doorgeeft aan Cuckoo
-2) DAG opstellen door de extra informatie te gebruiken in report.json
-3) DAG interpreteren, nodes met enkel uitgaande edges zijn de beginnende URL
-4) Kijken of er iets raar gebeurt in elk eiland
-5) Reporting
-
-\section{Platform specific problems}
-
-Unix heeft geen handles zoals Windows maar meer files
-
-
-\section{Proof of Concept}
-	- Cuckoo aanpassen
-		- Multiple URL support
-		- Fixed Yara
-	- Analyzer in Python
-		- report.json parser
-		- Commandline interface
-			- Input: file, lijst op cli
-			- Generic algorithm
-			- Output: "No Malicious activity found", "URL xxxxx shows malicious activity: en dan wat korte informatie" 
-		- 
+\clearpage
 
 \section{Results}
+\input{Chapters/04_Results.tex}
 
-Speedboost tussen Cuckoo 1.2-dev en onze wijzigingen, grafiekjes maken
-
-
-\section{Ethical issues}
-\input{ei.tex}
+\clearpage
 
 \section{Conclusion}
+\input{Chapters/99_Conclusion.tex}
 
+\clearpage
+
+\section{Future work}
+\input{Chapters/99_Future_Work.tex}
+
+\clearpage
 
 \bibliographystyle{ieeetr}
 \bibliography{report}
