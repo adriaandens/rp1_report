@@ -1,10 +1,37 @@
+For a better insight into the project, it is nescesaary to introduce certain theoretical concepts first. In the next chapter this theory will be used to base the approach on for the design and development of the algorithm and choices regarding the proof of concept.
 
 \subsection{Malware}
+
+
+
 \subsubsection{Drive-by downloads}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{Images/drive-by-download.png}
+    \caption{The anatomy of a drive-by download malware infection. \cite{http://blog.armorize.com/2011/04/newest-adobe-flash-0-day-used-in-new.html (modified)}}
+    \label{fig:dbdownload}
+\end{figure}
+
 \subsubsection{Behavior}
 
+What will happen after a malware infection depends on the malware used and goals of the attacker. In many cases the malware will download further malicious components and nestle itself in the operating system so it will be restarted after a reboot of the operating system and be able to restore itself after an attempt to remove it.
+
+To do this, the malware has to modify files, registery values and perform network operations. While in theory malware could directly communicate with the operating system kernel for this, most malware behaves like normal applications and use the installed or with the operating system provided libraries.
+
+\subsection{API analysis}
+
+In the early days were the libraries used by an application staticly linked into it. This means that the libraries becomes part of the application and it's no longer possible to determine which part of the application was originally part of the used libraries.
+
+For performance and maintainability was dynamic linking invented. The application described which libraries it needs and the linker of the operating system will glue the applications and its dependent libraries together in the memoryspace of the application. 
+
+Because the linker has to know all exported functions and where in the library it can found a function, a symbol table is part of every dynamic library. The same information can be used to hook into an provided function during runtime or to trick the linker to load a replacement of a certain function because the modified version has a higher priority.
+
+This is called API hooking\cite{} and it's a very usefull technique to monitor the behavior of applications. The original function is then replaced by a substitute. This substitue functions calls for example the original function and logs the performed operation or is a custom replacement of the original function.
+
+The technical implementation of API hooking is highly complex and platform specific and many different techniques\cite{http://jbremer.org/x86-api-hooking-demystified/} are possible. If the start of the application can be controlled, the linker search patch can be extended, a the replacement library stored somewhere in the searchpath or the import section of the application can be modified. When the application is already loaded or modification of the application or system is unwanted, the function to hook can be overwritten in memory with a replacement or jump to a different location in memory. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else.
+
+In this project will API hooking be used to reverse engineer the internal working and API usage of web browsers and to log the behavior of malware for later analysis.
 
 \subsection{Web browser architecture}
 \input{Chapters/04.1_Web_Browser_Arch.tex}
-
-
