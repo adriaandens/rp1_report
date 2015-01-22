@@ -5,6 +5,8 @@ In many cases\footnote{http://www.proofpoint.com/threatinsight/posts/malware-in-
 
 National CERT organisations are (of course) interested in an early detection of such threats. While automated systems to scan websites already exist, like Cuckoo\footnote{http://cuckoosandbox.org} and Anubis\footnote{http://anubis.iseclab.org}, one of the main difficulties is the time needed to analyse a single website and the maintenance needed to keep these systems up-to-date for the latest threats.
 
+The goal of this research project is to develop an algorithm that makes it possible to examine multiple websites for the existince of malware using the same computer system and at the same time. The effectiveness of this algorithm will be proven by implementing it in a proof of concept.
+
 % Zeggen dat _wij_ dit en dat gaan doen om die en dat redenen
 
 % Aanpassen aangezien we weten wat we hebben gedaan
@@ -25,7 +27,7 @@ To answer the research question, multiple subquestions have been formulated:
 \item What extra information from the client's (running) machine can be used to augment the information gained from network traffic to make the tracking of malware to its source URL easier?
 \end{itemize}
 
-\subsection{Motivation?}
+% \subsection{Motivation?}
 
 \subsection{Related work}
 
@@ -42,8 +44,9 @@ A different approach is taken by Rossow \textit{et al.} \cite{Rossow2011}, Cortj
 
 The predecessor of NCSC-NL started in 2007 with the development of their own system, namely the Honeyspider network \cite{honeyspider}, for the dynamic analysis of websites. This system crawled the biggest and most important websites of the Netherlands on a daily base. The downside of this system is that it requires a lot of maintenance and hence it started to become outdated.
 
--> Deriving Common Malware Behavior through Graph Clustering (p497-park.pdf)
+\todo{-> Deriving Common Malware Behavior through Graph Clustering (p497-park.pdf)}
 
+\iffalse
 \subsection{Scope}
 
 \todo{Zelfstandiger maken}
@@ -53,6 +56,8 @@ In this research project is an an algorithm created that allows multiple URLs to
 The goal during this research project was to make the algorithm fully platform agnostic, however, several technical challenges prevented this. For this reason we limited our self to Windows 7 with version 8 of the Internet Explorer browser and have we the identified issues described.
 
 The detection and identification of malicious behaviour was not part of this project. For our PoC we sticked to the detection of a well-known older and still to be determined malware family which existence is easy to detect on the system. 
+
+\fi
 
 \subsection{Ethical issues}
 
