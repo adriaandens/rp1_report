@@ -1,5 +1,7 @@
 % Target: 4-6 blz
 
+\todo{Meer bronnen?}
+
 Modern web browsers are complex applications consisting of many components that have to work together. To develop a generic algorithm it is crucial to have first an in-depth insight in the working of the engines used to drive a web browser. In this project is foccused on Internet Explorer, Mozilla Firefox, Chromium and Apple Safari. Those four browsers combined have a marketshare of more then 90\%\footnote{http://gs.statcounter.com/\#desktop-browser-ww-monthly-201412-201412-bar} \footnote{http://www.netmarketshare.com/browser-market-share.aspx?qprid=1\&qpcustomb=0}.
 
 All modern web browsers allow the usage of multiple tabs with web pages in a single window. The underlying implementations differ creatly. In some browsers are only libraries provided by the operating system used while others decided to use their own. Also have some vendors decided to use multiple processes, sometimes even a new process for every single tab.
@@ -13,7 +15,7 @@ The network stack used in Internet Explorer is provided by the Windows operating
 \begin{figure}
     \centering
     \includegraphics[width=9cm]{Images/IE8_process_model.png}
-    \caption{The Internet Explorer process model starting from version 8. \cite{zelfde msdn link}}
+    \caption{The Internet Explorer process model starting from version 8. \cite{zelfde msdn link, modified}}
     \label{fig:ie8proc}
 \end{figure}
 
@@ -28,7 +30,7 @@ To be platform independent is not directly interfaced with the provided librarie
 \begin{figure}[h]
     \centering
     \includegraphics[width=9cm]{Images/Chrome_network.png}
-    \caption{A high-level overview of the components involved in requesting an URL in Chromium. Platform specifics details related to sockets are hidden in StreamSocket and the usage of SSL/TLS is made transparant by using the interface-compatible SSLSocket instead of StreamSocket. \cite{http://www.chromium.org/developers/design-documents/network-stack}}
+    \caption{A high-level overview of the components involved in requesting an URL in Chromium. Platform specifics details related to sockets are hidden in StreamSocket and the usage of SSL/TLS is made transparant by using the interface-compatible SSLSocket instead of StreamSocket. \cite{http://www.chromium.org/developers/design-documents/network-stack, modified}}
     \label{fig:chrome_network}
 \end{figure}
 
