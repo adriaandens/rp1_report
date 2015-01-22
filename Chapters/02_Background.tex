@@ -2,22 +2,25 @@ For a better insight into the project, it is necessary to introduce certain theo
 
 \subsection{Drive-by downloads}
 
+Browsing the internet with an unpatched system, for example because the patch is not installed or there is simply no solution available, can be dangerous. All software contains mistakes and such mistakes are patched almost on a daily base. A part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software on it without the user noticing.
+
+If a website uses such mistake to take control over the webbrowser and to download malicious software to the system, this is called a drive-by download. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
+
+By compromising the webbrowser and injecting malicious code that will be executed, the malware gets full control over the infected process and has the same privileges as the webbrowser on the host system. Depending on the system configuration this means that full system access is available or that additional steps are required to escalate the privileges to the intended level.
 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{Images/drive-by-download.png}
     \caption{The anatomy of a drive-by download malware infection. \cite{http://blog.armorize.com/2011/04/newest-adobe-flash-0-day-used-in-new.html (modified)}}
     \label{fig:dbdownload}
 \end{figure}
 
-
-
 \subsubsection{Behavior}
 
 What will happen after a malware infection depends on the malware used and goals of the attacker. In many cases the malware will download further malicious components and nestle itself in the operating system so it will be restarted after a reboot of the operating system and be able to restore itself after an attempt to remove it.
 
-To do this, the malware has to modify files, registery values and perform network operations. While in theory malware could directly communicate with the operating system kernel for this, most malware behaves like normal applications and use the installed or with the operating system provided libraries.
+To do this, the malware has to modify files, registery values and perform network operations. While in theory malware could directly communicate with the operating system kernel for this, most malware behaves like normal applications and use the installed or with the operating system provided libraries. The usage of such libraries can be detected when the access to them is monitored.
 
 \subsection{API analysis}
 
@@ -25,7 +28,7 @@ In the early days were the libraries used by an application staticly linked into
 
 For performance and maintainability was dynamic linking invented. The application described which libraries it needs and the linker of the operating system will glue the applications and its dependent libraries together in the memoryspace of the application. 
 
-Because the linker has to know all exported functions and where in the library it can found a function, a symbol table is part of every dynamic library. The same information can be used to hook into an provided function during runtime or to trick the linker to load a replacement of a certain function because the modified version has a higher priority.
+Because the linker has to know all exported functions and where in the library it can found such function, a symbol table is part of every dynamic library. The same information can be used to hook into an provided function during runtime or to trick the linker to load a replacement of a certain function because the modified version has a higher priority.
 
 This is called API hooking\cite{} and it's a very usefull technique to monitor the behavior of applications. The original function is then replaced by a substitute. This substitue functions calls for example the original function and logs the performed operation or is a custom replacement of the original function.
 
