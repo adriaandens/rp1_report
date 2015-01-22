@@ -31,6 +31,7 @@ After the monitoring is set up, potentially malicious websites can be visited. D
 
 \subsubsection{Step 2: Process}
 
+\todo{Low-level -> high level is niet noodzakelijk}
 Tracking the system calls the browser makes, generates a significant amount of data which is not entirely useful in itself for the analyze phase. Therefor low-level calls are grouped into high-level events. As an example, consider the writing of a file. To write to a file, a file handle/descriptor has to be made or opened. Then one or more write calls occur with some data followed by the closing of the handle/descriptor. All these calls are grouped into one event, namely the writing of a file.\\
 
 
@@ -44,7 +45,8 @@ Although no specific structure of the DAG is required, a tree like structure see
 
 After the graph has been made, analysis algorithms can be run on the graph. It's important to note that no analysis is done in Step 2, all events are put in the graph. It's up to the analyzers in this step to find malicious behavior. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.\\
 
-It must be noted that analysis might be done whilst creating the graph but it should not influence the creating of the graph, neither should it alter the graph in any way.
+%It must be noted that analysis might be done every time a browsing context was closed, allowing for faster reporting of malware.
+%It must be noted that analysis might be done whilst creating the graph but it should not influence the creating of the graph, neither should it alter the graph in any way.
 
 \subsubsection{Step 4: Report}
 
