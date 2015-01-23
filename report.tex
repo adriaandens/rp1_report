@@ -12,6 +12,8 @@
 \usepackage{hyperref}
 
 \newcommand{\horizontalrule}[1]{\rule{\linewidth}{#1}}
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
 
 \title{University of Amsterdam \\[1cm] \horizontalrule{1pt}\\[0.5cm]Large-scale drive-by download detection: boot. visit$^n$. kill. repeat.}
 \subtitle{Master in System and Network Engineering \\[0.5cm] \horizontalrule{1pt} \\[10cm] }

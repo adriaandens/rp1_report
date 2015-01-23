@@ -4,21 +4,24 @@
 
 \subsubsection{Step 1: Visit}
 
-To support the parallel visiting of URLs in one virtual machine, we had to extend Cuckoo. Support for this was added pretty quickly using tabs, but this left us with a problem to detect when a new URL was feeded to a tab\todo{See problems below}. To solve this problem, every URL is now opened in its own window.
+To support the parallel visiting of URLs in one virtual machine, Cuckoo had to be extended. Support for this was added pretty quickly using tabs, but this left us with a problem to detect when a new URL was feeded to a tab\todo{See problems below}. To solve this problem, every URL in this PoC is now opened in its own window.
 
 \subsubsection{Step 2: Process}
-\begin{description}
-\item[on\_process\_new] sfdsfdf
-\item[on\_process\_finished] sfdsfdf
-\item[on\_http\_request] sfdsfdf
-\item[on\_file\_write] sfdsfdf
-\item[on\_file\_delete] sfdsfdf
-\item[on\_registry\_set] sfdsfdf
-\item[on\_registry\_delete] sfdsfdf
-\item[on\_shell\_execute] sfdsfdf
-\item[on\_socket\_connect] sfdsfdf
-\item[on\_anomaly\_detected] sfdsfdf
-\end{description}
+
+In this step, the API calls were bundled into 10 events, as listed below. The color between parentheses indicates the color the vertex gets in visual representations of the graph.
+\begin{itemize}
+\item on\_process\_new (red)
+\item on\_process\_finished (red)
+\item on\_http\_request (yellow). This event also includes the corresponding HTTP Response.
+\item on\_file\_write (blue) 
+\item on\_file\_delete (blue) 
+\item on\_registry\_set (green)
+\item on\_registry\_delete (green)
+\item on\_shell\_execute (purple)
+\item on\_socket\_connect (orange)
+\item on\_anomaly\_detected (black)
+\end{itemize}
+
 \subsubsection{Step 3: Analyze}
 
 To implement the analysis phase of the algorithm, a simple analyzer was written that detects process spawns below browsing contexts. Listing \todo{reffie} shows pseudo code of the analyzer.
@@ -46,43 +49,42 @@ function check_depth_in_graph(vertex, current_depth)
 endfunction
 \end{lstlisting}
 
+\subsubsection{Step 4: Report}
+
+Reporting is done on the commandline but generated graphs of anomalities are saved to the disk in the folder structure of Cuckoo.
+
 \subsubsection{Problems}
 \label{99problems}
 \epigraph{I've got 99 problems but Cuckoo ain't one.}{Adriaan}
 
-\begin{itemize}
-\item Out of order openen en sluiten van handles 
-\item Paralellizatie problemen
-\item BSON file loggen naar de host
-\item Weten wanneer een nieuwe URL wordt geopend
-\begin{itemize}
-\item Geen TypedURLs met COM
-\item COM (CrossZoneCompare, blocking Navigate met deadlock tot gevolg, )
-\end{itemize}
-\item Opsplitsen / linken van de data in 1 process over meerdere requests
-\item Missende data door te kleine buffers en niet geimplementeerde apis in cuckoomon
-\end{itemize}
+During the development of the proof of concept, several problems were encountered. We discuss the most interesting ones here.
 
-\subsection{Step 4: Report}
-\todo{Betere analyzer reporting in output script...}
+\textbf{Opening a new URL in the same browser context} was not detectable by the monitored API calls. Additionally processes were reused when a browsing context was closed and a new one was openened, this made it essentially the same as reusing the browsing context. Internet Explorer also behaves differently when interacting with the COM interface compared to real user interaction, leaving us without certain registry values that could be used to detect the opening of a new URL. Therefor we decided to use a new Internet Explorer process for each URL which gives us a process ID per browser context.
+
+\subsection{Running the PoC}
+
+Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \todo{reffie} shows how the PoC is run. As explained in section \todo{reffie} the URL list contains the Top 20 most visited websites and some malware websites. Figure \ref{graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns. The analyzer run in phase 3 succesfully found this anomality and reports it back to the user. A graph of the browsing context in which this anomality occured is also shown to the user, as can be seen in figure \ref{fig:subgraph}.
+
 \begin{lstlisting}
 $ python cuckoo.py &
-$ python utils/mass-analyse.py -g -t 22
+$ python utils/mass-analyse.py url_list.txt
 Warning: Task with ID 22 is not yet completed; Waiting...
 INFO:root:Parse log....
 Analyzer 'Subprocess_from_tab': The URL 'http://malware-site.com' 
 spawns a process called 'errfix.exe'.
 \end{lstlisting}
 
-\subsection{Running the PoC}
-\newgeometry{left=3cm,top=0.1cm,bottom=0.1cm}
- \todo{Explain the colors of the vertices}
+\newgeometry{left=0.5cm}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=17cm]{Images/graph2.png}
+    \includegraphics[width=20cm]{Images/graph2.png}
     \caption{An example of the graph}
     \label{fig:graph}
 \end{figure}
+\restoregeometry
+
+\newgeometry{left=3cm,top=0.1cm,bottom=0.1cm}
+ \todo{Explain the colors of the vertices}
 \begin{figure}[h]
     \centering
     \includegraphics[width=25cm, angle=90]{Images/report_Subprocess_from_tab}
@@ -97,7 +99,4 @@ Doe een keer voor vijf URLs, voor 10 URLs, voor 15 URLs, voor 20 URLs,...
 Daar kan je wel een grafiekje van maken dan, ook perfect om te doen
 als we in het lab zitten, aangezien we dan toch altijd slacken
 
-
-
 \todo{Speedboost tussen Cuckoo 1.2-dev en onze wijzigingen in grafiekje zetten}
-
