@@ -5,6 +5,8 @@ In many cases\footnote{http://www.proofpoint.com/threatinsight/posts/malware-in-
 
 National CERT organisations are interested in an early detection of such threats. While automated systems to scan websites already exist, like Cuckoo\footnote{http://cuckoosandbox.org} and Anubis\footnote{http://anubis.iseclab.org}, one of the main difficulties is the time needed to analyse a single website and the maintenance needed to keep these systems up-to-date for the latest threats.
 
+The goal of this research project is to develop an algorithm that makes it possible to examine multiple websites for the existince of malware using the same computer system and at the same time. The effectiveness of this algorithm will be proven by implementing it in a proof of concept.
+
 % Zeggen dat _wij_ dit en dat gaan doen om die en dat redenen
 
 % Aanpassen aangezien we weten wat we hebben gedaan
@@ -25,7 +27,7 @@ To answer the research question, multiple subquestions have been formulated:
 \item What extra information from the client's (running) machine can be used to augment the information gained from network traffic to make the tracking of malware to its source URL easier?
 \end{itemize}
 
-\subsection{Motivation?}
+% \subsection{Motivation?}
 
 \subsection{Related work}
 
@@ -42,9 +44,10 @@ A different approach is taken by Rossow \textit{et al.} \cite{Rossow2011}, Cortj
 
 The predecessor of NCSC-NL started in 2007 with the development of their own system, namely the Honeyspider network \cite{honeyspider}, for the dynamic analysis of websites. This system crawled the biggest and most important websites of the Netherlands on a daily base. The downside of this system is that it requires a lot of maintenance and hence it started to become outdated.
 
--> Deriving Common Malware Behavior through Graph Clustering (p497-park.pdf)
+\todo{-> Deriving Common Malware Behavior through Graph Clustering (p497-park.pdf)}
 
-\subsection{Scope\todo{Is dit nodig?}}
+\iffalse
+\subsection{Scope}
 
 \todo{Zelfstandiger maken}
 
@@ -59,3 +62,4 @@ The detection and identification of malicious behaviour was not part of this pro
 % Zinnen herschrijven die naar de toekomst verwijzen.
 Our research contains no major ethical issues as it does not include working with personally identifiable information. Malware, if any, will be run in a controlled virtual environment. After every testrun the virtual machine will be automatically destroyed.
 
+\fi
