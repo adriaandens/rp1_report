@@ -1,44 +1,51 @@
 graph G {
 
-	rankdir="LR";
+	#rankdir="LR";
 
-	IETab1 [label="iexplore.exe - Tab process"];
-	IETab2 [label="iexplore.exe - Tab process"];
-	IETab3 [label="iexplore.exe - Tab process"];
-	IETab4 [label="iexplore.exe - Tab process"];
-	IETab5 [label="iexplore.exe - Tab process"];
+	root=root;
+
+	root [label="Analyser Host Process"];
+
+	IETab1 [label="iexplore.exe"];
+	IETab2 [label="iexplore.exe"];
+	IETab3 [label="iexplore.exe"];
+	IETab4 [label="iexplore.exe"];
+	IETab5 [label="iexplore.exe"];
 
 
-	"iexplore.exe" -- IETab1
-	"iexplore.exe" -- IETab2
-	"iexplore.exe" -- IETab3
-	"iexplore.exe" -- IETab4
-	"iexplore.exe" -- IETab5
+	root -- IETab1
+	root -- IETab2
+	root -- IETab3
+	root -- IETab4
+	root -- IETab5
 
-	IETab1 -- "Read HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer"
-	IETab1 -- "Read HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\TabbedBrowsing\\EnableTabbedBrowsing"
+	IETab1 -- "GET http://example.org"
+	IETab2 -- "GET http://example.com"
+	IETab3 -- "GET http://example.net"
 
-	
-	IETab1 -- "GET http://www.example.org"
-	IETab1 -- "GET http://www.example.com"
-	IETab1 -- "GET http://www.example.net"
+	IETab3 -- "Read HKEY_CURRENT_USER\\Software\\\nMicrosoft\\Internet Explorer"
+	IETab3 -- "Read HKEY_CURRENT_USER\\Software\\Microsoft\\\nInternet Explorer\\EnableTabbedBrowsing"
 
-	"GET http://www.example.com" -- "GET http://www.example.com/style.css"
-	"GET http://www.example.com" -- "GET http://www.example.com/header.jpg"
-	"GET http://www.example.com" -- "GET http://www.example.com/menu.js"
-	"GET http://www.example.com" -- "GET http://www.ads-server.com/malicious-ad.swf"
+	"GET http://example.com" -- "GET http://example.com/style.css"
+	"GET http://example.com" -- "GET http://example.com/header.jpg"
+	#"GET http://example.com" -- "GET http://example.com/menu.js"
+	"GET http://example.com" -- "GET http://ads-server.com/malicious-ad.swf"
 
-	"GET http://www.ads-server.com/malicious-ad.swf" -- "flash.exe"
-	"flash.exe" -- "GET http://www.ads-server.com/crossdomain.xml"
+	"GET http://ads-server.com/malicious-ad.swf" -- "flash.exe"
+	"flash.exe" -- "GET http://ads-server.com/crossdomain.xml"
 
 	"flash.exe" -- "hjgvhjwen.exe"
 
 	"hjgvhjwen.exe" [color=red,style=filled];
+	"Connect to cnc.botnet.com:1337" [color=red,style=filled];
+	"Write file %temp%\\svchost.exe" [color=red,style=filled];
+	"Write HKEY_CURRENT_USER\\Software\\\nMicrosoft\\Windows\\CurrentVersion\\Run" [color=red,style=filled];
+	"svchost.exe" [color=red,style=filled];
 
 	"hjgvhjwen.exe" -- "Connect to cnc.botnet.com:1337"
 
 	"hjgvhjwen.exe" -- "Write file %temp%\\svchost.exe"
-	"hjgvhjwen.exe" -- "Write HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+	"hjgvhjwen.exe" -- "Write HKEY_CURRENT_USER\\Software\\\nMicrosoft\\Windows\\CurrentVersion\\Run"
 
 	"hjgvhjwen.exe" -- "svchost.exe"
 }
