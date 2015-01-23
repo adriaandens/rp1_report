@@ -1,0 +1,875 @@
+/* Created by igraph 0.7.0 */
+digraph {
+  0 [
+    color=red
+    pid=2640
+    label="Process: 2640"
+    type=on_process_new
+    id=0
+  ];
+  1 [
+    color=red
+    pid=2452
+    label="Process: iexplore.exe"
+    type=on_process_new
+    id=545
+  ];
+  2 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=546
+  ];
+  3 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=547
+  ];
+  4 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=548
+  ];
+  5 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=549
+  ];
+  6 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=550
+  ];
+  7 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=551
+  ];
+  8 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=552
+  ];
+  9 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=553
+  ];
+  10 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_write
+    id=554
+  ];
+  11 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_write
+    id=555
+  ];
+  12 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=556
+  ];
+  13 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=557
+  ];
+  14 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=558
+  ];
+  15 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_write
+    id=559
+  ];
+  16 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=560
+  ];
+  17 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_write
+    id=561
+  ];
+  18 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=562
+  ];
+  19 [
+    color=yellow
+    pid=2452
+    label="http://site.com"
+    type=on_http_request
+    id=563
+  ];
+  20 [
+    color=orange
+    pid=2452
+    label="127.0.0.1:58608"
+    type=on_socket_connect
+    id=564
+  ];
+  21 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=565
+  ];
+  22 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=566
+  ];
+  23 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=567
+  ];
+  24 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=568
+  ];
+  25 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=569
+  ];
+  26 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=570
+  ];
+  27 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=571
+  ];
+  28 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=572
+  ];
+  29 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=573
+  ];
+  30 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=574
+  ];
+  31 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=575
+  ];
+  32 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=576
+  ];
+  33 [
+    color=yellow
+    pid=2452
+    label="http://fonts.googleapis.com/css?family=Mr+Dafoe"
+    type=on_http_request
+    id=577
+  ];
+  34 [
+    color=yellow
+    pid=2452
+    label="http://fonts.googleapis.com/css?family=O[...]ns:300,600"
+    type=on_http_request
+    id=578
+  ];
+  35 [
+    color=yellow
+    pid=2452
+    label="http://site.com/css/new.css"
+    type=on_http_request
+    id=579
+  ];
+  36 [
+    color=yellow
+    pid=2452
+    label="http://site.com/css/style.css"
+    type=on_http_request
+    id=580
+  ];
+  37 [
+    color=yellow
+    pid=2452
+    label="http://site.com/jp/js/count.php"
+    type=on_http_request
+    id=581
+  ];
+  38 [
+    color=yellow
+    pid=2452
+    label="http://fonts.googleapis.com/css?family=O[...]ns:300,600"
+    type=on_http_request
+    id=582
+  ];
+  39 [
+    color=yellow
+    pid=2452
+    label="http:///css/style.css"
+    type=on_http_request
+    id=583
+  ];
+  40 [
+    color=yellow
+    pid=2452
+    label="http://fonts.googleapis.com/css?family=Mr+Dafoe"
+    type=on_http_request
+    id=584
+  ];
+  41 [
+    color=yellow
+    pid=2452
+    label="http://site.com/css/new.css"
+    type=on_http_request
+    id=585
+  ];
+  42 [
+    color=yellow
+    pid=2452
+    label="http://fonts.gstatic.com/s/opensans/v10/[...]xaG2iE.eot"
+    type=on_http_request
+    id=586
+  ];
+  43 [
+    color=yellow
+    pid=2452
+    label="http://fonts.gstatic.com/s/mrdafoe/v5/Uk[...]7m55DA.eot"
+    type=on_http_request
+    id=587
+  ];
+  44 [
+    color=yellow
+    pid=2452
+    label="http://site.com/jp/js/count.php"
+    type=on_http_request
+    id=588
+  ];
+  45 [
+    color=yellow
+    pid=2452
+    label="http://cdn.attacker.com:25707/hash[...]imeline=21"
+    type=on_http_request
+    id=589
+  ];
+  46 [
+    color=yellow
+    pid=2452
+    label="http://site.com/img/f.png"
+    type=on_http_request
+    id=590
+  ];
+  47 [
+    color=yellow
+    pid=2452
+    label="http://site.com/img/r.png"
+    type=on_http_request
+    id=591
+  ];
+  48 [
+    color=yellow
+    pid=2452
+    label="http://site.com/img/t1.png"
+    type=on_http_request
+    id=592
+  ];
+  49 [
+    color=yellow
+    pid=2452
+    label="http://www.google-analytics.com/analytics.js"
+    type=on_http_request
+    id=593
+  ];
+  50 [
+    color=yellow
+    pid=2452
+    label="http://site.com/img/bg.jpg"
+    type=on_http_request
+    id=594
+  ];
+  #51 [
+  #  color=blue
+  #  pid=2452
+  #  label=""
+  #  type=on_file_write
+  #  id=595
+  #];
+  #52 [
+  #  color=blue
+  #  pid=2452
+  #  label=""
+  #  type=on_file_write
+  #  id=596
+  #];
+  53 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_delete
+    id=597
+  ];
+  54 [
+    color=yellow
+    pid=2452
+    label="http://www.google-analytics.com/r/collec[...]1103919271"
+    type=on_http_request
+    id=598
+  ];
+  #55 [
+  #  color=blue
+  #  pid=2452
+  #  label=""
+  #  type=on_file_write
+  #  id=599
+  #];
+  56 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=600
+  ];
+  57 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=601
+  ];
+  58 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=602
+  ];
+  59 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=603
+  ];
+  60 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=604
+  ];
+  61 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=605
+  ];
+  62 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=606
+  ];
+  63 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=607
+  ];
+  64 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=608
+  ];
+  65 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=609
+  ];
+  66 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=610
+  ];
+  67 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=611
+  ];
+  68 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_delete
+    id=612
+  ];
+  69 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_delete
+    id=613
+  ];
+  70 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=614
+  ];
+  71 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=615
+  ];
+  72 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=616
+  ];
+  73 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=617
+  ];
+  74 [
+    color=purple
+    pid=2452
+    label="C:\\Users\\Cuckoo\\AppData\\Local\\Temp\\\\errfix.exe "
+    type=on_shell_execute
+    id=618
+  ];
+  75 [
+    color=purple
+    pid=2452
+    label="control.exe C:\\Users\\Cuckoo\\AppData\\Local\\Temp\\\\errfix.exe"
+    type=on_shell_execute
+    id=619
+  ];
+  76 [
+    color=yellow
+    pid=2452
+    label="http://site.com/favicon.ico"
+    type=on_http_request
+    id=620
+  ];
+  77 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=621
+  ];
+  78 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=622
+  ];
+  79 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=623
+  ];
+  80 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=624
+  ];
+  81 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=625
+  ];
+  82 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=626
+  ];
+  83 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=627
+  ];
+  84 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=628
+  ];
+  85 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=629
+  ];
+  86 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=630
+  ];
+  87 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=631
+  ];
+  88 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=632
+  ];
+  89 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=633
+  ];
+  90 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=634
+  ];
+  91 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=635
+  ];
+  92 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=636
+  ];
+  93 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=637
+  ];
+  94 [
+    color=black
+    pid=2452
+    label=""
+    type=on_anomaly_detected
+    id=638
+  ];
+  95 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_delete
+    id=639
+  ];
+  96 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_delete
+    id=640
+  ];
+  97 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=641
+  ];
+  98 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_set
+    id=642
+  ];
+  99 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_delete
+    id=643
+  ];
+  100 [
+    color=green
+    pid=2452
+    label=""
+    type=on_registry_delete
+    id=644
+  ];
+  101 [
+    color=blue
+    pid=2452
+    label=""
+    type=on_file_delete
+    id=645
+  ];
+  102 [
+    color=red
+    pid=2304
+    label="Process: errfix.exe"
+    type=on_process_new
+    id=768
+  ];
+  #103 [
+  #  color=blue
+  # pid=2304
+  #  label=""
+  #  type=on_file_write
+  #  id=769
+  #];
+  104 [
+    color=green
+    pid=2304
+    label=""
+    type=on_registry_set
+    id=770
+  ];
+  105 [
+    color=red
+    pid=3820
+    label="Process: control.exe"
+    type=on_process_new
+    id=771
+  ];
+  106 [
+    color=purple
+    pid=3820
+    label="%SystemRoot%\\system32\\rundll32.exe\n Shell32.dll,Control_RunDLL C:\\Users\\Cuckoo\\AppData\\Local\\Temp\\\\errfix.exe"
+    type=on_shell_execute
+    id=772
+  ];
+  107 [
+    color=red
+    pid=3952
+    label="Process: rundll32.exe"
+    type=on_process_new
+    id=773
+  ];
+  108 [
+    color=red
+    pid=3984
+    label="Process: avap.exe"
+    type=on_process_new
+    id=774
+  ];
+
+  0 -> 1;
+  1 -> 19;
+  1 -> 74;
+  1 -> 75;
+  1 -> 102;
+  1 -> 105;
+  1 -> 2;
+  1 -> 3;
+  1 -> 4;
+  1 -> 5;
+  1 -> 6;
+  1 -> 7;
+  1 -> 8;
+  1 -> 9;
+  1 -> 10;
+  1 -> 11;
+  1 -> 12;
+  1 -> 13;
+  1 -> 14;
+  1 -> 15;
+  1 -> 16;
+  1 -> 17;
+  1 -> 18;
+  1 -> 20;
+  1 -> 21;
+  1 -> 22;
+  1 -> 23;
+  1 -> 24;
+  1 -> 25;
+  1 -> 26;
+  1 -> 27;
+  1 -> 28;
+  1 -> 29;
+  1 -> 30;
+  1 -> 31;
+  1 -> 32;
+  1 -> 53;
+  1 -> 56;
+  1 -> 57;
+  1 -> 58;
+  1 -> 59;
+  1 -> 60;
+  1 -> 61;
+  1 -> 62;
+  1 -> 63;
+  1 -> 64;
+  1 -> 65;
+  1 -> 66;
+  1 -> 67;
+  1 -> 68;
+  1 -> 69;
+  1 -> 70;
+  1 -> 71;
+  1 -> 72;
+  1 -> 73;
+  1 -> 77;
+  1 -> 78;
+  1 -> 79;
+  1 -> 80;
+  1 -> 81;
+  1 -> 82;
+  1 -> 83;
+  1 -> 84;
+  1 -> 85;
+  1 -> 86;
+  1 -> 87;
+  1 -> 88;
+  1 -> 89;
+  1 -> 90;
+  1 -> 91;
+  1 -> 92;
+  1 -> 93;
+  1 -> 94;
+  1 -> 95;
+  1 -> 96;
+  1 -> 97;
+  1 -> 98;
+  1 -> 99;
+  1 -> 100;
+  1 -> 101;
+  19 -> 33;
+  19 -> 34;
+  19 -> 35;
+  19 -> 36;
+  19 -> 37;
+  19 -> 38;
+  19 -> 39;
+  19 -> 40;
+  19 -> 41;
+  19 -> 42;
+  19 -> 43;
+  19 -> 44;
+  19 -> 45;
+  19 -> 46;
+  19 -> 47;
+  19 -> 48;
+  19 -> 49;
+  19 -> 50;
+  19 -> 54;
+  19 -> 76;
+  #50 -> 51;
+  #50 -> 52;
+  #54 -> 55;
+  102 -> 108;
+  102 -> 104;
+  #103 -> 108;
+  105 -> 106;
+  105 -> 107;
+}
