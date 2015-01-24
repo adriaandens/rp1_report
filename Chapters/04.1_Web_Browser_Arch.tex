@@ -6,7 +6,7 @@ Modern web browsers are complex applications consisting of many components that 
 
 All modern web browsers allow the usage of multiple tabs with web pages in a single window. The underlying implementations differ creatly. In some browsers are only libraries provided by the operating system used while others decided to use their own. Also have some vendors decided to use multiple processes, sometimes even a new process for every single tab.
 
-\textbf{Internet Explorer} is the well-known web browser from Microsoft. While until quite some time ago also a Mac version was available, in the last decade only the Windows version has been updated. Since version 7 is tabbed browsing available and version 8 was improved with the ability to run tabs from their own process (see figure \ref{fig:ie8proc}). This feature is called Loosely-Coupled IE\cite{http://blogs.msdn.com/b/ie/archive/2008/03/11/ie8-and-loosely-coupled-ie-lcie.aspx}. Every process runs independent from the other processes and runs its own network stack and instances of content plugins like Flash or Silverlight.
+\textbf{Internet Explorer} is the well-known web browser from Microsoft. While until quite some time ago also a Mac version was available, in the last decade only the Windows version has been updated. Since version 7 is tabbed browsing available and version 8 was improved with the ability to run tabs from their own process (see figure \ref{fig:ie8proc}). This feature is called Loosely-Coupled IE\cite{IE8LCIE}. Every process runs independent from the other processes and runs its own network stack and instances of content plugins like Flash or Silverlight.
 
 Starting each tab in its own process comes with an inevitable overhead by using more memory and the time it cost to start the process. For this reason can a process host multiple tabs. The amount of tabs to host in a single process and the maximum of processes to use is determined by the configuration. For backwards compatibility reasons is also the option provided to disable the usage of multiple processes and host all tabs in a single browser process.
 
@@ -15,7 +15,7 @@ The network stack used in Internet Explorer is provided by the Windows operating
 \begin{figure}
     \centering
     \includegraphics[width=9cm]{Images/IE8_process_model.png}
-    \caption{The Internet Explorer process model starting from version 8. \cite{zelfde msdn link, modified}}
+    \caption{The Internet Explorer process model starting from version 8. \cite{IE8LCIEP}}
     \label{fig:ie8proc}
 \end{figure}
 
@@ -25,12 +25,12 @@ In Firefox run only the plugins from a different process. The rendering of the w
 
 To be platform independent is not directly interfaced with the provided libraries of the operating system. Instead a platform-neutral API called NSPR is used. Together with the NSS library that provides the functionality to create SSL/TLS connections is this used by the high-level network library called Necko. Necko provides the interface to perform HTTP and other protocol requests without revealing protocol, transport level or platform specific implementation details and is comparable to WinINet.
 
-\textbf{Chromium} is the open-source version of the Google Chrome browser and is except a couple of proprietary components identical. While it's relative young, it is one of the most used web browsers. The big innovation of Chrome \cite{http://blog.chromium.org/2008/09/multi-process-architecture.html} was to use multiple processes instead of a single process. Besides its own process for every tab, have also the plugins and audio subsystem their own process. The subprocesses run in a sandbox with limited privileges and use the main process to communicate with the outside world.
+\textbf{Chromium} is the open-source version of the Google Chrome browser and is except a couple of proprietary components identical. While it's relative young, it is one of the most used web browsers. The big innovation of Chrome \cite{ChromeMPA} was to use multiple processes instead of a single process. Besides its own process for every tab, have also the plugins and audio subsystem their own process. The subprocesses run in a sandbox with limited privileges and use the main process to communicate with the outside world.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=9cm]{Images/Chrome_network.png}
-    \caption{A high-level overview of the components involved in requesting an URL in Chromium. Platform specifics details related to sockets are hidden in StreamSocket and the usage of SSL/TLS is made transparent by using the interface-compatible SSLSocket instead of StreamSocket. \cite{http://www.chromium.org/developers/design-documents/network-stack, modified}}
+    \caption{A high-level overview of the components involved in requesting an URL in Chromium. Platform specifics details related to sockets are hidden in StreamSocket and the usage of SSL/TLS is made transparent by using the interface-compatible SSLSocket instead of StreamSocket. \cite{ChromeNetwork}}
     \label{fig:chrome_network}
 \end{figure}
 

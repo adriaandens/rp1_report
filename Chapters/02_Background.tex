@@ -4,7 +4,7 @@ For a better insight into the project, it is necessary to introduce certain theo
 
 Browsing the internet with an unpatched system, for example because the patch is not installed or there is simply no solution available, can be dangerous. All software contains mistakes and such mistakes are patched almost on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software without the user noticing.
 
-If a website uses such mistake to take control over the web browser and download malicious software to the system, this is called a drive-by download. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
+If a website uses such mistake to take control over the web browser and download malicious software to the system, this is called a drive-by download\cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
 
 By compromising the web browser and injecting malicious code, the malware gets full control over the infected process, running with the same privileges as the web browser on the host system. Depending on the system configuration this either means that full system access is available or that additional steps are required to escalate the privileges to the intended level.
 
@@ -12,7 +12,7 @@ By compromising the web browser and injecting malicious code, the malware gets f
 \begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{Images/drive-by-download.png}
-    \caption{The anatomy of a drive-by download malware infection. \cite{http://blog.armorize.com/2011/04/newest-adobe-flash-0-day-used-in-new.html (modified)}}
+    \caption{The anatomy of a drive-by download malware infection. \cite{dbdownload-anatomy}}
     \label{fig:dbdownload}
 \end{figure}
 
@@ -20,7 +20,7 @@ By compromising the web browser and injecting malicious code, the malware gets f
 
 What happens after a malware infection depends on the malware used and goals of the attacker. In many cases the malware will download further malicious components and nestle itself in the operating system so it can be restarted after a reboot of the operating system and is able to restore itself after an attempt to remove it.
 
-To do this, the malware has to modify files, registry values \todo{is Windows specific} and perform network operations. While theoretically malware could directly communicate with the kernel for this, most malware behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
+To do this, the malware modifies, for example, files and registry values or performs network operations. While theoretically malware could directly communicate with the kernel for this, most malware\todo{need citation} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
 
 \subsection{API analysis}
 
@@ -32,7 +32,7 @@ Because the linker has to know all exported functions and where in the library i
 
 This is called API hooking\cite{} and it is a very useful technique to monitor the behaviour of applications. The original function is replaced by a substitute. This substitute function calls, for example, the original function and logs the performed operation or \todo{change sentence} is a custom replacement of the original function.
 
-The technical implementation of API hooking is highly complex and platform specific. Many different techniques\cite{http://jbremer.org/x86-api-hooking-demystified/} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or modification of the application or system is unwanted, the function to hook can be overwritten in memory with a replacement or jump to a different location in memory. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else.
+The technical implementation of API hooking is highly complex and platform specific. Many different techniques\cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or modification of the application or system is unwanted, the function to hook can be overwritten in memory with a replacement or jump to a different location in memory. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else.
 
 In this project API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of malware for later analysis.
 
