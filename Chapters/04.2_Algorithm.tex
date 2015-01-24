@@ -15,7 +15,7 @@ The algorithm is as follows:
 
 \subsubsection{Prerequisites and considerations\todo{Considerations vervangen door constraints?}}
 
-To correctly associate API calls with a browsing context and analyze the machine's behavior after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behavior with a browsing context.\\
+To correctly associate API calls with a browsing context and analyze the machine's behaviour after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behaviour with a browsing context.\\
 
 To track drive-by downloads, we consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.} as valid information to track. Of course these operations should only be tracked for processes who are child processes of the browser or the browser process itself.\\
 \todo{Extra informatie is een research question! Leg uit}
@@ -26,7 +26,7 @@ One of the major considerations that was made, is the fact that the algorithm sh
 
 \subsubsection{Step 1: Visit\todo{Remove steps from ToC?}}
 
-After the monitoring is set up, potentially malicious websites can be visited. Due to the monitoring, the behavior of a website can be monitored in such a way that multiple websites can be visited at one given time. This concurrency is a major speed improvement compared to old systems like HoneySpider Network.
+After the monitoring is set up, potentially malicious websites can be visited. Due to the monitoring, the behaviour of a website can be monitored in such a way that multiple websites can be visited at one given time. This concurrency is a major speed improvement compared to old systems like HoneySpider Network.
 
 
 \subsubsection{Step 2: Process}
@@ -45,7 +45,7 @@ Although no specific structure of the DAG is required, a tree like structure see
 
 \subsubsection{Step 3: Analyze}
 
-After the graph has been made, analysis algorithms can be run on the graph. It's important to note that no analysis is done in Step 2, all events are put in the graph. It's up to the analyzers in this step to find malicious behavior. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.\\
+After the graph has been made, analysis algorithms can be run on the graph. It's important to note that no analysis is done in Step 2, all events are put in the graph. It's up to the analyzers in this step to find malicious behaviour. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.\\
 
 %It must be noted that analysis might be done every time a browsing context was closed, allowing for faster reporting of malware.
 %It must be noted that analysis might be done whilst creating the graph but it should not influence the creating of the graph, neither should it alter the graph in any way.
