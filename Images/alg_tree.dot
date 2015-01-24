@@ -34,18 +34,18 @@ graph G {
 	"GET http://ads-server.com/malicious-ad.swf" -- "flash.exe"
 	"flash.exe" -- "GET http://ads-server.com/crossdomain.xml"
 
-	"flash.exe" -- "hjgvhjwen.exe"
+	"flash.exe" -- "malware.exe"
 
-	"hjgvhjwen.exe" [color=red,style=filled];
+	"malware.exe" [color=red,style=filled];
 	"Connect to cnc.botnet.com:1337" [color=red,style=filled];
 	"Write file %temp%\\svchost.exe" [color=red,style=filled];
 	"Write HKEY_CURRENT_USER\\Software\\\nMicrosoft\\Windows\\CurrentVersion\\Run" [color=red,style=filled];
 	"svchost.exe" [color=red,style=filled];
 
-	"hjgvhjwen.exe" -- "Connect to cnc.botnet.com:1337"
+	"malware.exe" -- "Connect to cnc.botnet.com:1337"
 
-	"hjgvhjwen.exe" -- "Write file %temp%\\svchost.exe"
-	"hjgvhjwen.exe" -- "Write HKEY_CURRENT_USER\\Software\\\nMicrosoft\\Windows\\CurrentVersion\\Run"
+	"malware.exe" -- "Write file %temp%\\svchost.exe"
+	"malware.exe" -- "Write HKEY_CURRENT_USER\\Software\\\nMicrosoft\\Windows\\CurrentVersion\\Run"
 
-	"hjgvhjwen.exe" -- "svchost.exe"
+	"malware.exe" -- "svchost.exe"
 }
