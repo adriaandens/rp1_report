@@ -8,19 +8,7 @@ To support the parallel visiting of URLs in one virtual machine, Cuckoo had to b
 
 \subsubsection{Step 2: Process}
 
-In this step, the API calls were bundled into 10 events, as listed below. The color between parentheses indicates the color the vertex gets in visual representations of the graph.
-\begin{itemize}
-\item on\_process\_new (red)
-\item on\_process\_finished (red)
-\item on\_http\_request (yellow). This event also includes the corresponding HTTP Response.
-\item on\_file\_write (blue) 
-\item on\_file\_delete (blue) 
-\item on\_registry\_set (green)
-\item on\_registry\_delete (green)
-\item on\_shell\_execute (purple)
-\item on\_socket\_connect (orange)
-\item on\_anomaly\_detected (black)
-\end{itemize}
+In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created from the event to the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree.\cite{http://pdf.aminer.org/000/654/566/analysis_of_user_web_traffic_with_a_focus_on_search.pdf} \todo{Define all relations here?}
 
 \subsubsection{Step 3: Analyze}
 
