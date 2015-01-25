@@ -17,10 +17,11 @@ By compromising the web browser and injecting malicious code, the malware gets f
 \end{figure}
 
 \subsubsection{Behaviour}
+\label{sec:behavior}
 
-What happens after a malware infection depends on the malware used and goals of the attacker. In many cases the malware will download further malicious components and nestle itself in the operating system so it can be restarted after a reboot of the operating system and is able to restore itself after an attempt to remove it.
+What happens after a malware infection depends on the malware and the goals of the attacker. But usually the goals of the attacker are persistence and further exploitation. The former is achieved by writing executable code to the disk and optionally changing several configuration files to make sure the code is executed at certain events, for example after reboot. The latter is achieved by dowloading further malicious components. We thus expect to see extra network traffic after the first exploit.
 
-To do this, the malware modifies, for example, files and registry values or performs network operations. While theoretically malware could directly communicate with the kernel for this, most malware\todo{need citation} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
+While theoretically malware could directly communicate with the kernel, most malware\todo{need citation} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
 
 \subsection{API analysis}
 

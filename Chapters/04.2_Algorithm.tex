@@ -17,7 +17,7 @@ The algorithm is as follows:
 
 To correctly associate API calls with a browsing context and analyze the machine's behaviour after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behaviour with a browsing context.\\
 
-To track drive-by downloads, we consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.} as valid information to track. Of course these operations should only be tracked for processes who are child processes of the browser or the browser process itself.\\
+To track the behavior of drive-by downloads, we consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.} as valid information to track, as discussed in \ref{sec:behavior}. Of course these operations should only be tracked for processes who are child processes of the browser or the browser process itself.\\
 \todo{Extra informatie is een research question! Leg uit}
 
 The question of course is how this information can be retrieved and on which level we have to work. Turns out that although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL. Making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.\\% Most, if not all, information can be retrieved on the operating system level. Only the 
