@@ -11,6 +11,17 @@
 \usepackage{todonotes}
 \usepackage{hyperref}
 
+\lstset{
+breaklines=true,
+breakautoindent=true,
+postbreak=\space,
+tabsize=2,
+basicstyle=\ttfamily\footnotesize,
+showspaces=false,
+showstringspaces=false,
+extendedchars=true,
+}
+
 \newcommand{\horizontalrule}[1]{\rule{\linewidth}{#1}}
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
 \let\endchangemargin=\endlist
@@ -120,6 +131,33 @@ Current malware analysis systems do not allow for concurrently visiting multiple
 First and foremost, we would like to thank our supervisors for the support and insight they have given during our research project. They have gravely improven the quality of this report.
 
 We would also like to thank the Cuckoo developers (especially Jurriaan Bremer) who helped us demystify the inner workings of Cuckoo and even helped us resolving the bugs we introduced ourselves during this project.
+
+\clearpage
+
+\section{Appendix A: Simple Analyzer}
+
+\begin{lstlisting}
+function deep_process_spawn_analyzer(graph)
+    foreach vertex in graph
+        if vertex.type == "process_spawned"
+            if check_depth_in_graph(vertex, 0) > 1
+                print "Malicious activity"
+            endif
+        endif
+    endforeach
+endfunction
+
+function check_depth_in_graph(vertex, current_depth)
+    parents = get_parents_of_vertex(vertex)
+    # Actually we need only one parent
+    if length_array(parents) > 0
+        return check_depth_in_graph(parents[0], current_depth++)
+    else
+        # No more parents, we're at the root node
+        return current_depth
+    endif
+endfunction
+\end{lstlisting}
 
 \clearpage
 
