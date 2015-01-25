@@ -5,5 +5,14 @@
 %\item How can we link an HTTP request to its source URL without the modification of the used web browser?
 %\item What extra information from the client's (running) machine can be used to augment the information gained from network traffic to make the tracking of malware to its source URL easier?
 
-In this research project was focussed on the question how the detection of drive-by download infections of malware can be improved by the means of concurrently visitting multiple URLs and still be able to determine which URL was responsible for malicious activities. To reach this goal four sub-questions have been formulated.
+In this research project was focussed on the question how the detection of drive-by download infections of malware can be improved by the means of concurrently visiting multiple URLs and still be able to determine which URL was responsible for malicious activities. To reach this goal four sub-questions have been formulated that have been answered.
 
+Browsers implement the ability to concurrently visit multiple URLs all in a different way. Some browsers decided to use multiple threads in a single process, but most modern browsers use subprocesses dedicated to a single or a few URLs. When multiple processes are used, it depends on the implementation if that process is directly fetching the webpages or that the main process or an intermediate process is used.
+
+How webpages are retrieved and the involved APIs highly depend on the implementation. Two of the examined browsers use the high-level HTTP library provided by the operating system while others implement their own. Such implementations are, for example, a custom library that is independent from other components of the web browser and an implementation where the network library is tightly integrated in the browser engine.
+
+By monitoring the API calls to the network stack and the process and thread context they are made from, an individual HTTP request can be linked to where it originates from. While other methods are possible, this way no modifications to the web browser are required while still all information is available.
+
+Additional information that can be used to detect the malicious behaviour includes process, file, registry and other network related API calls. While information sources like network sniffing, syscall observation and other passive techniques could be used, no additional information would be gained.
+
+Based on this research, this paper proposes an algorithm that enables the possibility to do large-scale drive-by download detection by concurrently visiting multiple URLs and still be able to determine the responsible URL for the observed malicious behaviour. To validate the working and effectiveness of this algorithm, a proof of concept has been developped for an existing solution for the detection of drive-by downloads. A performance gain of xx\todo{} percent has been observed.
