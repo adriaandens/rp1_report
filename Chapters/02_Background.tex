@@ -23,7 +23,7 @@ What happens after a malware infection depends on the malware and the goals of t
 
 While theoretically malware could directly communicate with the kernel, most malware\todo{need citation} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
 
-\subsection{API analysis}
+\subsection{API hooking}
 
 In the early days, libraries were primarily used by an application by statically linking to it. This means that the library becomes part of the application and it is no longer possible to determine which part of the application was originally part of the used libraries.
 
@@ -31,14 +31,21 @@ For performance and maintainability, dynamic linking was invented. The applicati
 
 Because the linker has to know all exported functions and where in the library it can find such function, a symbol table is part of every dynamic library. The same information can be used to hook into an provided function during runtime or to trick the linker to load a replacement of a certain function because the modified version has a higher priority.
 
-This is called API hooking\cite{} and it is a very useful technique to monitor the behaviour of applications. The original function is replaced by a substitute. This substitute function calls, for example, the original function and logs the performed operation or \todo{change sentence} is a custom replacement of the original function.
+This is called API hooking\cite{}\todo{} and it is a very useful technique to monitor the behaviour of applications. The original function is replaced by a substitute. This substitute function calls, for example, the original function and logs the performed operation. Or the substitute could be a custom replacement of the original function.
 
 The technical implementation of API hooking is highly complex and platform specific. Many different techniques\cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or modification of the application or system is unwanted, the function to hook can be overwritten in memory with a replacement or jump to a different location in memory. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else.
 
-In this project API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of malware for later analysis.
+In this project API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of the web browser and malware for later analysis.
 
 \subsection{Web browser architecture}
 \input{Chapters/04.1_Web_Browser_Arch.tex}
 
-\subsection{Observing HTTP requests}
-\todo{Subvraag 3}
+\subsection{Correlating HTTP requests}
+
+The challenge faced when multiple websites have to be loaded at the same time, is to known to which website a HTTP request corresponds. Many websites consists of dozens of resources that has to be loaded. The loading of some resources can even be delayed until after certain predefined events. In some libraries consists the requesting of a web resource of several independant steps.
+
+An easy solution would be to modify the web browser in such way that it exposes this information with an easy to use interface. While this would solve the problem, regular maintenace would be required to keep this system up-to-date. A better solution would be, to be able to correlate a HTTP request to it's originating webpage by observing the behaviour and environment of the web browser.
+
+A solution could be to log all the network traffic and analyse this. While this information is always available, it would require complex protocol and content parsers to reconstruct the original network streams and extract useful information from it. Loading resources over an encrypted connection would be impossible to notice, unless a proxy is used that would on-the-fly replace the certificate. Even then it would be trivial to circumvent this system as scripting languages and browser plugins could be used to dynamicly request resources.
+
+Instead, by logging the API calls that are made by the web browser, the full process and thread context of every call is available or can be reconstructed from earlier calls. As all modern web browsers use high-level network libraries, this is the ideal place to monitor. When combined with other interesting APIs, a full insight in the behaviour of the web browser is available and detecting malicious behaviour is a matter of writing the correct behavioural analysers.
