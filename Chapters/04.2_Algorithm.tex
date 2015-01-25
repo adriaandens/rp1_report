@@ -1,28 +1,29 @@
-% Intro is overbodig, slechts eenmaal in begin van hoofdstuk doen
-
 \subsubsection{Generic algorithm}
 
-The algorithm proposed takes as input a list of URLs, visits them and returns the URL which behaves abnormally. To be able to visit those URLs concurrently, thus providing large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{algo2}\todo{ref updaten}). After gathering this data, the events are stored in a graph after which analysis can be run to detect drive-by downloads.
+The algorithm proposed takes as input a list of URLs, visits them and returns the URL which behaves abnormally. To be able to visit those URLs concurrently, thus providing large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{sec:prereq}). After gathering this data, the events are stored in a graph after which analysis can be run to detect drive-by downloads.
 
 The algorithm is as follows:
 
+\begin{changemargin}{5cm}{0cm}
 \begin{enumerate}
-\item Visit.
-\item Process.\todo{Zet in het midden + label / caption}
-\item Analyze.
-\item Report.
+\item Visit (the URLs).
+\item Process (the data).\todo{Label + caption?}
+\item Analyze (the graph).
+\item Report (the findings).
 \end{enumerate}
+\end{changemargin}
 
-\subsubsection{Prerequisites and considerations\todo{Considerations vervangen door constraints?}}
+\subsubsection{Prerequisites and considerations}
+\label{sec:prereq}
 
 To correctly associate API calls with a browsing context and analyze the machine's behaviour after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behaviour with a browsing context.\\
 
-To track the behavior of drive-by downloads, we consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.} as valid information to track, as discussed in \ref{sec:behavior}. Of course these operations should only be tracked for processes who are child processes of the browser or the browser process itself.\\
-\todo{Extra informatie is een research question! Leg uit}
+To track the behavior of drive-by downloads, we consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}, as discussed in \ref{sec:behavior}. Of course these operations should only be tracked for processes which are the childs of the browser or the browser process itself.\\
+%\todo{Extra informatie is een research question! Leg uit}
 
-The question of course is how this information can be retrieved and on which level we have to work. Turns out that although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL. Making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.\\% Most, if not all, information can be retrieved on the operating system level. Only the 
+The question of course is how this information can be retrieved and on which level has to be worked. Turns out that although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL. Making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.\\% Most, if not all, information can be retrieved on the operating system level. Only the 
 
-One of the major considerations that was made, is the fact that the algorithm should work on multiple operating systems and multiple web browsers. The second constraint is a reasonable runtime, meaning the algorithm should run in an acceptable time on normal commodity hardware.
+One of the major considerations that was made, is the fact that the algorithm should work on multiple operating systems and multiple web browsers. The second consideration is a reasonable runtime, meaning the algorithm should run in an acceptable time on normal commodity hardware.
 
 \subsubsection{Step 1: Visit\todo{Remove steps from ToC?}}
 
@@ -31,10 +32,7 @@ After the monitoring is set up, potentially malicious websites can be visited. D
 
 \subsubsection{Step 2: Process}
 
-%Tracking the system calls the browser makes, generates a significant amount of data which is not entirely useful in itself for the analyze phase. Therefor low-level calls are grouped into high-level events. As an example, consider the writing of a file. To write to a file, a file handle/descriptor has to be made or opened. Then one or more write calls occur with some data followed by the closing of the handle/descriptor. All these calls are grouped into one event, namely the writing of a file.\\
-%
-
-The API calls triggered by the visiting of the URLs are put into a directed acyclic graph (DAG). Causally related events are connected by an edge. Optionally,\todo{Low-level -> high level is niet noodzakelijk, maar bespreek het} an abstraction of these API calls can be defined to decrease the size of the graph and thus speed up operations performed on the graph. API calls are henceforth abstracted as ``events'' but it's not actually necessary to actually create high-level events.\\
+The API calls triggered by the visiting of the URLs are put into a directed acyclic graph (DAG). Causally related events are connected by an edge. Optionally, an abstraction of these API calls can be defined to decrease the size of the graph and thus speed up operations performed on the graph. API calls are henceforth abstracted as ``events'' but it's not actually necessary to create high-level events.\\
 
 
 As an example, say that a webpage is cached by a browser. Then the cached version of that webpage is stored on a disk. The visiting of that webpage and the following cache write are causally related and hence a directed edge should be created between the calls.\\
@@ -45,10 +43,7 @@ Although no specific structure of the DAG is required, a tree like structure see
 
 \subsubsection{Step 3: Analyze}
 
-After the graph has been made, analysis algorithms can be run on the graph. It's important to note that no analysis is done in Step 2, all events are put in the graph. It's up to the analyzers in this step to find malicious behaviour. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.\\
-
-%It must be noted that analysis might be done every time a browsing context was closed, allowing for faster reporting of malware.
-%It must be noted that analysis might be done whilst creating the graph but it should not influence the creating of the graph, neither should it alter the graph in any way.
+After the graph has been created, analysis algorithms can be run on the graph. It's important to note that no analysis is done in Step 2, only events are added to the graph. It is up to the analyzers in this step to find malicious behaviour. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.\\
 
 \subsubsection{Step 4: Report}
 
