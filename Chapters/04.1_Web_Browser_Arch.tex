@@ -10,7 +10,8 @@ All modern web browsers allow the usage of multiple tabs with web pages in a sin
 
 Starting each tab in its own process comes with an inevitable overhead by using more memory and the time it cost to start the process. For this reason can a process host multiple tabs. The amount of tabs to host in a single process and the maximum of processes to use is determined by the configuration. For backwards compatibility reasons is also the option provided to disable the usage of multiple processes and host all tabs in a single browser process.
 
-The network stack used in Internet Explorer is provided by the Windows operating system and is called WinINet. This library provides high-level access to functions that allows applications to perform HTTP and FTP requests and utility functions for caching, proxys and security. After setting up the library and initiating and configuring the request, WinINet will perform the necessary steps to execute the request. WinINet depends for this on the Winsock library to setup the required network connections and Schannel to provide transparent support for SSL/TLS connections.
+\label{sec:brie}
+The network stack used in Internet Explorer is provided by the Windows operating system and is called WinINet. This library provides high-level access to functions that allows applications to perform HTTP and FTP requests and utility functions for caching, proxys and security. After setting up the library and initiating and configuring the request, WinINet will perform the necessary steps to execute the request. WinINet depends for this on the Winsock library to setup the required network connections and Schannel \cite{schannel} to provide transparent support for SSL/TLS connections.
 
 \begin{figure}
     \centering

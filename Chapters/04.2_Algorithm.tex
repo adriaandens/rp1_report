@@ -31,6 +31,7 @@ After the monitoring is set up, potentially malicious websites can be visited. D
 
 
 \subsubsection{Step 2: Process}
+\label{sec:algos2}
 
 The API calls triggered by the visiting of the URLs are put into a directed acyclic graph (DAG). Causally related events are connected by an edge. Optionally, an abstraction of these API calls can be defined to decrease the size of the graph and thus speed up operations performed on the graph. API calls are henceforth abstracted as ``events'' but it's not actually necessary to create high-level events.\\
 
