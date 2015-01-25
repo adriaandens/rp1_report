@@ -4,17 +4,17 @@ This section discusses the implementation of the algorithm, the problems encount
 
 The actual code can be found on GitHub at \url{https://github.com/MartijnB/cuckoo/tree/multi-url}.
 
-\subsubsection{Step 1: Visit}
+%\subsubsection{Step 1: Visit}
+\begin{enumerate}
+\item \textbf{Visit} To support the parallel visiting of URLs in one virtual machine, Cuckoo had to be extended. Support for this was added pretty quickly using tabs, but this left us with a problem to detect when a new URL was feeded to a tab\todo{See problems below}. To solve this problem, every URL in this PoC is now opened in its own window.
 
-To support the parallel visiting of URLs in one virtual machine, Cuckoo had to be extended. Support for this was added pretty quickly using tabs, but this left us with a problem to detect when a new URL was feeded to a tab\todo{See problems below}. To solve this problem, every URL in this PoC is now opened in its own window.
+%\subsubsection{Step 2: Process}
 
-\subsubsection{Step 2: Process}
+\item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created from the event to the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree.\cite{http://pdf.aminer.org/000/654/566/analysis_of_user_web_traffic_with_a_focus_on_search.pdf} \todo{Define all relations here?}
 
-In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created from the event to the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree.\cite{http://pdf.aminer.org/000/654/566/analysis_of_user_web_traffic_with_a_focus_on_search.pdf} \todo{Define all relations here?}
+%\subsubsection{Step 3: Analyze}
 
-\subsubsection{Step 3: Analyze}
-
-To implement the analysis phase of the algorithm, a simple analyzer was written that detects process spawns below browsing contexts. Listing \todo{reffie} shows pseudo code of the analyzer.
+\item \textbf{Analyze} To implement the analysis phase of the algorithm, a simple analyzer was written that detects process spawns below browsing contexts. Listing \todo{reffie} shows pseudo code of the analyzer.
 
 \begin{lstlisting}
 function deep_process_spawn_analyzer(graph)
@@ -39,9 +39,10 @@ function check_depth_in_graph(vertex, current_depth)
 endfunction
 \end{lstlisting}
 
-\subsubsection{Step 4: Report}
+%\subsubsection{Step 4: Report}
 
-Reporting is done on the commandline but generated graphs of anomalities are saved to the disk in the folder structure of Cuckoo.
+\item \textbf{Report} Reporting is done on the commandline but generated graphs of anomalities are saved to the disk in the folder structure of Cuckoo.
+\end{enumerate}
 
 \subsubsection{Problems}
 \label{99problems}
