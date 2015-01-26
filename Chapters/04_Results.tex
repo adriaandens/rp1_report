@@ -67,15 +67,14 @@ Analyzer 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a proce
 \pagenumbering{arabic}
 \setcounter{page}{\thesavepage}
 
-\subsection{Comparison with Cuckoo 1.2}
+\subsection{Comparison with Cuckoo}
 
-To show the improvement which was made, several benchmarks where run with a different amount of URLs. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}}. This version was also used as the basis for our development. The benchmark consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because the adapted version does not have this status, the benchmark stops when the \texttt{mass-analyse.py} script exits. Benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs. Each benchmark is run 25 times.\\
+To quantify the improvement that was made, several benchmarks where run. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}}. This version was also used as the base for our development. The benchmark consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because the adapted version does not have this status, the benchmark for this version of Cuckoo stops when the \texttt{mass-analyse.py} script exits. Benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and each benchmark was run 25 times to filter out anomalities.\\
 
-Figure \ref{fig:chart-box} shows a boxplot which compares the boxplot of the reference version with our modified version.\todo{Meer uitleg maar we hebben nog niet alle data} Figure \ref{fig:chart-trend} shows an interpolation and extrapolation of the results. The mean has been calculated over all results for a certain number of URLs.\\
+Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives the mean over all 25 runs given \textit{X} URLs for the unmodified and modified Cuckoo respectively. It then makes a comparison between the execution time of those two versions. As can be seen from the table, for 1 URL there is already an improvement of 313\% and for more than 10 URLs, our version is at least ten times as fast.\\
 
-In both of these figures, it can be seen that our version of Cuckoo is significantly better. For 1 URL, there is an improvement of 316\% and for more than 10 URLs, our version is at least ten times as fast.
+Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows a boxplot which compares the boxplot of the reference version with our modified version.\todo{Meer uitleg maar we hebben nog niet alle data} Figure \ref{fig:chart-trend} shows an interpolation and extrapolation of the results.
 
-The raw numbers used to generate these graphs can be found in Appendix B.\\
 
 \todo{Boxplot voor elk aantal URLs voor reference Cuckoo}
 \begin{figure}[h]
@@ -93,11 +92,13 @@ The raw numbers used to generate these graphs can be found in Appendix B.\\
 \end{figure}
 
 \begin{table}[h]
+\caption{Mean runtime of Cuckoo and the modified version.}
+\label{tbl:results}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-                & 1 URL   & 5 URLs  & 10 URLs     & 25 URLs     & 50 URLs     & 100 URLs \\ \midrule
-Reference       & 152,8   & 764,1   & 1528,2      & 3820,5      & 7640,9      & 15281,8 \\
-Modified Cuckoo & 48,8    & 118,5   & 143,8       & 233,1       &             &         \\
-Improvement     & 312,9\% & 644,6\% & 1062,6\%    & 1639,2\%    &             &         \\ \bottomrule
+                & 1 URL    & 5 URLs   & 10 URLs      & 25 URLs      & 50 URLs     & 100 URLs \\ \midrule
+Reference       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     & 15281,8s \\
+Modified Cuckoo & 48,8s    & 118,5s   & 143,8s       & 233,1s       &             &          \\
+Improvement     & 313,1\%  & 644,8\%  & 1062,7\%     & 1639,0\%     &             &          \\ \bottomrule
 \end{tabular}
 \end{table}
