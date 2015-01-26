@@ -1,10 +1,10 @@
-For a better insight into the project, it is necessary to introduce certain theoretical concepts first. In the next chapter this theory will be used to base the approach on for the design and development of the algorithm and choices regarding the proof of concept.
+For a better insight into the project, it is necessary to introduce certain theoretical concepts first. The next chapter will use this theory as a basis for the design and development of the algorithm.
 
 \subsection{Drive-by downloads}
 
-Browsing the internet with an unpatched system, for example because the patch is not installed or there is simply no solution available, can be dangerous. All software contains mistakes and such mistakes are patched almost on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software without the user noticing.
+Browsing the internet with an unpatched system can be dangerous. Many, if not all, software contains mistakes and such mistakes are patched almost on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software without the user noticing.
 
-If a website uses such mistake to take control over the web browser and download malicious software to the system, this is called a drive-by download\cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
+If a website uses such a mistake to take control over the web browser and download malicious software to the system, then this is called a drive-by download\cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
 
 By compromising the web browser and injecting malicious code, the malware gets full control over the infected process, running with the same privileges as the web browser on the host system. Depending on the system configuration this either means that full system access is available or that additional steps are required to escalate the privileges to the intended level.
 
@@ -27,13 +27,13 @@ While theoretically malware could directly communicate with the kernel, most mal
 
 In the early days, libraries were primarily used by an application by statically linking to it. This means that the library becomes part of the application and it is no longer possible to determine which part of the application was originally part of the used libraries.
 
-For performance and maintainability, dynamic linking was invented. The application describes which libraries it needs and the linker of the operating system will glue the applications and its dependent libraries together in the memory space of the application. 
+For performance and maintainability, dynamic linking was invented. The application describes which libraries it needs and the linker of the operating system will glue the applications and its dependent libraries together in the memory space of the application. This happens at runtime. 
 
-Because the linker has to know all exported functions and where in the library it can find such function, a symbol table is part of every dynamic library. The same information can be used to hook into an provided function during runtime or to trick the linker to load a replacement of a certain function because the modified version has a higher priority.
+Because the linker has to know all exported functions and their location, a symbol table is part of every dynamic library. The same information can be used to hook into a function during runtime or to trick the linker in loading a replacement for a function.
 
-This is called API hooking\cite{}\todo{} and it is a very useful technique to monitor the behaviour of applications. The original function is replaced by a substitute. This substitute function calls, for example, the original function and logs the performed operation. Or the substitute could be a custom replacement of the original function.
+This is called API hooking\cite{wikihooking} and it is a widely used technique to monitor the behaviour of applications. With API hooking, the original function is replaced by a substitute. This substitute function, for example, first logs the performed operation and then calls the original function. Or the substitute could be a custom replacement of the original function.
 
-The technical implementation of API hooking is highly complex and platform specific. Many different techniques\cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or modification of the application or system is unwanted, the function to hook can be overwritten in memory with a replacement or jump to a different location in memory. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else.
+The technical implementation of API hooking is highly complex and platform specific. Many different techniques\cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or modification of the application or system is unwanted, the function to be hooked can be overwritten in memory with a replacement or jump to a different location in memory. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else.
 
 In this project API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of the web browser and malware for later analysis.
 
