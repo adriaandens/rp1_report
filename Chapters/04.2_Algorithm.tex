@@ -1,5 +1,3 @@
-\subsubsection{Generic algorithm}
-
 The algorithm proposed takes as input a list of URLs, visits them and returns the URL which behaves abnormally. To be able to visit those URLs concurrently, thus providing large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{sec:prereq}). After gathering this data, the events are stored in a graph after which analysis can be run to detect drive-by downloads.
 
 The algorithm is as follows:
