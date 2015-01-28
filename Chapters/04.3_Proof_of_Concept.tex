@@ -18,7 +18,7 @@ The current development version, \texttt{1.2-dev},  only accepts one URL at a ti
 \subsubsection{The setup}
 \label{sec:setup}
 
-To test the algorithm, we will use the adapted Cuckoo with Virtualbox as the sandbox environment. As the virtual machine's operating system, we will use Windows 7 as this is still the operating system which is most targeted by malware. As the browser, we will use Internet Explorer 8 to actually allow the malware to successfully perform the drive-by download.
+To test the algorithm, we will use the adapted Cuckoo with Virtualbox as the sandbox environment. As the virtual machine's operating system, we will use Windows 7 as this is still the operating system which is most targeted by malware. As the browser, we will use Internet Explorer 8\todo{Ook misschien verwijzen naar de theorie dat doordat IE zijn process model deze het makkelijkst te monitoren is?} to actually allow the malware to successfully perform the drive-by download.
 
 The adapted Cuckoo will be provisioned with the Top 20 of visited websites in the Netherlands, according to Alexa \cite{http://www.alexa.com/topsites/countries/NL}, and one website which serves a drive-by download which spawns processes.
 
