@@ -149,12 +149,12 @@ We would also like to thank the Cuckoo developers (especially Jurriaan Bremer) w
 
 \clearpage
 
-\section*{Appendix A: Simple Analyzer}
-\addcontentsline{toc}{section}{Appendix A: Simple Analyzer}
+\section*{Appendix A: Simple Analyser}
+\addcontentsline{toc}{section}{Appendix A: Simple Analyser}
 
-\todo{Omschrijving toevoegen}
+To implement step 3 of the algorithm a very simple analyser was written which detects a process spawn beneath tab processes. Although the real code\footnote{\url{https://github.com/MartijnB/cuckoo/blob/multi-url/utils/mass-analyse.py}} is a bit unclear, it is the same as the pseudo code in listing \ref{analysercode}.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Pseudo code for phase 3 of the algorithm},label={analysercode}]
 function deep_process_spawn_analyzer(graph)
     foreach vertex in graph
         if vertex.type == "process_spawned"
