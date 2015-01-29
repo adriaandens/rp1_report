@@ -141,17 +141,19 @@ We would also like to thank the Cuckoo developers (especially Jurriaan Bremer) w
 
 \clearpage
 
-
-\addcontentsline{toc}{section}{References}
-
 \todo{Cites consistent maken}
 
+\addcontentsline{toc}{section}{References}
 \bibliographystyle{abbrv}
 \bibliography{report}
-\clearpage
-\section*{Appendix A: Simple Analyzer}
 
+\clearpage
+
+\section*{Appendix A: Simple Analyzer}
 \addcontentsline{toc}{section}{Appendix A: Simple Analyzer}
+
+\todo{Omschrijving toevoegen}
+
 \begin{lstlisting}
 function deep_process_spawn_analyzer(graph)
     foreach vertex in graph
@@ -178,8 +180,9 @@ endfunction
 \clearpage
 
 \section*{Appendix B: Raw benchmark data}
-
 \addcontentsline{toc}{section}{Appendix B: Raw benchmark data}
+
+\todo{Omschrijving toevoegen}
 
 \begin{table}[h]
 \begin{tabular}{@{}lllllll@{}}
@@ -218,7 +221,6 @@ Reference & 1 URL      & 5 URLs     & 10 URLs     & 25 URLs     & 50 URLs     & 
 \clearpage
 
 \section*{Appendix C: Cuckoomon modifications}
-
 \addcontentsline{toc}{section}{Appendix C: Cuckoomon modifications}
 
 Cuckoomon is the analyser component of Cuckoo. It hooks interesting API functions and logs their usage. As part of the development of the proof of concept, many hooks have been disabled and several missing ones added.
