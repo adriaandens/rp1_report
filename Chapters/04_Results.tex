@@ -36,7 +36,23 @@ $ python cuckoo.py &
 $ python utils/mass-analyse.py url_list.txt
 Warning: Task with ID 22 is not yet completed; Waiting...
 INFO:root:Parse log....
-Analyzer 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a process called 'errfix.exe'.
+[...]
+PID 2876 'iexplore.exe' spawned from parent PID 2860
+Visiting: http://google.com/
+PID 3656 'iexplore.exe' spawned from parent PID 2860
+Visiting: http://malware-site.com/
+PID 2108 'iexplore.exe' spawned from parent PID 2860
+Visiting: http://google.nl/
+PID 3064 'iexplore.exe' spawned from parent PID 2860
+Visiting: http://imdb.com/
+PID 1012 'iexplore.exe' spawned from parent PID 2860
+Visiting: http://facebook.com/
+PID 3728 'control.exe' spawned from parent PID 3656
+PID 2848 'repfix.exe' spawned from parent PID 3656
+PID 1944 'rundll32.exe' spawned from parent PID 3728
+PID 3780 'ynuni.exe' spawned from parent PID 2848
+[...]
+Analyzer 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a process called 'control.exe', 'repfix.exe', 'rundll32.exe' and 'ynuni.exe'.
 \end{lstlisting}
 
 \setcounter{savepage}{\arabic{page}}
