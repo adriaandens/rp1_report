@@ -16,7 +16,7 @@ The algorithm is as follows:
 
 To correctly associate API calls with a browsing context and analyze the machine's behaviour after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behaviour with a browsing context.\\
 
-To track the behavior of drive-by downloads, we consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}, as discussed in \ref{sec:behavior}. Of course these operations should only be tracked for processes which are the childs of the browser or the browser process itself.\\
+According to \cite{Sami:2010:MDB:1774088.1774303}, process, file, registry and console operations are the top API categories when it comes to malware. To track the behavior of drive-by downloads, we thus consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}. These operations should only be tracked for processes in the process subtree of the browser as other system activity is not of interest for detecting drive-by downloads.\\
 %\todo{Extra informatie is een research question! Leg uit}
 
 The question of course is how this information can be retrieved and on which level has to be worked. Turns out that although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL. Making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.\\% Most, if not all, information can be retrieved on the operating system level. Only the 
@@ -27,22 +27,21 @@ One of the major considerations that was made, is the fact that the algorithm sh
 
 \textbf{Step 1: Visit}
 
-After the monitoring is set up, potentially malicious websites can be visited. Due to the monitoring, the behaviour of a website can be monitored in such a way that multiple websites can be visited at one given time. This concurrency is a major speed improvement compared to old systems like HoneySpider Network.
+After the monitoring is set up, potentially malicious websites can be visited. Due to the monitoring, the behaviour of a website can be monitored in such a way that multiple websites can be visited at one given time. This coincides with our research question of concurrently visiting websites.
 
 
 \textbf{Step 2: Process}
 \label{sec:algos2}
 
-The API calls triggered by the visiting of the URLs are put into a directed acyclic graph (DAG). Causally related events are connected by an edge. Optionally, an abstraction of these API calls can be defined to decrease the size of the graph and thus speed up operations performed on the graph. API calls are henceforth abstracted as ``events'' but it's not actually necessary to create high-level events.\\
+The API calls triggered by the visiting of the URLs are put into a directed acyclic graph (DAG). Causally related events are connected by an edge. This relationship between events allows tracking and linking events to a browsing context/URL. Optionally, an abstraction of these API calls can be defined to decrease the size of the graph and thus speed up operations performed on the graph. API calls are henceforth abstracted as ``events'' but it is not actually necessary to create high-level events.
 
-
-As an example, say that a webpage is cached by a browser. Then the cached version of that webpage is stored on a disk. The visiting of that webpage and the following cache write are causally related and hence a directed edge should be created between the calls.\\
+As an example of causally related events, say that a webpage is cached by a browser. Then the cached version of that webpage is stored on disk. The visiting of that webpage and the following cache write are causally related and hence a directed edge should be created between the calls.
 
 Although no specific structure of the DAG is required, a tree like structure seems the most fitting for the problem of tracking events to a browsing context. In this structure each browsing context has its own subtree of events. 
 
 \textbf{Step 3: Analyze}
 
-After the graph has been created, analysis algorithms can be run on the graph. It's important to note that no analysis is done in Step 2, only events are added to the graph. It is up to the analyzers in this step to find malicious behaviour. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.\\
+After the graph has been created, analysis algorithms can be run on the graph. It is important to note that no analysis is done in Step 2, only events are added to the graph. It is up to the analyzers in this step to find malicious behaviour. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.
 
 \textbf{Step 4: Report}
 
