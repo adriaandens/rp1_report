@@ -6,7 +6,7 @@ The algorithm is as follows:
 \begin{enumerate}
 \item Visit (the URLs).
 \item Process (the data).\todo{Label + caption?}
-\item Analyze (the graph).
+\item Analyse (the graph).
 \item Report (the findings).
 \end{enumerate}
 \end{changemargin}
@@ -14,7 +14,7 @@ The algorithm is as follows:
 \subsubsection{Prerequisites and considerations}
 \label{sec:prereq}
 
-To correctly associate API calls with a browsing context and analyze the machine's behaviour after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behaviour with a browsing context.\\
+To correctly associate API calls with a browsing context and analyse the machine's behaviour after visiting a URL, monitoring is needed. Monitoring can be split up in two distinct parts, namely the network traffic and all extra information that is needed to associate malicious behaviour with a browsing context.\\
 
 According to \cite{Sami:2010:MDB:1774088.1774303}, process, file, registry and console operations are the top API categories when it comes to malware. To track the behavior of drive-by downloads, we thus consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}. These operations should only be tracked for processes in the process subtree of the browser as other system activity is not of interest for detecting drive-by downloads.\\
 %\todo{Extra informatie is een research question! Leg uit}
@@ -39,10 +39,10 @@ As an example of causally related events, say that a webpage is cached by a brow
 
 Although no specific structure of the DAG is required, a tree like structure seems the most fitting for the problem of tracking events to a browsing context. In this structure each browsing context has its own subtree of events. 
 
-\textbf{Step 3: Analyze}
+\textbf{Step 3: Analyse}
 
-After the graph has been created, analysis algorithms can be run on the graph. It is important to note that no analysis is done in Step 2, only events are added to the graph. It is up to the analyzers in this step to find malicious behaviour. Analyzers are of course highly dependant on the graph structure to correctly interpret the graph.
+After the graph has been created, analysis algorithms can be run on the graph. It is important to note that no analysis is done in Step 2, only events are added to the graph. It is up to the analysers in this step to find malicious behaviour. Analysers are of course highly dependant on the graph structure to correctly interpret the graph.
 
 \textbf{Step 4: Report}
 
-The final step is reporting to the user. After Step 3, each analyzer reports its findings back to the user. It goes without saying that the analyzer should give clear and precise information of what happened.
+The final step is reporting to the user. After Step 3, each analyser reports its findings back to the user. It goes without saying that the analyser should give clear and precise information of what happened.

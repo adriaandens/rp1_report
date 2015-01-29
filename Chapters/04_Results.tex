@@ -11,8 +11,8 @@ What follows is a short overview of how the algorithm was implemented, the actua
 %\subsubsection{Step 2: Process}
 \item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created between the event itself and the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree\cite{qui}. \todo{Discuss all relations here?}
 
-%\subsubsection{Step 3: Analyze}
-\item \textbf{Analyze} To implement the analysis phase of the algorithm, a simple analyzer was written that detects process spawns below browsing contexts. Appendix A shows pseudo code of the analyzer.
+%\subsubsection{Step 3: Analyse}
+\item \textbf{Analyse} To implement the analysis phase of the algorithm, a simple analyser was written that detects process spawns below browsing contexts. Appendix A shows pseudo code of the analyser.
 
 
 %\subsubsection{Step 4: Report}
@@ -25,13 +25,13 @@ What follows is a short overview of how the algorithm was implemented, the actua
 
 \textbf{Opening a new URL in the same browser context} was not detectable by the monitored API calls. On top of that, processes were reused when a browsing context was closed and a new one was opened, this made it essentially the same as reusing the browsing context. Internet Explorer also behaves differently when interacting with the COM interface compared to real user interaction, leaving us without certain registry values that could be used to detect the opening of a new URL. Therefor we decided to use a new Internet Explorer process for each URL which gives us a process ID per browser context.
 
-\textbf{Working with JSON} was extremely slow in Cuckoo. After the virtual machine has done its work, BSON files are transferred to the host machine. These BSON files are then parsed by Cuckoo and analyzed after which a JSON file is written. Our \texttt{mass-analyze.py} depended on this JSON, which made it very slow to use. A BSON parser was written to skip the whole JSON step and thus we were able to work earlier on the data, giving us a dramatic speedup.
+\textbf{Working with JSON} was extremely slow in Cuckoo. After the virtual machine has done its work, BSON files are transferred to the host machine. These BSON files are then parsed by Cuckoo and analysed after which a JSON file is written. Our \texttt{mass-analyse.py} depended on this JSON, which made it very slow to use. A BSON parser was written to skip the whole JSON step and thus we were able to work earlier on the data, giving us a dramatic speedup.
 
 \subsection{Running the PoC}
 
-Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \ref{code:run} shows how the PoC is run. As explained in section \ref{sec:setup} the URL list contains the Top 20 most visited websites and some malware websites. Figure \ref{fig:graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns and the purple dots which indicate shell command executions. The analyzer run in phase 3 succesfully found this anomality and reports it back to the user. A graph of the browsing context in which this anomality occured is also shown to the user, as can be seen in figure \ref{fig:subgraph}.
+Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \ref{code:run} shows how the PoC is run. As explained in section \ref{sec:setup} the URL list contains the Top 20 most visited websites and some malware websites. Figure \ref{fig:graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns and the purple dots which indicate shell command executions. The analyser run in phase 3 succesfully found this anomality and reports it back to the user. A graph of the browsing context in which this anomality occured is also shown to the user, as can be seen in figure \ref{fig:subgraph}.
 
-\begin{lstlisting}[caption={Mass analyzer being run},label={code:run}]
+\begin{lstlisting}[caption={Mass analyser being run},label={code:run}]
 $ python cuckoo.py &
 $ python utils/mass-analyse.py url_list.txt
 Warning: Task with ID 22 is not yet completed; Waiting...
@@ -52,7 +52,7 @@ PID 2848 'repfix.exe' spawned from parent PID 3656
 PID 1944 'rundll32.exe' spawned from parent PID 3728
 PID 3780 'ynuni.exe' spawned from parent PID 2848
 [...]
-Analyzer 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a process called 'control.exe', 'repfix.exe', 'rundll32.exe' and 'ynuni.exe'.
+Analyser 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a process called 'control.exe', 'repfix.exe', 'rundll32.exe' and 'ynuni.exe'.
 \end{lstlisting}
 
 \setcounter{savepage}{\arabic{page}}
