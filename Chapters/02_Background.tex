@@ -55,17 +55,3 @@ In this project API hooking will be used to reverse engineer the internal workin
 
 \subsection{Web browser architecture}
 \input{Chapters/04.1_Web_Browser_Arch.tex}
-
-\subsection{Correlating HTTP requests}
-
-\todo{Verplaatsen}
-
-The challenge faced when multiple websites have to be loaded at the same time, is to know which HTTP request corresponds to which website. Many webpages consist of dozens of resources that have to be loaded. The loading of some resources can even be delayed until after certain predefined events. In some libraries, the requesting of a web resource consists of several independant steps.
-
-An easy solution would be to modify the web browser in such a way that it exposes this information with an easy to use interface. While this would solve the problem, regular maintenance would be required to keep this system working. 
-
-A solution could be to log all the network traffic and analyse it. While this information is always available, it would require complex protocol and content parsers to reconstruct the original network streams and extract useful information from it. Additionally, an encrypted connection would require a proxy that uses on-the-fly creation of certificates. Even then it would be trivial to circumvent this system as scripting languages and browser plugins could be used to dynamically request resources.
-
-A better solution would be to correlate a HTTP request to its originating webpage by observing the behaviour and environment of the web browser. By logging the API calls that are made by the web browser, the full process and thread context of every call is available or can be reconstructed from earlier calls. As all modern web browsers use high-level network libraries, this is the ideal place to monitor. When combined with other interesting APIs, such as file, registry, low-level network or process management operations, a full insight in the behaviour of the web browser is available and detecting malicious behaviour is a matter of writing the correct behavioural analysers.
-
-\todo{Plaatje cuckoomon}
