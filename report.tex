@@ -11,6 +11,8 @@
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
 
 \lstset{
 breaklines=true,
@@ -28,6 +30,8 @@ extendedchars=true,
 \let\endchangemargin=\endlist
 
 \newcounter{savepage}
+
+\setlength{\LTleft}{0pt}
 
 \title{\horizontalrule{1pt}\\[0.5cm]Large-scale drive-by download detection: boot. visit$^n$. kill. repeat.}
 \subtitle{Master in System and Network Engineering \\[0.5cm] \horizontalrule{1pt} }
@@ -212,5 +216,71 @@ Reference & 1 URL      & 5 URLs     & 10 URLs     & 25 URLs     & 50 URLs     & 
 \end{table}
 
 \clearpage
+
+\section*{Appendix C: Cuckoomon modifications}
+
+\addcontentsline{toc}{section}{Appendix C: Cuckoomon modifications}
+
+Cuckoomon is the analyser component of Cuckoo. It hooks interesting API functions and logs their usage. As part of the development of the proof of concept, many hooks have been disabled and several missing ones added.
+
+\textbf{Added hooks}
+
+\begin{longtable}{*{2}{>{\arraybackslash}p{6cm}}}
+URLDownloadToFileA     & HttpSendRequestExW           \\
+FtpOpenFileA           & HttpEndRequestA              \\
+FtpOpenFileW           & HttpEndRequestW              \\
+FtpGetFileA            & HttpQueryInfoA               \\
+FtpGetFileW            & HttpQueryInfoW               \\
+FtpPutFileA            & InternetConfirmZoneCrossingA \\
+FtpPutFileW            & InternetConfirmZoneCrossingW \\
+HttpAddRequestHeadersA & InternetReadFileExA          \\
+HttpAddRequestHeadersW & InternetReadFileExW          \\
+HttpSendRequestExA     &                             
+\end{longtable}
+
+\textbf{Removed hooks}
+
+\begin{longtable}{*{2}{>{\arraybackslash}p{6cm}}}
+NtReadFile            & NtDeviceIoControlFile   \\
+NtQueryDirectoryFile  & NtQueryInformationFile  \\
+NtOpenDirectoryObject & FindFirstFileExA        \\
+FindFirstFileExW      & GetDiskFreeSpaceExA     \\
+GetDiskFreeSpaceExW   & GetDiskFreeSpaceA       \\
+GetDiskFreeSpaceW     & RegEnumKeyW             \\
+RegEnumKeyExA         & RegEnumKeyExW           \\
+RegEnumValueA         & RegEnumValueW           \\
+RegQueryValueExA      & RegQueryValueExW        \\
+RegQueryInfoKeyA      & RegQueryInfoKeyW        \\
+NtEnumerateKey        & NtEnumerateValueKey     \\
+NtQueryValueKey       & NtQueryMultipleValueKey \\
+NtLoadKey             & NtLoadKey2              \\
+NtLoadKeyEx           & NtQueryKey              \\
+FindWindowA           & FindWindowW             \\
+FindWindowExA         & FindWindowExW           \\
+EnumWindows           & NtOpenMutant            \\
+NtOpenSection         & ZwMapViewOfSection      \\
+ExitProcess           & NtUnmapViewOfSection    \\
+NtFreeVirtualMemory   & SetWindowsHookExA       \\
+SetWindowsHookExW     & UnhookWindowsHookEx     \\
+LdrGetDllHandle       & LdrGetProcedureAddress  \\
+ExitWindowsEx         & LookupPrivilegeValueW   \\
+WriteConsoleA         & WriteConsoleW           \\
+GetSystemMetrics      & GetCursorPos            \\
+GetComputerNameA      & GetComputerNameW        \\
+GetUserNameA          & GetUserNameW            \\
+NtDelayExecution      & GetLocalTime            \\
+GetSystemTime         & GetTickCount            \\
+NtQuerySystemTime     & send                    \\
+sendto                & recv                    \\
+recvfrom              & select                  \\
+connect               & WSARecv                 \\
+WSARecvFrom           & WSASend                 \\
+WSASendTo             & CryptProtectData        \\
+CryptUnprotectData    & CryptProtectMemory      \\
+CryptUnprotectMemory  & CryptDecrypt            \\
+CryptEncrypt          & CryptHashData           \\
+CryptDecodeMessage    & CryptDecryptMessage     \\
+CryptEncryptMessage   & CryptHashMessage       
+\end{longtable}
 
 \end{document}
