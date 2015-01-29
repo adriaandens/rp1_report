@@ -4,18 +4,13 @@ This section discusses the implementation of the algorithm, the problems encount
 
 What follows is a short overview of how the algorithm was implemented, the actual code can be found on GitHub\footnote{\url{https://github.com/MartijnB/cuckoo/tree/multi-url}}.
 
-%\subsubsection{Step 1: Visit}
 \begin{enumerate}
 \item \textbf{Visit} To support the parallel visiting of URLs in one virtual machine, Cuckoo had to be extended. Support for this was added using tabs, but this left us with a problem to detect when a new URL was feeded to a tab (see \ref{99problems}). To solve this problem, every URL in this PoC is now opened in its own window.
 
-%\subsubsection{Step 2: Process}
 \item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created between the event itself and the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree\cite{qui}. \todo{Discuss all relations here?}
 
-%\subsubsection{Step 3: Analyse}
 \item \textbf{Analyse} To implement the analysis phase of the algorithm, a simple analyser was written that detects process spawns below browsing contexts. Appendix A shows pseudo code of the analyser.
 
-
-%\subsubsection{Step 4: Report}
 \item \textbf{Report} Reporting is done on the commandline but generated graphs of anomalities are saved to the disk in the folder structure of Cuckoo.
 \end{enumerate}
 
@@ -114,13 +109,13 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \end{figure}
 
 \begin{table}[h]
-\caption{Mean runtime of Cuckoo and the modified version.}
-\label{tbl:results}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
                                   & 1 URL    & 5 URLs   & 10 URLs      & 25 URLs      & 50 URLs     & 100 URLs \\ \midrule
-Reference (time in sec)       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     & 15281,8s \\
-Modified Cuckoo (time in sec) & 48,8s    & 74,8s    & 102,4s       & 160,1s       & 286,4s      & 450,9s   \\
+Cuckoo       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     & 15281,8s \\
+Roadrunner& 48,8s    & 74,8s    & 102,4s       & 160,1s       & 286,4s      & 450,9s   \\
 Improvement(\%)                   & 313,1\%  & 1021,5\% & 1492,4\%     & 2386,3\%     & 2667,9\%    & 3389,2\% \\ \bottomrule
 \end{tabular}
+\caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds.}
+\label{tbl:results}
 \end{table}
