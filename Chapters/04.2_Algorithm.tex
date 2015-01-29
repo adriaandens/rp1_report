@@ -1,4 +1,4 @@
-The algorithm proposed takes as input a list of URLs, visits them and returns the URL which behaves abnormally. To be able to visit those URLs concurrently, thus providing large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{sec:prereq}). After gathering this data, the events are stored in a graph after which analysis can be run to detect drive-by downloads.
+The algorithm proposed takes as input a list of URLs, visits them and returns the URL which behaves abnormally, if any. To be able to visit those URLs concurrently, thus providing large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{sec:prereq}). After gathering this data, the events are stored in a graph after which analysis can be run to detect drive-by downloads.
 
 The algorithm is as follows:
 
@@ -19,9 +19,9 @@ To correctly associate API calls with a browsing context and analyse the machine
 According to \cite{Sami:2010:MDB:1774088.1774303}, process, file, registry and console operations are the top API categories when it comes to malware. To track the behavior of drive-by downloads, we thus consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}. These operations should only be tracked for processes in the process subtree of the browser as other system activity is not of interest for detecting drive-by downloads.\\
 %\todo{Extra informatie is een research question! Leg uit}
 
-The question of course is how this information can be retrieved and on which level has to be worked. Turns out that although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL. Making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.\\% Most, if not all, information can be retrieved on the operating system level. Only the 
+The question is how this information can be retrieved and on which level has to be worked. Although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL, making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.\\% Most, if not all, information can be retrieved on the operating system level. Only the 
 
-One of the major considerations that was made, is the fact that the algorithm should work on multiple operating systems and multiple web browsers. The second consideration is a reasonable runtime, meaning the algorithm should run in an acceptable time on normal commodity hardware.
+One of the major considerations that was made, is the fact that the algorithm should work on multiple operating systems and multiple web browsers. The second consideration is a reasonable running time, meaning the algorithm should run in an acceptable time on normal commodity hardware.
 
 \subsubsection{Steps}
 
@@ -45,4 +45,4 @@ After the graph has been created, analysis algorithms can be run on the graph. I
 
 \textbf{Step 4: Report}
 
-The final step is reporting to the user. After Step 3, each analyser reports its findings back to the user. It goes without saying that the analyser should give clear and precise information of what happened.
+The final step is reporting to the user. After Step 3, each analyser reports its findings back to the user. The analyser should give clear and precise information of what happened.

@@ -23,7 +23,7 @@ What follows is a short overview of how the algorithm was implemented, the actua
 \label{99problems}
 %\epigraph{I've got 99 problems but Cuckoo ain't one.}{Adriaan}
 
-\textbf{Opening a new URL in the same browser context} was not detectable by the monitored API calls. On top of that, processes were reused when a browsing context was closed and a new one was opened, this made it essentially the same as reusing the browsing context. Internet Explorer also behaves differently when interacting with the COM interface compared to real user interaction, leaving us without certain registry values that could be used to detect the opening of a new URL. Therefor we decided to use a new Internet Explorer process for each URL which gives us a process ID per browser context.
+\textbf{Opening a new URL in the same browser context} was not detectable by the monitored API calls. On top of that, processes were reused when a browsing context was closed and a new one was opened, this made it essentially the same as reusing the browsing context. Internet Explorer also behaves differently when interacting with the automation interface (COM) compared to real user interaction, leaving us without certain registry values that could be used to detect the opening of a new URL. Therefor we decided to use a new Internet Explorer process for each URL which gives us a process ID per browser context.
 
 \textbf{Working with JSON} was extremely slow in Cuckoo. After the virtual machine has done its work, BSON files are transferred to the host machine. These BSON files are then parsed by Cuckoo and analysed after which a JSON file is written. Our \texttt{mass-analyse.py} depended on this JSON, which made it very slow to use. A BSON parser was written to skip the whole JSON step and thus we were able to work earlier on the data, giving us a dramatic speedup.
 
@@ -87,7 +87,7 @@ Analyser 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a proce
 
 \subsection{Comparison with other malware analysis systems}
 
-To quantify the improvement that was made, several benchmarks where run against our improved version. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis\footnote{\url{http://anubis.iseclab.org/?action=advanced\_form}}, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
+To quantify the improvement that was made, several benchmarks were run against our improved version. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis\footnote{\url{http://anubis.iseclab.org/?action=advanced\_form}}, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
 
 The benchmark, for the unmodified Cuckoo, consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because the adapted version does not have this status, the benchmark for this version of Cuckoo stops when the \texttt{mass-analyse.py} script exits. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time.
 
@@ -101,14 +101,14 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \todo{Boxplot voor elk aantal URLs voor reference Cuckoo}
 \begin{figure}[h]
     \centering
-    \centerline{\includegraphics[width=20cm]{Images/chart-box.png}}
+    \centerline{\includegraphics[width=17cm]{Images/chart-box.png}}
     \caption{Boxplot}
     \label{fig:chart-box}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \centerline{\includegraphics[width=20cm]{Images/chart-trend}}
+    \centerline{\includegraphics[width=17cm]{Images/chart-trend}}
     \caption{Interpolation of the results. (Logaritmic scale)}
     \label{fig:chart-trend}
 \end{figure}
@@ -118,9 +118,9 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \label{tbl:results}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-                & 1 URL    & 5 URLs   & 10 URLs      & 25 URLs      & 50 URLs     & 100 URLs \\ \midrule
-Reference       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     & 15281,8s \\
-Modified Cuckoo & 48,8s    & 74,8s    & 102,4s       & 160,1s       & 286,4s      & 450,9s   \\
-Improvement     & 313,1\%  & 1021,5\% & 1492,4\%     & 2386,3\%     & 2667,9\%    & 3389,2\% \\ \bottomrule
+                                  & 1 URL    & 5 URLs   & 10 URLs      & 25 URLs      & 50 URLs     & 100 URLs \\ \midrule
+Reference (time in sec)       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     & 15281,8s \\
+Modified Cuckoo (time in sec) & 48,8s    & 74,8s    & 102,4s       & 160,1s       & 286,4s      & 450,9s   \\
+Improvement(\%)                   & 313,1\%  & 1021,5\% & 1492,4\%     & 2386,3\%     & 2667,9\%    & 3389,2\% \\ \bottomrule
 \end{tabular}
 \end{table}
