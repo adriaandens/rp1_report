@@ -1,7 +1,5 @@
 % Target: 4-6 blz
 
-\todo{Meer bronnen?}
-
 Modern web browsers are complex applications consisting of many components which have to work together. To develop a generic algorithm, it is crucial to have an in-depth understanding of the inner workings of a web browser. This project focuses on Internet Explorer, Mozilla Firefox, Chromium and Apple Safari. Those four browsers combined have a marketshare of more than 90\%\footnote{http://gs.statcounter.com/\#desktop-browser-ww-monthly-201412-201412-bar} \footnote{http://www.netmarketshare.com/browser-market-share.aspx?qprid=1\&qpcustomb=0}.
 
 All modern web browsers allow the usage of multiple tabs in a single window. The underlying implementations of those tabs differ greatly. Internet Explorer and Safari use only libraries provided by the operating system while Firefox and Chromium decided to use their own libraries. Some browsers decided to use multiple processes and sometimes even a new process for every single tab.
@@ -11,7 +9,7 @@ All modern web browsers allow the usage of multiple tabs in a single window. The
 Starting each tab in its own process comes with an inevitable overhead of using more memory and a slower startup. For this reason a process in Internet Explorer can host multiple tabs. The amount of tabs in a single process and the maximum number of processes is determined by the configuration. For backwards compatibility, Internet Explorer also provides the option to disable the usage of multiple processes and host all tabs in a single browser process.
 
 \label{sec:brie}
-The network stack used in Internet Explorer is provided by the Windows operating system and is called WinINet\cite{wininet}. This library provides high-level access to functions that allow HTTP and FTP requests and utility functions for caching, proxies and security. After initiating and configuring the request, WinINet will perform the necessary steps to execute the request. WinINet depends on the Winsock library \cite{winsock} to setup the required network connections and Schannel \cite{schannel} is used to provide transparent support for SSL/TLS connections.
+The network stack used in Internet Explorer is provided by the Windows operating system and is called WinINet\cite{wininet}. This library provides high-level access to functions that perform HTTP and FTP requests and utility functions for caching, proxies and security. After initiating and configuring the request, WinINet will perform the necessary steps to execute the request. WinINet depends on the Winsock library \cite{winsock} to setup the required network connections and Schannel \cite{schannel} is used to provide transparent support for SSL/TLS connections.
 
 \begin{figure}
     \centering
