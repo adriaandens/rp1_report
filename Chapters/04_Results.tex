@@ -82,29 +82,28 @@ Analyser 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a proce
 
 \subsection{Comparison with other malware analysis systems}
 
-To quantify the improvement that was made, several benchmarks were run against our improved version. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis\footnote{\url{http://anubis.iseclab.org/?action=advanced\_form}}, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
+To quantify the improvement that was made, several benchmarks were run against our improved version, henceforth called ``Roadrunner''\footnote{http://en.wikipedia.org/wiki/Geococcyx}. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis\footnote{\url{http://anubis.iseclab.org/?action=advanced\_form}}, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
 
-The benchmark, for the unmodified Cuckoo, consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because the adapted version does not have this status, the benchmark for this version of Cuckoo stops when the \texttt{mass-analyse.py} script exits. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time.
+The benchmark, for the unmodified Cuckoo, consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because Roadrunner does not have this status, the benchmark stops when the \texttt{mass-analyse.py} script exits. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time.
 
-Benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and each benchmark was run 25 times to filter out anomalities.
+For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and each benchmark was run 25 times to filter out anomalities. Cuckoo and Anubis were both run 25 times, each with a different URL. Because both only run one URL at a given time, there is no real use in executing it with a different amount of URLs. It will be a linear increase in time with more URLs.
 
-Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives the mean over all 25 runs given \textit{X} URLs for the unmodified and modified Cuckoo respectively. It then makes a comparison between the execution time of those two versions. As can be seen from the table, for 1 URL there is already an improvement of 313\% and for more than 10 URLs, our version is at least ten times as fast.
+Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives mean time over 25 runs of Roadrunner with the amount of URLs. For Cuckoo and Anubis, the mean of the 25 runs with 1 URL was calculated and extrapolated to higher URL counts. A comparison in the speed between Cuckoo and Roadrunner has also been made. Although the difference is significant, a sidenote must be made that speed is not the primary goal of Cuckoo and that Cuckoo, if wanted, can be speeded up by configuration tweaks.
 
-Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows a boxplot which compares the boxplot of the reference version with our modified version.\todo{Meer uitleg maar we hebben nog niet alle data} Figure \ref{fig:chart-trend} shows an interpolation and extrapolation of the results.
+Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows the boxplots of the different runs. We can say that for a lower amount of URLs, there's less variance in the time it takes to complete. Figure \ref{fig:chart-trend} is a visual representation of table \ref{tbl:results}, on the x-axis we see the number of URLs; the y-axis the time it takes to analyse these URLs. 
 
 
-\todo{Boxplot voor elk aantal URLs voor reference Cuckoo}
 \begin{figure}[h]
     \centering
     \centerline{\includegraphics[width=17cm]{Images/chart-box.png}}
-    \caption{Boxplot}
+    \caption{Less variance on lower URL counts.}
     \label{fig:chart-box}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \centerline{\includegraphics[width=17cm]{Images/chart-trend}}
-    \caption{Interpolation of the results. (Logaritmic scale)}
+    \caption{Interpolation and extrapolation of results. Roadrunner is in all cases faster than both systems which run sequentially.}
     \label{fig:chart-trend}
 \end{figure}
 
