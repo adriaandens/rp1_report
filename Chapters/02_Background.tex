@@ -22,7 +22,7 @@ What happens after a malware infection depends on the malware and the goals of t
 
 While some malware communicates directly with the kernel (via so-called system calls), most malware \cite{MaliciousAPIs} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
 
-A special class of malware \cite{ZeroAccess,Gameover} is formed by those that infiltrate the operating system kernel by loading malicious drivers. Such malware is called a rootkit and is very hard to detect and analyse as it runs with the highest possible priviliges. This allows it to hide itselfs, files, network connections and other applications for the user and normal applications from the moment the driver is loaded.
+A special class of malware \cite{ZeroAccess,Gameover} is formed by those that infiltrate the operating system kernel by loading malicious drivers. Such malware is called a rootkit and is very hard to detect and analyse as it runs with the highest possible privileges. This allows it to hide itself, files, network connections and other applications for the user and normal applications from the moment the driver is loaded.
 
 \subsection{Libraries and APIs}
 
@@ -43,7 +43,7 @@ The technical implementation of API hooking is highly complex and platform speci
 \begin{figure}
     \centering
     \includegraphics[width=14.7cm]{Images/API-hooking.png}
-    \caption{Example of how an API function can be hooked at runtime by overwriting the first bytes with a jump to a substitue function. If the original function has to be preserved, an trampoline is added which consists of the overwritten bytes of the original function. \cite{APIHookImage}}
+    \caption{Example of how an API function can be hooked at runtime by overwriting the first bytes with a jump to a substitute function. If the original function has to be preserved, a trampoline is added which consists of the overwritten bytes of the original function. \cite{APIHookImage}}
     \label{fig:apihooking}
 \end{figure}
 

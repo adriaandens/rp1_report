@@ -24,7 +24,7 @@ What follows is a short overview of how the algorithm was implemented, the actua
 
 \subsection{Running the PoC}
 
-Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \ref{code:run} shows how the PoC is run. As explained in section \ref{sec:setup} the URL list contains the Top 20 most visited websites and some malware websites. Figure \ref{fig:graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns and the purple dots which indicate shell command executions. The analyser run in phase 3 succesfully found this anomality and reports it back to the user. A graph of the browsing context in which this anomality occured is also shown to the user, as can be seen in figure \ref{fig:subgraph}.
+Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \ref{code:run} shows how the PoC is run. As explained in section \ref{sec:setup} the URL list contains the Top 20 most visited websites and some malware websites. Figure \ref{fig:graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns and the purple dots which indicate shell command executions. The analyser run in phase 3 successfully found this anomality and reports it back to the user. A graph of the browsing context in which this anomality occurred is also shown to the user, as can be seen in figure \ref{fig:subgraph}.
 
 \begin{lstlisting}[caption={Mass analyser being run},label={code:run}]
 $ python cuckoo.py &

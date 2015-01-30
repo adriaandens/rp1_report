@@ -37,7 +37,7 @@ The library used by Chromium for network access is custom developed and tightly 
 
 Safari uses a dedicated process for every tab until a certain limit is reached. Once this limit is reached, multiple tabs are hosted in a single process. The network operations for the main and tab processes is concentrated in a dedicated process. Only this process will retrieve the webpages and use IPC mechanics to deliver the result to the correct process. 
 
-CFNetwork is the library that is used by Safari for its network access. This library is one of the core frameworks of the OS X operating system and available for all applications. It provides interfaces for all relevant web related protocols. A unified interface called NSUrl, similarily to other browsers, is also available. However, because of the closed-source nature of Safari it is not possible without an extensive reverse engineering effort to determine if it is used instead of directly using the provided APIs of the CFNetwork library.
+CFNetwork is the library that is used by Safari for its network access. This library is one of the core frameworks of the OS X operating system and available for all applications. It provides interfaces for all relevant web related protocols. A unified interface called NSUrl, similarly to other browsers, is also available. However, because of the closed-source nature of Safari it is not possible without an extensive reverse engineering effort to determine if it is used instead of directly using the provided APIs of the CFNetwork library.
 
 \iffalse
 
