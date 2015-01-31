@@ -7,7 +7,7 @@ What follows is a short overview of how the algorithm was implemented, the actua
 \begin{enumerate}
 \item \textbf{Visit} To support the parallel visiting of URLs in one virtual machine, Cuckoo had to be extended. Support for this was added using tabs, but this left us with a problem to detect when a new URL was feeded to a tab (see \ref{99problems}). To solve this problem, every URL in this PoC is now opened in its own window.
 
-\item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created between the event itself and the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree\cite{qui}. \todo{Discuss all relations here?}
+\item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created between the event itself and the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree \cite{qui}. \todo{Discuss all relations here?}
 
 \item \textbf{Analyse} To implement the analysis phase of the algorithm, a simple analyser was written that detects process spawns below browsing contexts. Appendix A shows pseudo code of the analyser.
 
