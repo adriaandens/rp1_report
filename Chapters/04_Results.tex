@@ -14,11 +14,19 @@ What follows is a short overview of how the algorithm was implemented, the actua
 \item \textbf{Report} Reporting is done on the commandline but generated graphs of anomalities are saved to the disk in the folder structure of Cuckoo.
 \end{enumerate}
 
+\subsubsection{Limitations}
+
+The proof of concept is in its current shape not suitable for 
+
+- Stability
+- Java?
+- Correlation 
+
 \subsubsection{Problems}
 \label{99problems}
 %\epigraph{I've got 99 problems but Cuckoo ain't one.}{Adriaan}
 
-\textbf{Opening a new URL in the same browser context} was not detectable by the monitored API calls. On top of that, processes were reused when a browsing context was closed and a new one was opened, this made it essentially the same as reusing the browsing context. Internet Explorer also behaves differently when interacting with the automation interface (COM) compared to real user interaction, leaving us without certain registry values that could be used to detect the opening of a new URL. Therefor we decided to use a new Internet Explorer process for each URL which gives us a process ID per browser context.
+\textbf{Opening a new URL in the same browser context} was not detectable by the monitored API calls. On top of that, processes were reused when a browsing context was closed and a new one was opened, this made it essentially the same as reusing the browsing context. Internet Explorer also behaves differently when interacting with the automation interface (COM) compared to real user interaction, leaving us without distinct API calls (like modifying certain registry values or files) that could be used to detect the opening of a new URL. Therefor we decided to use a new Internet Explorer process for each URL which gives us a process ID per browser context.
 
 \textbf{Working with JSON} was extremely slow in Cuckoo. After the virtual machine has done its work, BSON files are transferred to the host machine. These BSON files are then parsed by Cuckoo and analysed after which a JSON file is written. Our \texttt{mass-analyse.py} depended on this JSON, which made it very slow to use. A BSON parser was written to skip the whole JSON step and thus we were able to work earlier on the data, giving us a dramatic speedup.
 
@@ -86,26 +94,11 @@ To quantify the improvement that was made, several benchmarks were run against o
 
 The benchmark, for the unmodified Cuckoo, consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because Roadrunner does not have this status, the benchmark stops when the \texttt{mass-analyse.py} script exits. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time.
 
-For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and each benchmark was run 25 times to filter out anomalities. Cuckoo and Anubis were both run 25 times, each with a different URL. Because both only run one URL at a given time, there is no real use in executing it with a different amount of URLs. It will be a linear increase in time with more URLs.
+For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and each benchmark was run 25 times to filter out anomalities. If the benchmark crashed (or hit the critical time-out) the measurement was thrown away as this is a known issue\footnote{The monitor component of Cuckoo is under active development and a significant upgrade is expected in the coming months.}, but no easy workaround was available.  Cuckoo and Anubis were both run 25 times, each with a different URL. Because both only run one URL at a given time, there is no real use in executing it with a different amount of URLs as it will be a linear increase in time with more URLs. The expected duration is calculated by multiplying the amount of URLs with the average time a single URL took.
 
-Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives mean time over 25 runs of Roadrunner with the amount of URLs. For Cuckoo and Anubis, the mean of the 25 runs with 1 URL was calculated and extrapolated to higher URL counts. A comparison in the speed between Cuckoo and Roadrunner has also been made. Although the difference is significant, a sidenote must be made that speed is not the primary goal of Cuckoo and that Cuckoo, if wanted, can be speeded up by configuration tweaks.
+Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives mean time over 25 runs of Roadrunner with the amount of URLs. For Cuckoo and Anubis, the mean of the 25 runs with 1 URL was calculated and extrapolated to higher URL counts. A comparison in the speed between Cuckoo and Roadrunner has also been made. Although the difference is significant, a important sidenote must be made that speed is not the primary goal of Cuckoo and that Cuckoo, if wanted, can be speeded up by configuration tweaks. The changes made to speedup the proof of concept removed a lot of the detailled insights Cuckoo gives in the behaviour of malware as for this project only the data that makes it possible to detect that there is some malicious activity is important, not detailled insight of what the exact behaviour of the malware is.
 
 Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows the boxplots of the different runs. We can say that for a lower amount of URLs, there's less variance in the time it takes to complete. Figure \ref{fig:chart-trend} is a visual representation of table \ref{tbl:results}, on the x-axis we see the number of URLs; the y-axis the time it takes to analyse these URLs. 
-
-
-\begin{figure}[h]
-    \centering
-    \centerline{\includegraphics[width=17cm]{Images/chart-box.png}}
-    \caption{Less variance on lower URL counts.}
-    \label{fig:chart-box}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \centerline{\includegraphics[width=17cm]{Images/chart-trend}}
-    \caption{Interpolation and extrapolation of results. Roadrunner is in all cases faster than both systems which run sequentially.}
-    \label{fig:chart-trend}
-\end{figure}
 
 \begin{table}[h]
 \begin{tabular}{@{}lllllll@{}}
@@ -116,6 +109,20 @@ Cuckoo       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     &
 Roadrunner& 48,8s    & 74,8s    & 102,4s       & 160,1s       & 286,4s      & 450,9s   \\
 Improvement(\%)                   & 313,1\%  & 1021,5\% & 1492,4\%     & 2386,3\%     & 2667,9\%    & 3389,2\% \\ \bottomrule
 \end{tabular}
-\caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds.}
+\caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds. The improvement is calculated against Cuckoo.}
 \label{tbl:results}
 \end{table}
+
+\begin{figure}[h!]
+    \centering
+    \centerline{\includegraphics[width=17cm]{Images/chart-box.png}}
+    \caption{Less variance on lower URL counts.}
+    \label{fig:chart-box}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \centerline{\includegraphics[width=17cm]{Images/chart-trend}}
+    \caption{A line chart with the results of the benchmarks. To give an indication about how long it would take for higher amounts of URLs, the data has been extrapolated for up to 1000 URLs. Roadrunner is in all cases faster then both existing systems which run sequentially.}
+    \label{fig:chart-trend}
+\end{figure}
