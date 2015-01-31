@@ -1,10 +1,10 @@
-For a better insight into the project, it is necessary to introduce certain theoretical concepts first. The next chapter will use this theory as a basis for the design and development of the algorithm.
+For a better insight into the project, it is necessary to introduce certain theoretical concepts first. The next section will use this theory as a basis for the design and development of the algorithm.
 
 \subsection{Drive-by downloads}
 
-Browsing the internet with an unpatched system can be dangerous. All software contains mistakes and fixes are released on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software without the user noticing. Such mistakes are called vulnerabilities.
+Browsing the Internet with an unpatched system can be dangerous. All software contains mistakes and fixes are released on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software without the user noticing. Such mistakes are called vulnerabilities.
 
-If such vulnerability is used to take control over the web browser (or one of its plugins like Flash or Java) and download malicious software to the system, then this is called a drive-by download\cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
+If such vulnerability is used to take control over the web browser (or one of its plug-ins like Flash or Java) and download malicious software to the system, then this is called a drive-by download\cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
 
 By compromising the web browser and injecting malicious code (called exploitation), the malware gets full control over the infected process, running with the same privileges as the web browser on the host system. Depending on the system configuration this either means that the system is now under the control of the attacker or that additional steps are required to escalate the privileges to the intended level.
 
@@ -18,11 +18,11 @@ By compromising the web browser and injecting malicious code (called exploitatio
 \subsubsection{Behaviour}
 \label{sec:behavior}
 
-What happens after a malware infection depends on the malware and the goals of the attacker. Common goals are persistence of the malware and further exploitation. The former is achieved by writing executable code to the disk and optionally changing several configuration files to make sure the code is executed at certain events, for example after reboot. The latter is achieved by dowloading further malicious components for the next stage. We thus expect to see filesystem operations and additional network traffic after the first exploit.
+What happens after a malware infection depends on the malware and the goals of the attacker. Common goals are persistence of the malware and further exploitation. The former is achieved by writing executable code to the disk and optionally changing several configuration files to make sure the code is executed at certain events, for example after rebooting. The latter is achieved by dowloading further malicious components for the next stage. We thus expect to see file system operations and additional network traffic after the first exploit.
 
 While some malware communicates directly with the kernel (via so-called system calls), most malware \cite{MaliciousAPIs} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
 
-A special class of malware \cite{ZeroAccess,Gameover} is formed by those that infiltrate the operating system kernel by loading malicious drivers. Such malware is called a rootkit and is very hard to detect and analyse as it runs with the highest possible privileges. This allows it to hide itself, files, network connections and other applications for the user and normal applications from the moment the driver is loaded.
+A special class of malware \cite{ZeroAccess,Gameover} is formed by those that infiltrate the operating system kernel by loading malicious drivers. Such malware is called a rootkit and is very hard to detect and analyse as it runs with the highest possible privileges. From the moment the driver is loaded it is able to hide itself, files, network connections and other applications from the user and normal applications.
 
 \subsection{Libraries and APIs}
 
@@ -36,9 +36,9 @@ Because the linker has to know all exported functions and their location, a symb
 
 \subsubsection{API hooking}
 
-API hooking is a widely used technique to monitor or change the behaviour of applications. With API hooking, the original function is replaced by a substitute (or hook). This substitute function, for example, first logs the performed operation and then calls the original function. Or the substitute could be a custom replacement of the original function.
+API hooking is a widely used technique to monitor or change the behaviour of applications. With API hooking the original function is replaced by a substitute (or hook). This substitute function, for example, first logs the performed operation and then calls the original function. Or the substitute could be a custom replacement of the original function.
 
-The technical implementation of API hooking is highly complex and platform specific. Many different techniques\cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or modification of the application or system is undesired, the function to be hooked can be overwritten in memory with a replacement or jump to a different location in memory as can be seen in figure \ref{fig:apihooking}. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else (a so-called trampoline).
+The technical implementation of API hooking is highly complex and platform specific. Many different techniques \cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or the modification of the application or system is undesired, the function to be hooked can be overwritten in memory with a replacement or a jump to a different location in memory as can be seen in figure \ref{fig:apihooking}. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else (a so-called trampoline).
 
 \begin{figure}
     \centering
