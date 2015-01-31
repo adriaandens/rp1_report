@@ -31,7 +31,7 @@ To be platform independent, Firefox does not directly interface with the provide
     \label{fig:chrome_network}
 \end{figure}
 
-The library used by Chromium for network access is custom developed and tightly integrated in the engine. It provides similar functionality as Necko and WinINet using a high-level interface (see figure \ref{fig:chrome_network}) but it also contains low-level interfaces that uses the operating system's socket APIs direct. To provide transparent SSL/TLS support, the same library as Firefox is used, NSS.
+The library used by Chromium for network access is custom developed and tightly integrated in the engine. It provides similar functionality as Necko and WinINet, using a high-level interface (see figure \ref{fig:chrome_network}), but it also contains low-level interfaces that use the operating system's socket APIs directly. To provide transparent SSL/TLS support, the same library as Firefox is used, NSS.
 
 \textbf{Safari} is the last browser that was examined in this project. Since 2011\footnote{https://lists.webkit.org/pipermail/webkit-help/2011-July/002298.html} support for using multiple processes has been added. Safari is closed-source but built on top of many open-source components like JavaScriptCore and WebKit.
 

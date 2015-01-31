@@ -1,7 +1,7 @@
 % :( No more epic citations in final report
 %\epigraph{You're the chosen one, Cuckoo.}{Adriaan}
 
-For the Proof of Concept (PoC), Cuckoo \cite{cuckoo} will be used. Cuckoo is a malware analysis system that runs malware in a virtual environment, tracks its behaviour and reports these results to the user. The focus of the proof of concept will be on the gathering and processing of the data. The actual analysis is outside the scope of this project, except a simple demonstration analyser that is able to detect spawning processes. As such, no validation of the effectiveness to detect malware will be performed. 
+For the Proof of Concept (PoC), Cuckoo \cite{cuckoo} will be used. Cuckoo is a malware analysis system that runs malware in a virtual environment, tracks its behaviour and reports these results to the user. The focus of the proof of concept will be on the gathering and processing of the data. The actual detection of malware is outside the scope of this project, only a simple analyser will be written to show the working of the algorithm. As such, no validation of the effectiveness to detect malware will be performed. 
 
 Cuckoo was chosen because it already implements a great deal of the prerequisites of the algorithm, discussed in \ref{sec:prereq}. Cuckoo, through Cuckoomon \cite{cuckoomon}, provides a series of hooks which monitors calls between the browser and the operating system.
 
@@ -13,14 +13,14 @@ As explained in \ref{sec:brie}, Internet Explorer uses Windows' ``Schannel'' \ci
 
 As already explained, Cuckoo uses Cuckoomon, which uses hooks to monitor calls, to keep track of the browser activity. Besides adding a few new hooks and deleting irrelevant hooks for drive-by downloads, nothing major has to be changed to Cuckoomon. The list of hooks to be added and to be deleted can be found in Appendix \ref{cuckoomonmods}.
 
-The current development version, \texttt{1.2-dev},  only accepts one URL at a time. To allow for concurrently visiting multiple websites in one sandbox environment, Cuckoo has to be extended.
+The current development version, \texttt{1.2-dev},  only accepts one URL at a time. To allow for concurrently visiting multiple web sites in one sandbox environment, Cuckoo has to be extended.
 
 \subsubsection{The setup}
 \label{sec:setup}
 
 To test the algorithm, we will use the adapted Cuckoo with Virtualbox as the sandbox environment. As the virtual machine's operating system, we will use Windows 7 as this is widely used and also frequently targeted by malware developers. As the browser, we will use Internet Explorer 8\todo{Ook misschien verwijzen naar de theorie dat doordat IE zijn process model deze het makkelijkst te monitoren is?} to actually allow the malware to successfully perform the drive-by download.
 
-The adapted Cuckoo will be provisioned with the top 20 of most visited websites in the Netherlands\footnote{http://www.alexa.com/topsites/countries/NL}, and one website who serves a drive-by download which spawns processes.
+The adapted Cuckoo will be provisioned with the top 20 of most visited web sites in the Netherlands\footnote{http://www.alexa.com/topsites/countries/NL}, and one website who serves a drive-by download which spawns processes.
 
 The structure of the graph will be tree-like, as suggested in \ref{sec:algos2}. Figure \ref{fig:alg_tree} shows an example graph of a website with a drive-by download.
 
