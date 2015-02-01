@@ -7,7 +7,7 @@ What follows is a short overview of how the algorithm was implemented, the actua
 \begin{enumerate}
 \item \textbf{Visit} To support the parallel visiting of URLs in one virtual machine, Cuckoo had to be extended. Support for this was added using tabs, but this left us with a problem to detect when a new URL was feeded to a tab (see \ref{99problems}). To solve this problem, every URL in this PoC is now opened in its own window.
 
-\item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created between the event itself and the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree \cite{qui}. \todo{Discuss all relations here?}
+\item \textbf{Process} In this step, the API calls were bundled into ten different events before being added to the graph. If no relation was found between an event and a previous event, an edge was created between the event itself and the event which represents the browser context. The HTTP `Referer' header was used to find relations between HTTP events, essentially creating a referer tree \cite{qui}. %\todo{Discuss all relations here?}
 
 \item \textbf{Analyse} To implement the analysis phase of the algorithm, a simple analyser was written that detects process spawns below browsing contexts. Appendix A shows pseudo code of the analyser.
 
@@ -16,11 +16,11 @@ What follows is a short overview of how the algorithm was implemented, the actua
 
 \subsubsection{Limitations}
 
-The proof of concept is in its current shape not suitable for 
+The proof of concept is in its current shape not ready for deployment. While tests during the development with real malware suggests that even this simplistic analyser is able to detect certain malware families, more advanced analysers should be developped first. The current analyser has also the downside that it would give a false positive on a website that uses Java applets. While none of the tested websites uses such applets, it should be considered to add a whitelist of processes that can legitimately be started by browser plug-ins.
 
-- Stability
-- Java?
-- Correlation 
+Another issue is the stability of the proof of concept. In up to twenty percent of the cases, the proof of concept would never go to the completed state. As this was not related to a specific website or malware sample, this is not seen as a fundamental mistake in the algorithm, but a bug in the implementation. No time was available to resolve this issue and a major update for Cuckoo is around the corner that resolves several known issues.
+
+The last issue is that it remains hard to correlate events. For example, the correlation between an HTTP request and file write is missed in most cases. More advanced analysers should resolve this issue, for example with content-based matching and identification.
 
 \subsubsection{Problems}
 \label{99problems}
@@ -33,6 +33,8 @@ The proof of concept is in its current shape not suitable for
 \subsection{Running the PoC}
 
 Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \ref{code:run} shows how the PoC is run. As explained in section \ref{sec:setup} the URL list contains the Top 20 most visited websites and some malware websites. Figure \ref{fig:graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns and the purple dots which indicate shell command executions. The analyser run in phase 3 successfully found this anomality and reports it back to the user. A graph of the browsing context in which this anomality occurred is also shown to the user, as can be seen in figure \ref{fig:subgraph}.
+
+\pagebreak
 
 \begin{lstlisting}[caption={Mass analyser being run},label={code:run}]
 $ python cuckoo.py &
@@ -98,7 +100,21 @@ For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and 
 
 Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives mean time over 25 runs of Roadrunner with the amount of URLs. For Cuckoo and Anubis, the mean of the 25 runs with 1 URL was calculated and extrapolated to higher URL counts. A comparison in the speed between Cuckoo and Roadrunner has also been made. Although the difference is significant, a important sidenote must be made that speed is not the primary goal of Cuckoo and that Cuckoo, if wanted, can be speeded up by configuration tweaks. The changes made to speedup the proof of concept removed a lot of the detailed insights Cuckoo gives in the behaviour of malware. For this project, however, only the data that makes it possible to detect malicious activity is of importance, not detailed insight of the exact behaviour of malware.
 
-Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows the boxplots of the different runs. We can say that for a lower amount of URLs, there's less variance in the time it takes to complete. Figure \ref{fig:chart-trend} is a visual representation of table \ref{tbl:results}, on the x-axis we see the number of URLs; the y-axis the time it takes to analyse these URLs. 
+Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows the boxplots of the different runs. We can say that for a higher amount of URLs, there's bigger variance in the time it takes to complete. It was not expected this would result in such (relatively) big spreading and there is no satisfactorily explanation for this behaviour. The expected result was that the differences between web sites would even out on higher URL counts. Figure \ref{fig:chart-trend} is a visual representation of table \ref{tbl:results}, on the x-axis we see the number of URLs; the y-axis the time it takes to analyse these URLs. 
+
+\setcounter{savepage}{\arabic{page}}
+\stepcounter{savepage}
+\pagebreak
+
+\pagenumbering{gobble}
+\newgeometry{left=3cm,top=2.5cm,bottom=0.1cm}
+
+\begin{figure}[h!]
+    \centering
+    \centerline{\includegraphics[width=15cm]{Images/chart-box.png}}
+    \caption{A boxplot of the benchmark durations. A higher URL count results in a higher variance of the duration.}
+    \label{fig:chart-box}
+\end{figure}
 
 \begin{table}[h]
 \begin{tabular}{@{}lllllll@{}}
@@ -115,14 +131,14 @@ Improvement(\%)                   & 313,1\%  & 1021,5\% & 1492,4\%     & 2386,3\
 
 \begin{figure}[h!]
     \centering
-    \centerline{\includegraphics[width=17cm]{Images/chart-box.png}}
-    \caption{Less variance on lower URL counts.}
-    \label{fig:chart-box}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \centerline{\includegraphics[width=17cm]{Images/chart-trend}}
+    \centerline{\includegraphics[width=15cm]{Images/chart-trend}}
     \caption{A line chart with the results of the benchmarks. To give an indication how long it would take for higher amounts of URLs, the data has been extrapolated for up to 1000 URLs. Roadrunner is in all cases faster than both existing systems which run sequentially.}
     \label{fig:chart-trend}
 \end{figure}
+
+\stepcounter{savepage}
+\pagebreak
+
+\restoregeometry
+\pagenumbering{arabic}
+\setcounter{page}{\thesavepage}

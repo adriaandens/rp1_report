@@ -11,16 +11,16 @@ These hooks, conveniently, also monitor the network calls made by the browser. A
 
 As explained in \ref{sec:brie}, Internet Explorer uses Windows' ``Schannel'' \cite{schannel} to encrypt HTTP requests and decrypt HTTP responses. This will allow us to monitor traffic on the operating system level without any need for a proxy to decrypt the traffic.
 
-As already explained, Cuckoo uses Cuckoomon, which uses hooks to monitor calls, to keep track of the browser activity. Besides adding a few new hooks and deleting irrelevant hooks for drive-by downloads, nothing major has to be changed to Cuckoomon. The list of hooks to be added and to be deleted can be found in Appendix \ref{cuckoomonmods}.
+As already explained, Cuckoo uses Cuckoomon, which uses hooks to monitor calls, to keep track of the browser activity. Besides adding a few new hooks and deleting irrelevant hooks for drive-by downloads, nothing major has to be changed to Cuckoomon. The list of hooks to be added and to be deleted can be found in Appendix C.
 
 The current development version, \texttt{1.2-dev},  only accepts one URL at a time. To allow for concurrently visiting multiple web sites in one sandbox environment, Cuckoo has to be extended.
 
 \subsubsection{The setup}
 \label{sec:setup}
 
-To test the algorithm, we will use the adapted Cuckoo with Virtualbox as the sandbox environment. As the virtual machine's operating system, we will use Windows 7 as this is widely used and also frequently targeted by malware developers. As the browser, we will use Internet Explorer 8\todo{Ook misschien verwijzen naar de theorie dat doordat IE zijn process model deze het makkelijkst te monitoren is?} to actually allow the malware to successfully perform the drive-by download.
+To test the algorithm, we will use the adapted Cuckoo with Virtualbox as the sandbox environment. As the virtual machine's operating system, we will use Windows 7 as this is widely used and also frequently targeted by malware developers. As browser, we will use Internet Explorer 8. This browser doesn't implement the latest vulnerability mitigations, is still supported by the vendor. This makes it a relative easy and populair target for drive-by downloads. % to actually allow the malware to successfully perform the drive-by download.
 
-The adapted Cuckoo will be provisioned with the top 20 of most visited web sites in the Netherlands\footnote{http://www.alexa.com/topsites/countries/NL}, and one website who serves a drive-by download which spawns processes.
+The adapted Cuckoo will be provisioned with the top 20 of most visited web sites in the Netherlands\footnote{http://www.alexa.com/topsites/countries/NL} and one website who serves a drive-by download which spawns processes.
 
 The structure of the graph will be tree-like, as suggested in \ref{sec:algos2}. Figure \ref{fig:alg_tree} shows an example graph of a website with a drive-by download.
 
