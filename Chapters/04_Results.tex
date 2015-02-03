@@ -16,11 +16,11 @@ What follows is a short overview of how the algorithm was implemented, the actua
 
 \subsubsection{Limitations}
 
-The proof of concept is in its current shape not ready for deployment. While tests during the development with real malware suggests that even this simplistic analyser is able to detect certain malware families, more advanced analysers should be developped first. The current analyser has also the downside that it would give a false positive on a website that uses Java applets. While none of the tested websites uses such applets, it should be considered to add a whitelist of processes that can legitimately be started by browser plug-ins.
+The proof of concept in its current stage is not ready for deployment. While tests during the development with real malware suggest that even a simplistic analyser is able to detect certain malware families, more advanced analysers should be developed. The current analyser also gives a false positive on a website that uses Java applets. While none of the tested websites use such applets, it should be considered to add a whitelist of processes that can legitimately be started by browser plug-ins.
 
-Another issue is the stability of the proof of concept. In up to twenty percent of the cases, the proof of concept would never go to the completed state. As this was not related to a specific website or malware sample, this is not seen as a fundamental mistake in the algorithm, but a bug in the implementation. No time was available to resolve this issue and a major update for Cuckoo is around the corner that resolves several known issues.
+Another limitation is the stability of the proof of concept. In up to twenty percent of the cases, the proof of concept would never go to the completed state. As this was not related to a specific website or malware sample, this is not seen as a fundamental mistake in the algorithm, but a bug in the implementation. No time was available to resolve this issue and a major update for Cuckoo is around the corner that resolves several known issues.
 
-The last issue is that it remains hard to correlate events. For example, the correlation between an HTTP request and file write is missed in most cases. More advanced analysers should resolve this issue, for example with content-based matching and identification.
+The last limitation is that it remains hard to correlate events. For example, the correlation between an HTTP request and file write is missed in most cases. More advanced analysers should resolve this issue, for example with content-based matching and identification.
 
 \subsubsection{Problems}
 \label{99problems}
@@ -45,7 +45,7 @@ INFO:root:Parse log....
 PID 2876 'iexplore.exe' spawned from parent PID 2860
 Visiting: http://google.com/
 PID 3656 'iexplore.exe' spawned from parent PID 2860
-Visiting: http://malware-site.com/
+Visiting: http://unsuspicious.com/
 PID 2108 'iexplore.exe' spawned from parent PID 2860
 Visiting: http://google.nl/
 PID 3064 'iexplore.exe' spawned from parent PID 2860
@@ -57,7 +57,7 @@ PID 2848 'repfix.exe' spawned from parent PID 3656
 PID 1944 'rundll32.exe' spawned from parent PID 3728
 PID 3780 'ynuni.exe' spawned from parent PID 2848
 [...]
-Analyser 'Subprocess_from_tab': The URL 'http://malware-site.com' spawns a process called 'control.exe', 'repfix.exe', 'rundll32.exe' and     'ynuni.exe'.
+Analyser 'Subprocess_from_tab': The URL 'http://unsuspicious.com' spawns a process called 'control.exe', 'repfix.exe', 'rundll32.exe' and     'ynuni.exe'.
 \end{lstlisting}
 
 \setcounter{savepage}{\arabic{page}}
@@ -116,6 +116,19 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
     \label{fig:chart-box}
 \end{figure}
 
+\begin{table}[h]
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+                                  & 1 URL   & 10 URLs  & 100 URLs \\ \midrule
+Anubis                            & 273,8s  & 2738,4s  & 27384,0s \\                                  
+Cuckoo                            & 152,8s  & 1528,2s  & 15281,8s \\
+Roadrunner                        & 48,8s   & 102,4s   & 450,9s   \\
+Improvement RR c.t. Cuckoo (\%)   & 313,1\% & 1492,4\% & 3389,2\% \\
+Improvement RR c.t. Anubis (\%)   & 313,1\% & 1492,4\% & 3389,2\% \\ \bottomrule
+\end{tabular}
+\caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds.}
+\label{tbl:results}
+\end{table}
 \begin{table}[h]
 \begin{tabular}{@{}lllllll@{}}
 \toprule
