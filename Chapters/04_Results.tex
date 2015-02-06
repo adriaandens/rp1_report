@@ -14,11 +14,11 @@ What follows is a short overview of how the algorithm was implemented, the actua
 \item \textbf{Report} Reporting is done on the commandline but generated graphs of anomalities are saved to the disk in the folder structure of Cuckoo.
 \end{enumerate}
 
-\subsubsection{Limitations}
+\subsubsection{Limitations PoC}
 
-The proof of concept in its current stage is not ready for deployment. While tests during the development with real malware suggest that even a simplistic analyser is able to detect certain malware families, more advanced analysers should be developed. The current analyser also gives a false positive on a website that uses Java applets. While none of the tested websites use such applets, it should be considered to add a whitelist of processes that can legitimately be started by browser plug-ins.
+The proof of concept in its current state is not ready for deployment. While tests during the development with real malware suggest that even a simplistic analyser is able to detect certain malware families, more advanced analysers should be developed. The current analyser also gives a false positive on a website that uses Java applets. While none of the tested websites use such applets, creating a whitelist of processes that can legitimately be started by browser plug-ins should be considered.
 
-Another limitation is the stability of the proof of concept. In up to twenty percent of the cases, the proof of concept would never go to the completed state. As this was not related to a specific website or malware sample, this is not seen as a fundamental mistake in the algorithm, but a bug in the implementation. No time was available to resolve this issue and a major update for Cuckoo is around the corner that resolves several known issues.
+Another limitation is the stability of the proof of concept. In up to twenty percent of the cases, the proof of concept would never go to a completed state. As this was not related to a specific website or malware sample, this is not seen as a fundamental mistake in the algorithm, but a bug in the implementation. No time was available to resolve this issue and a major update for Cuckoo is around the corner that resolves several known issues.
 
 The last limitation is that it remains hard to correlate events. For example, the correlation between an HTTP request and file write is missed in most cases. More advanced analysers should resolve this issue, for example with content-based matching and identification.
 
