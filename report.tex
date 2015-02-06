@@ -93,7 +93,7 @@ Wouter Katz\\\texttt{wouter.katz@ncsc.nl}
 
 \section*{Abstract}
 
-Current malware analysis systems do not allow for concurrently visiting multiple websites. In this paper we present an algorithm which solves this problem by extensive monitoring of the environment. Additionally, a proof of concept has been developed which implements this algorithm. Results show a significant performance gain compared to current systems.
+Current malware analysis systems do not allow for concurrently visiting multiple websites. In this paper we present an algorithm which solves this problem by hooking into the APIs that a browser uses. The data received from the API hooking is added into a graph (without loosing the URL context), after which analysis of malware can be done. Additionally, a proof of concept has been developed which implements this algorithm. Results show a significant performance gain compared to current systems.
 
 \clearpage
 

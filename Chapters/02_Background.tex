@@ -2,9 +2,9 @@ For a better insight into the project, it is necessary to introduce certain theo
 
 \subsection{Drive-by downloads}
 
-Browsing the Internet with an unpatched system can be dangerous. All software contains mistakes and fixes are released on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software without the user noticing. Such mistakes are called vulnerabilities.
+Browsing the Internet with an unpatched system can be dangerous. Software contains mistakes and fixes for these mistakes are released on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software. Such mistakes are called vulnerabilities.
 
-If such vulnerability is used to take control over the web browser (or one of its plug-ins like Flash or Java) and download malicious software to the system, then this is called a drive-by download \cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
+If such a vulnerability is used to take control over the web browser (or one of its plug-ins like Flash or Java) and malicious software is downloaded to the system then this is called a drive-by download \cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
 
 By compromising the web browser and injecting malicious code (called exploitation), the malware gets full control over the infected process, running with the same privileges as the web browser on the host system. Depending on the system configuration this either means that the system is now under the control of the attacker or that additional steps are required to escalate the privileges to the intended level.
 
@@ -30,7 +30,7 @@ Libraries contain reusable parts of code to make the development of applications
 
 In the early days, libraries were primarily used by an application by statically linking to it. This means that the library becomes part of the application and it is no longer possible to determine which part of the application was originally part of the used libraries.
 
-For performance and maintainability, dynamic linking was invented. The application describes which libraries it needs and the linker of the operating system will glue the applications and its dependent libraries (which are defined in the import section of the application) together in the memory space of the application. This happens at runtime. 
+For size reduction and maintainability, dynamic linking was invented. The application describes which libraries it needs and the linker of the operating system will glue the applications and its dependent libraries (which are defined in the import section of the application) together in the memory space of the application. This happens at runtime. 
 
 Because the linker has to know all exported functions and their location, a symbol table is part of every dynamic library. The same information can be used to hook into a function during runtime or to trick the linker in loading a replacement for a function. This is called API hooking \cite{APIHookingRevealed}.
 
@@ -38,7 +38,7 @@ Because the linker has to know all exported functions and their location, a symb
 
 API hooking is a widely used technique to monitor or change the behaviour of applications. With API hooking the original function is replaced by a substitute (or hook). This substitute function, for example, first logs the performed operation and then calls the original function. Or the substitute could be a custom replacement of the original function.
 
-The technical implementation of API hooking is highly complex and platform specific. Many different techniques \cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or the modification of the application or system is undesired, the function to be hooked can be overwritten in memory with a replacement or a jump to a different location in memory as can be seen in figure \ref{fig:apihooking}. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else (a so-called trampoline).
+The technical implementation of API hooking is highly complex and platform specific. Many different techniques \cite{jbremer2012} of hooking are possible as well. If the start of the application can be controlled, the linker search path can be extended to include the replacement library. Alternatively, the import section of the application can be modified. When the application is already loaded or the modification of the application or system is undesired, the function to be hooked can be overwritten in memory with a replacement or a jump to a different location in memory as can be seen in figure \ref{fig:apihooking}. However, this will prevent the ability to execute the original function unless the overwritten bytes are carefully preserved and reconstructed somewhere else, a so-called trampoline.
 
 \begin{figure}
     \centering
@@ -47,7 +47,7 @@ The technical implementation of API hooking is highly complex and platform speci
     \label{fig:apihooking}
 \end{figure}
 
-In this project API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of the web browser and malware for later analysis.
+In this project, API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of the web browser and malware for later analysis.
 
 %\subsubsection{Alternatives}
 

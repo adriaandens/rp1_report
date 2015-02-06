@@ -1,8 +1,8 @@
-In the digital world of today, malware is still a massive and growing problem. While back in the day it was used to annoy users and system administrators, nowadays it is used for extortion, cyber espionage and surveillance by criminal groups and rivalling governments. One of the main risk factors to get infected with malware is a drive-by download while visiting a normal day-to-day website because, for example, the website got hacked and infected. 
+In the digital world of today, malware is still a massive and growing problem. While back in the day it was used to annoy users and system administrators, nowadays it is used for extortion, cyber espionage and surveillance by criminal groups and rivalling governments. One of the main causes of getting infected with malware is a drive-by download while visiting a normal day-to-day website because, for example, the website got hacked and infected. 
 
-In many cases \cite{proofpoint,foxittelegraaf,foxityahoo}, it was not the actual website but one of the advertisement networks that was infiltrated and which subsequently started serving malicious code hidden in innocently looking advertisement code. This is also called malvertising \cite{Li2012}.
+In many cases \cite{proofpoint,foxittelegraaf,foxityahoo} however, it was not the actual website but one of the advertisement networks that was infiltrated and which subsequently started serving malicious code hidden in innocently looking advertisement code. This is also called malvertising \cite{Li2012}.
 
-National CERT organisations are interested in an early detection of such threats. While automated systems to scan websites already exist, like Cuckoo\footnote{http://cuckoosandbox.org} and Anubis\footnote{http://anubis.iseclab.org}, one of the main difficulties is the time needed to analyse a single website and the maintenance needed to keep these systems up-to-date for the latest threats.
+National CERT organisations are interested in an early detection of such threats. While automated systems to scan websites already exist, like Cuckoo\footnote{http://cuckoosandbox.org} and Anubis\footnote{http://anubis.iseclab.org}, one of the main downsides is the time needed to analyse multiple websites.
 
 The goal of this research project is to develop an algorithm that makes it possible to examine multiple websites for the existence of malware using the same computer system and at the same time, increasing the speed at which detection can occur. The effectiveness of this algorithm will be proved by implementing it in a proof of concept.
 
@@ -29,7 +29,7 @@ To answer the research question, multiple sub-questions have been formulated:
 
 \subsection{Related work}
 
-The growing importance (and because of the economic losses) of malware resulted in many research projects in the last few years. The detection and analysis of malware has been researched from several different angles \cite{auto_malware,Chang2013} and resulted in many proposed static and dynamic analysis techniques.
+The growing importance of malware resulted in many research projects in the last few years. The detection and analysis of malware has been researched from several different angles \cite{auto_malware,Chang2013} and resulted in many proposed static and dynamic analysis techniques.
 
 In 2013, Le \textit{et al.} \cite{Le2013} presented a framework that describes the common stages and characteristics of a drive-by download attack. They described four stages from placing the malicious content on a webpage until the execution of the malicious activity.
 
