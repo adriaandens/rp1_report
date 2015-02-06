@@ -120,11 +120,10 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \begin{tabular}{@{}lllllll@{}}
 \toprule
                                   & 1 URL   & 10 URLs  & 100 URLs \\ \midrule
-Anubis                            & 273,8s  & 2738,4s  & 27384,0s \\                                  
-Cuckoo                            & 152,8s  & 1528,2s  & 15281,8s \\
-Roadrunner                        & 48,8s   & 102,4s   & 450,9s   \\
-Improvement RR c.t. Cuckoo (\%)   & 313,1\% & 1492,4\% & 3389,2\% \\
-Improvement RR c.t. Anubis (\%)   & 313,1\% & 1492,4\% & 3389,2\% \\ \bottomrule
+Anubis                            & \multicolumn{1}{r}{273,8s}  & \multicolumn{1}{r}{2810s}  & \multicolumn{1}{r}{\hbox{$\scriptstyle\sim$}27500s} \\                                  
+Cuckoo                            & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{1507s}  & \multicolumn{1}{r}{\hbox{$\scriptstyle\sim$}15000s} \\
+Roadrunner                        & \multicolumn{1}{r}{48,8s}   & \multicolumn{1}{r}{102,4s}   & \multicolumn{1}{r}{450,9s}   \\
+Improvement                       & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x}   & \multicolumn{1}{r}{33-60x} \\ \bottomrule
 \end{tabular}
 \caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds.}
 \label{tbl:results}
