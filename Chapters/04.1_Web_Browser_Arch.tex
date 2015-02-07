@@ -4,7 +4,7 @@ Modern web browsers are complex applications consisting of many components which
 
 All modern web browsers allow the usage of multiple tabs in a single window. The underlying implementations of those tabs differ greatly. Internet Explorer and Safari use only libraries provided by the operating system while Firefox and Chromium decided to use their own libraries. Some browsers decided to use multiple processes and sometimes even a new process for every single tab.
 
-\textbf{Internet Explorer} supports tabs since version 7 and version 8 was improved with the ability to run tabs in their own process (see figure \ref{fig:ie8proc}). This feature is called ``loosely-coupled IE'' \cite{IE8LCIE}, every process runs independently from the other processes and runs with its own network stack and instances of content plug-ins like Flash or Silverlight.
+\textbf{Internet Explorer} supports tabs since version 7 and version 8 was improved with the ability to run tabs in their own process (see Figure \ref{fig:ie8proc}). This feature is called ``loosely-coupled IE'' \cite{IE8LCIE}, every process runs independently from the other processes and runs with its own network stack and instances of content plug-ins like Flash or Silverlight.
 
 Starting each tab in its own process comes with an inevitable overhead of using more memory and a slower startup. For this reason a process in Internet Explorer can host multiple tabs. The number of tabs in a single process and the maximum number of processes is determined by the configuration. For backwards compatibility, Internet Explorer also provides the option to disable the usage of multiple processes and host all tabs in a single browser process.
 
@@ -32,7 +32,7 @@ To be platform independent, Firefox does not directly interface with the provide
     \label{fig:chrome_network}
 \end{figure}
 
-The library used by Chromium for network access is custom developed and tightly integrated into the engine. It provides similar functionality as Necko and WinINet, using a high-level interface (see figure \ref{fig:chrome_network}), but it also contains low-level interfaces that use the operating system's socket APIs directly. To provide transparent SSL/TLS support, the same library as Firefox is used: NSS.
+The library used by Chromium for network access is custom developed and tightly integrated into the engine. It provides similar functionality as Necko and WinINet, using a high-level interface (see Figure \ref{fig:chrome_network}), but it also contains low-level interfaces that use the operating system's socket APIs directly. To provide transparent SSL/TLS support, the same library as Firefox is used: NSS.
 
 \textbf{Safari} is the last browser that was examined in this project. Since 2011\footnote{https://lists.webkit.org/pipermail/webkit-help/2011-July/002298.html} support for using multiple processes has been added. Safari is closed-source but built on top of many open-source components like JavaScriptCore and WebKit.
 
