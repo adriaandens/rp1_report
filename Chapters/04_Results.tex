@@ -92,15 +92,15 @@ Analyser 'Subprocess_from_tab': The URL 'http://unsuspicious.com' spawns a proce
 
 \subsection{Comparison with other malware analysis systems}
 
-To quantify the improvement that was made, several benchmarks were run against our improved version, henceforth called ``Roadrunner''\footnote{http://en.wikipedia.org/wiki/Geococcyx}. Those benchmarks were compared with a development version of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis\footnote{\url{http://anubis.iseclab.org/?action=advanced\_form}}, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
+To quantify the improvement that was made, several benchmarks were run against our improved version, henceforth called ``Roadrunner''\footnote{http://en.wikipedia.org/wiki/Geococcyx}. Those benchmarks were compared with a development snapshot of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis. %, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
 
-The benchmark, for the unmodified Cuckoo, consists of provisioning Cuckoo with one or more URLs until Cuckoo changes the status to ``reported''. Because Roadrunner does not have this status, the benchmark stops when the \texttt{mass-analyse.py} script exits. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time.
+The benchmarks consists of provisioning the system with one or more URLs. With Cuckoo, the time is measured until the status changes to ``reported''. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time. The Roadrunner benchmark measures the time between submitting the URL list and the exit of the developped analysis script. Each benchmark was run 25 times to filter out anomalities.
 
-For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs and each benchmark was run 25 times to filter out anomalities. If the benchmark crashed (or hit the critical time-out) the measurement was thrown away as this is a known issue\footnote{The monitor component of Cuckoo is under active development and a significant upgrade is expected in the coming months.}, but no easy workaround was available.  Cuckoo and Anubis were both run 25 times, each with a different URL. Because both only run one URL at a given time, there is no real use in executing it with a different amount of URLs as it will be a linear increase in time with more URLs. The expected duration is calculated by multiplying the amount of URLs with the average time a single URL took.
+For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs. If the benchmark crashed (or hit the critical time-out) the measurement was thrown away as this is a known issue\footnote{The monitor component of Cuckoo is under active development and a significant upgrade is expected in the coming months.}, but no easy workaround was available. Because Anubis is a hosted system outside our control, it was not possible to run the benchmark with high(er) URL counts. For this reason a maximum of 10 URLs at the same time is used. For the unmodified Cuckoo was not enough time available to benchmark with 50 and 100 URLs at the same time. Based on the fact that both systems visit the URLs sequentially and the benchmarks show an (almost) liniair increase, extrapolation is possible with an acceptable margin of error.
 
-Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives mean time over 25 runs of Roadrunner with the amount of URLs. For Cuckoo and Anubis, the mean of the 25 runs with 1 URL was calculated and extrapolated to higher URL counts. A comparison in the speed between Cuckoo and Roadrunner has also been made. Although the difference is significant, a important sidenote must be made that speed is not the primary goal of Cuckoo and that Cuckoo, if wanted, can be speeded up by configuration tweaks. The changes made to speedup the proof of concept removed a lot of the detailed insights Cuckoo gives in the behaviour of malware. For this project, however, only the data that makes it possible to detect malicious activity is of importance, not detailed insight of the exact behaviour of malware.
+Table \ref{tbl:results} shows the summary\footnote{The raw numbers used to generate the table and graphs can be found in Appendix B.} of the benchmarks. This table gives mean time over 25 runs with a certain amount of URLs. A rough comparison in the speed between Cuckoo and Roadrunner has also been made. Although the difference is significant, a important sidenote must be made that speed is not the primary goal of Cuckoo and that Cuckoo, if wanted, can be speeded up by configuration tweaks. The changes made to speedup the proof of concept removed a lot of the detailed insights Cuckoo gives in the behaviour of malware. For this project, however, only the data that makes it possible to detect malicious activity is of importance, not detailed insight of the exact behaviour of malware.
 
-Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows the boxplots of the different runs. We can say that for a higher amount of URLs, there's bigger variance in the time it takes to complete. It was not expected this would result in such (relatively) big spreading and there is no satisfactorily explanation for this behaviour. The expected result was that the differences between websites would even out on higher URL counts. Figure \ref{fig:chart-trend} is a visual representation of table \ref{tbl:results}, on the x-axis we see the number of URLs; the y-axis the time it takes to analyse these URLs. 
+Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers in a different way. Figure \ref{fig:chart-box} shows the boxplots of the different runs of Roadrunner. We can say that for a higher amount of URLs, there's bigger variance in the time it takes to complete. It was not expected this would result in such (relatively) big spreading and there is no satisfactorily explanation for this behaviour. The expected result was that the differences between websites would even out on higher URL counts. Figure \ref{fig:chart-trend} is a visual representation of table \ref{tbl:results}, on the x-axis we see the number of URLs; the y-axis the time it takes to analyse these URLs. 
 
 \setcounter{savepage}{\arabic{page}}
 \stepcounter{savepage}
@@ -112,32 +112,20 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \begin{figure}[h!]
     \centering
     \centerline{\includegraphics[width=15cm]{Images/chart-box.png}}
-    \caption{A boxplot of the benchmark durations. A higher URL count results in a higher variance of the duration.}
+    \caption{A boxplot of the Roadrunner benchmark durations. A higher URL count results in a higher variance of the duration.}
     \label{fig:chart-box}
 \end{figure}
 
 \begin{table}[h]
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-                                  & 1 URL   & 10 URLs  & 100 URLs \\ \midrule
-Anubis                            & \multicolumn{1}{r}{273,8s}  & \multicolumn{1}{r}{2810s}  & \multicolumn{1}{r}{\hbox{$\scriptstyle\sim$}27500s} \\                                  
-Cuckoo                            & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{1507s}  & \multicolumn{1}{r}{\hbox{$\scriptstyle\sim$}15000s} \\
-Roadrunner                        & \multicolumn{1}{r}{48,8s}   & \multicolumn{1}{r}{102,4s}   & \multicolumn{1}{r}{450,9s}   \\
-Improvement                       & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x}   & \multicolumn{1}{r}{33-60x} \\ \bottomrule
+                                  & 1 URL                       & 5 URLs                     & 10 URLs                     & 25 URLs                     & 50 URLs                     & 100 URLs \\ \midrule
+Anubis                            & \multicolumn{1}{r}{274s}    & \multicolumn{1}{r}{1397s}  & \multicolumn{1}{r}{2793s}   & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\                                  
+Cuckoo                            & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{769,7s} & \multicolumn{1}{r}{1575,2s} & \multicolumn{1}{r}{tbd}     & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
+Roadrunner                        & \multicolumn{1}{r}{48,8s}   & \multicolumn{1}{r}{74,8s}  & \multicolumn{1}{r}{102,4s}  & \multicolumn{1}{r}{160,1s}  & \multicolumn{1}{r}{286,4s}  & \multicolumn{1}{r}{450,9s} \\
+Improvement                       & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x} & \multicolumn{1}{r}{33-60x}  \\ \bottomrule
 \end{tabular}
-\caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds.}
-\label{tbl:results}
-\end{table}
-\begin{table}[h]
-\begin{tabular}{@{}lllllll@{}}
-\toprule
-                                  & 1 URL    & 5 URLs   & 10 URLs      & 25 URLs      & 50 URLs     & 100 URLs \\ \midrule
-Anubis       & 273,8s   & 1369,2s   & 2738,4s      & 6846,0s      & 13692,0s     & 27384,0s \\                                  
-Cuckoo       & 152,8s   & 764,1s   & 1528,2s      & 3820,5s      & 7640,9s     & 15281,8s \\
-Roadrunner& 48,8s    & 74,8s    & 102,4s       & 160,1s       & 286,4s      & 450,9s   \\
-Improvement(\%)                   & 313,1\%  & 1021,5\% & 1492,4\%     & 2386,3\%     & 2667,9\%    & 3389,2\% \\ \bottomrule
-\end{tabular}
-\caption{Mean runtime of Cuckoo, Roadrunner and Anubis. Time in seconds. The improvement is calculated against Cuckoo.}
+\caption{Mean runtime in seconds of Cuckoo, Roadrunner and Anubis. Limitations of available time prevented the benchmarking of Anubis and Cuckoo with higher URL counts.}
 \label{tbl:results}
 \end{table}
 
