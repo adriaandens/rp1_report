@@ -111,13 +111,14 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \end{figure}
 
 \begin{table}[h]
+\center
 \begin{tabular}{@{}lllllll@{}}
 \toprule
             & 1 URL                       & 5 URLs                     & 10 URLs                     & 25 URLs                     & 50 URLs                     & 100 URLs \\ \midrule
 Anubis      & \multicolumn{1}{r}{274s}    & \multicolumn{1}{r}{1397s}  & \multicolumn{1}{r}{2793s}   & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
-Cuckoo      & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{769,7s} & \multicolumn{1}{r}{1575,2s} & \multicolumn{1}{r}{tbd}     & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
+Cuckoo      & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{769,7s} & \multicolumn{1}{r}{1575,2s} & \multicolumn{1}{r}{3947,1s} & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
 Roadrunner  & \multicolumn{1}{r}{48,8s}   & \multicolumn{1}{r}{74,8s}  & \multicolumn{1}{r}{102,4s}  & \multicolumn{1}{r}{160,1s}  & \multicolumn{1}{r}{286,4s}  & \multicolumn{1}{r}{450,9s} \\
-Improvement & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x} & \multicolumn{1}{r}{33-60x}  \\ \bottomrule
+Improvement & \multicolumn{1}{r}{3-5,5x}  & \multicolumn{1}{r}{10-18x} & \multicolumn{1}{r}{15-27x}  & \multicolumn{1}{r}{24x}     & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}  \\ \bottomrule
 \end{tabular}
 \caption{Mean runtime in seconds of Cuckoo, Roadrunner and Anubis. Limitations of available time prevented the benchmarking of Anubis and Cuckoo with higher URL counts.}
 \label{tbl:results}
@@ -136,9 +137,6 @@ Improvement & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x} & \multic
 \restoregeometry
 \pagenumbering{arabic}
 \setcounter{page}{\thesavepage}
-ms which run sequentially.}
-    \label{fig:chart-trend}
-\end{figure}
 
 \stepcounter{savepage}
 \pagebreak
