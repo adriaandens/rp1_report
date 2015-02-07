@@ -186,36 +186,107 @@ endfunction
 Table \ref{rawdata} shows the raw values (in seconds) as gathered during the benchmarks. Every value equals to a single run. The first two columns show the existing malware detection systems: Anubis and Cuckoo. The other columns show the data of the proof of concept developed for this project. The URLs used for this benchmark are random selected from the top 100 of a worldwide list\footnote{http://www.alexa.com/topsites} with the most populair websites.
 
 \begin{table}[h]
+\center
 \begin{tabular}{@{}llllllll@{}}
 \toprule
-Anubis  & Cuckoo  & 1 URL       & 5 URLs      & 10 URLs      & 25 URLs      & 50 URLs      & 100 URLs     \\ \midrule
-260,0s  & 148,5s  & 44,8s       & 93,7s       & 109,3s       & 144,2s       & 271,0s       & 455,9s        \\
-311,0s  & 161,2s  & 45,2s       & 85,3s       & 100,4s       & 140,5s       & 240,3s       & 431,9s        \\
-267,0s  & 152,2s  & 45,2s       & 67,7s       & 84,0s        & 152,2s       & 251,8s       & 438,8s        \\
-299,0s  & 152,1s  & 47,1s       & 59,9s       & 86,9s        & 146,0s       & 272,2s       & 456,9s        \\
-283,0s  & 143,4s  & 44,9s       & 67,6s       & 141,0s       & 156,4s       & 254,7s       & 482,3s        \\
-271,0s  & 149,5s  & 43,8s       & 83,5s       & 100,8s       & 155,7s       & 252,3s       & 414,2s        \\
-270,0s  & 152,9s  & 46,2s       & 74,8s       & 90,0s        & 138,4s       & 247,9s       & 480,1s        \\
-250,0s  & 146,0s  & 44,7s       & 65,1s       & 135,1s       & 153,5s       & 240,7s       & 430,7s        \\
-282,0s  & 159,0s  & 47,8s       & 92,5s       & 87,2s        & 161,5s       & 257,5s       & 410,6s        \\
-265,0s  & 148,3s  & 60,0s       & 63,9s       & 93,5s        & 172,8s       & 297,0s       & 429,2s        \\
-251,0s  & 153,5s  & 47,0s       & 76,4s       & 103,4s       & 185,4s       & 248,3s       & 452,5s        \\
-264,0s  & 147,9s  & 47,6s       & 106,5s      & 90,0s        & 144,1s       & 265,3s       & 442,3s        \\
-264,0s  & 160,7s  & 52,5s       & 74,4s       & 128,0s       & 156,0s       & 582,7s       & 537,1s        \\
-279,0s  & 152,3s  & 51,3s       & 64,8s       & 95,7s        & 156,8s       & 265,4s       & 461,4s        \\
-255,0s  & 144,0s  & 61,7s       & 65,9s       & 84,2s        & 160,3s       & 251,6s       & 441,2s        \\
-357,0s  & 146,8s  & 45,8s       & 104,3s      & 109,1s       & 163,9s       & 261,5s       & 436,1s        \\
-251,0s  & 164,3s  & 46,2s       & 69,7s       & 86,4s        & 166,9s       & 253,3s       & 438,3s        \\
-279,0s  & 148,6s  & 46,9s       & 68,1s       & 103,5s       & 145,9s       & 332,1s       & 465,9s        \\
-275,0s  & 152,5s  & 48,3s       & 69,6s       & 88,0s        & 185,9s       & 535,8s       & 409,4s        \\
-265,0s  & 146,2s  & 61,2s       & 65,5s       & 93,3s        & 175,4s       & 258,9s       & 463,5s        \\
-298,0s  & 148,1s  & 54,1s       & 70,6s       & 138,8s       & 202,8s       & 259,4s       & 466,5s        \\
-256,0s  & 185,5s  & 45,7s       & 67,0s       & 104,7s       & 186,5s       & 284,9s       & 481,0s        \\
-256,0s  & 161,1s  & 42,7s       & 74,4s       & 110,8s       & 165,1s       & 260,2s       & 451,8s        \\
-271,0s  & 144,1s  & 54,1s       & 70,4s       & 95,8s        & 139,7s       & 267,6s       & 446,4s        \\
-277,0s  & 151,9s  & 45,9s       & 69,5s       & 99,8s        & 146,3s       & 247,6s       & 448,0s        \\ \bottomrule
+1 URL       & 5 URLs      & 10 URLs    \\ \midrule
+\multicolumn{1}{r}{260s} & \multicolumn{1}{r}{1463s} & \multicolumn{1}{r}{2810s} \\
+\multicolumn{1}{r}{311s} & \multicolumn{1}{r}{1296s} & \multicolumn{1}{r}{2702s} \\
+\multicolumn{1}{r}{267s} & \multicolumn{1}{r}{1526s} & \multicolumn{1}{r}{2749s} \\
+\multicolumn{1}{r}{299s} & \multicolumn{1}{r}{1373s} & \multicolumn{1}{r}{2923s} \\
+\multicolumn{1}{r}{283s} & \multicolumn{1}{r}{1387s} & \multicolumn{1}{r}{2779s} \\
+\multicolumn{1}{r}{271s} & \multicolumn{1}{r}{1318s} & \\
+\multicolumn{1}{r}{270s} & \multicolumn{1}{r}{1353s} & \\
+\multicolumn{1}{r}{250s} & \multicolumn{1}{r}{1390s} & \\
+\multicolumn{1}{r}{282s} & \multicolumn{1}{r}{1448s} & \\
+\multicolumn{1}{r}{265s} & \multicolumn{1}{r}{1417s} & \\
+\multicolumn{1}{r}{251s} &  & \\
+\multicolumn{1}{r}{264s} &  & \\
+\multicolumn{1}{r}{264s} &  & \\
+\multicolumn{1}{r}{279s} &  & \\
+\multicolumn{1}{r}{255s} &  & \\
+\multicolumn{1}{r}{357s} &  & \\
+\multicolumn{1}{r}{251s} &  & \\
+\multicolumn{1}{r}{279s} &  & \\
+\multicolumn{1}{r}{275s} &  & \\
+\multicolumn{1}{r}{265s} &  & \\
+\multicolumn{1}{r}{298s} &  & \\
+\multicolumn{1}{r}{256s} &  & \\
+\multicolumn{1}{r}{256s} &  & \\
+\multicolumn{1}{r}{271s} &  & \\
+\multicolumn{1}{r}{277s} &  & \\ \bottomrule
 \end{tabular}
-\caption{Raw values of the benchmarks in seconds.}
+\caption{Raw values of the benchmarks of Anubis in seconds.}
+\label{rawdata_an}
+\end{table}
+
+\begin{table}[h]
+\center
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+1 URL       & 5 URLs      & 10 URLs      & 25 URLs      \\ \midrule
+\multicolumn{1}{r}{148,5s} & \multicolumn{1}{r}{650,6s} & \multicolumn{1}{r}{1616,2s} & \multicolumn{1}{r}{3776,9s} \\
+ \multicolumn{1}{r}{161,2s} & \multicolumn{1}{r}{764,0s} & \multicolumn{1}{r}{1541,5s} & \multicolumn{1}{r}{3971,7s} \\
+ \multicolumn{1}{r}{152,2s} & \multicolumn{1}{r}{736,8s} & \multicolumn{1}{r}{1519,0s} & \multicolumn{1}{r}{3812,1s} \\
+ \multicolumn{1}{r}{152,1s} & \multicolumn{1}{r}{771,2s} & \multicolumn{1}{r}{1462,0s} & \multicolumn{1}{r}{3799,3s} \\
+ \multicolumn{1}{r}{143,4s} & \multicolumn{1}{r}{749,0s} & \multicolumn{1}{r}{1504,7s} & \multicolumn{1}{r}{3752,4s} \\
+ \multicolumn{1}{r}{149,5s} & \multicolumn{1}{r}{723,8s} & \multicolumn{1}{r}{1600,0s} & \multicolumn{1}{r}{4762,5s} \\
+ \multicolumn{1}{r}{152,9s} & \multicolumn{1}{r}{971,5s} & \multicolumn{1}{r}{1530,7s} & \multicolumn{1}{r}{3968,9s} \\
+ \multicolumn{1}{r}{146,0s} & \multicolumn{1}{r}{738,8s} & \multicolumn{1}{r}{1520,9s} & \multicolumn{1}{r}{3990,1s} \\
+ \multicolumn{1}{r}{159,0s} & \multicolumn{1}{r}{748,6s} & \multicolumn{1}{r}{1539,2s} & \multicolumn{1}{r}{4042,0s} \\
+ \multicolumn{1}{r}{148,3s} & \multicolumn{1}{r}{742,3s} & \multicolumn{1}{r}{1532,4s} & \multicolumn{1}{r}{4030,6s} \\
+ \multicolumn{1}{r}{153,5s} & \multicolumn{1}{r}{754,2s} & \multicolumn{1}{r}{1414,6s} & \multicolumn{1}{r}{3899,7s} \\
+ \multicolumn{1}{r}{147,9s} & \multicolumn{1}{r}{771,5s} & \multicolumn{1}{r}{1825,4s} & \multicolumn{1}{r}{3878,4s} \\
+ \multicolumn{1}{r}{160,7s} & \multicolumn{1}{r}{1013,1s} & \multicolumn{1}{r}{1702,2s} & \multicolumn{1}{r}{3735,5s} \\
+ \multicolumn{1}{r}{152,3s} & \multicolumn{1}{r}{728,0s} & \multicolumn{1}{r}{1458,6s} & \multicolumn{1}{r}{4023,4s} \\
+ \multicolumn{1}{r}{144,0s} & \multicolumn{1}{r}{648,7s} & \multicolumn{1}{r}{1539,1s} & \multicolumn{1}{r}{3845,5s} \\
+ \multicolumn{1}{r}{146,8s} & \multicolumn{1}{r}{712,1s} & \multicolumn{1}{r}{1618,3s} & \multicolumn{1}{r}{3853,7s} \\
+ \multicolumn{1}{r}{164,3s} & \multicolumn{1}{r}{738,2s} & \multicolumn{1}{r}{1504,3s} & \multicolumn{1}{r}{3777,3s} \\
+ \multicolumn{1}{r}{148,6s} & \multicolumn{1}{r}{785,5s} & \multicolumn{1}{r}{1488,2s} & \multicolumn{1}{r}{3923,2s} \\
+ \multicolumn{1}{r}{152,5s} & \multicolumn{1}{r}{850,2s} & \multicolumn{1}{r}{1485,1s} & \multicolumn{1}{r}{4021,3s} \\
+ \multicolumn{1}{r}{146,2s} & \multicolumn{1}{r}{910,1s} & \multicolumn{1}{r}{1504,3s} & \multicolumn{1}{r}{3921,2s} \\
+ \multicolumn{1}{r}{148,1s} & \multicolumn{1}{r}{728,8s} & \multicolumn{1}{r}{1804,9s} & \multicolumn{1}{r}{3792,8s} \\
+ \multicolumn{1}{r}{185,5s} & \multicolumn{1}{r}{751,5s} & \multicolumn{1}{r}{1786,5s} & \multicolumn{1}{r}{3990,1s} \\
+ \multicolumn{1}{r}{161,1s} & \multicolumn{1}{r}{755,0s} & \multicolumn{1}{r}{1554,4s} & \multicolumn{1}{r}{3972,7s} \\
+ \multicolumn{1}{r}{144,1s} & \multicolumn{1}{r}{751,7s} & \multicolumn{1}{r}{1548,9s} & \multicolumn{1}{r}{4154,6s} \\
+ \multicolumn{1}{r}{151,9s} & \multicolumn{1}{r}{746,2s} & \multicolumn{1}{r}{1779,8s} & 3982,2 \\ \bottomrule
+\end{tabular}
+\caption{Raw values of the benchmarks of Cuckoo in seconds.}
+\label{rawdata_cuckoo}
+\end{table}
+
+\begin{table}[h]
+\center
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+1 URL       & 5 URLs      & 10 URLs      & 25 URLs      & 50 URLs      & 100 URLs     \\ \midrule
+\multicolumn{1}{r}{44,8s}       & \multicolumn{1}{r}{93,7s}       & \multicolumn{1}{r}{109,3s}       & \multicolumn{1}{r}{144,2s}       & \multicolumn{1}{r}{271,0s}       & \multicolumn{1}{r}{455,9s}        \\
+\multicolumn{1}{r}{45,2s}       & \multicolumn{1}{r}{85,3s}       & \multicolumn{1}{r}{100,4s}       & \multicolumn{1}{r}{140,5s}       & \multicolumn{1}{r}{240,3s}       & \multicolumn{1}{r}{431,9s}        \\
+\multicolumn{1}{r}{45,2s}       & \multicolumn{1}{r}{67,7s}       & \multicolumn{1}{r}{84,0s}        & \multicolumn{1}{r}{152,2s}       & \multicolumn{1}{r}{251,8s}       & \multicolumn{1}{r}{438,8s}        \\
+\multicolumn{1}{r}{47,1s}       & \multicolumn{1}{r}{59,9s}       & \multicolumn{1}{r}{86,9s}        & \multicolumn{1}{r}{146,0s}       & \multicolumn{1}{r}{272,2s}       & \multicolumn{1}{r}{456,9s}        \\
+\multicolumn{1}{r}{44,9s}       & \multicolumn{1}{r}{67,6s}       & \multicolumn{1}{r}{141,0s}       & \multicolumn{1}{r}{156,4s}       & \multicolumn{1}{r}{254,7s}       & \multicolumn{1}{r}{482,3s}        \\
+\multicolumn{1}{r}{43,8s}       & \multicolumn{1}{r}{83,5s}       & \multicolumn{1}{r}{100,8s}       & \multicolumn{1}{r}{155,7s}       & \multicolumn{1}{r}{252,3s}       & \multicolumn{1}{r}{414,2s}        \\
+\multicolumn{1}{r}{46,2s}       & \multicolumn{1}{r}{74,8s}       & \multicolumn{1}{r}{90,0s}        & \multicolumn{1}{r}{138,4s}       & \multicolumn{1}{r}{247,9s}       & \multicolumn{1}{r}{480,1s}        \\
+\multicolumn{1}{r}{44,7s}       & \multicolumn{1}{r}{65,1s}       & \multicolumn{1}{r}{135,1s}       & \multicolumn{1}{r}{153,5s}       & \multicolumn{1}{r}{240,7s}       & \multicolumn{1}{r}{430,7s}        \\
+\multicolumn{1}{r}{47,8s}       & \multicolumn{1}{r}{92,5s}       & \multicolumn{1}{r}{87,2s}        & \multicolumn{1}{r}{161,5s}       & \multicolumn{1}{r}{257,5s}       & \multicolumn{1}{r}{410,6s}        \\
+\multicolumn{1}{r}{60,0s}       & \multicolumn{1}{r}{63,9s}       & \multicolumn{1}{r}{93,5s}        & \multicolumn{1}{r}{172,8s}       & \multicolumn{1}{r}{297,0s}       & \multicolumn{1}{r}{429,2s}        \\
+\multicolumn{1}{r}{47,0s}       & \multicolumn{1}{r}{76,4s}       & \multicolumn{1}{r}{103,4s}       & \multicolumn{1}{r}{185,4s}       & \multicolumn{1}{r}{248,3s}       & \multicolumn{1}{r}{452,5s}        \\
+\multicolumn{1}{r}{47,6s}       & \multicolumn{1}{r}{106,5s}      & \multicolumn{1}{r}{90,0s}        & \multicolumn{1}{r}{144,1s}       & \multicolumn{1}{r}{265,3s}       & \multicolumn{1}{r}{442,3s}        \\
+\multicolumn{1}{r}{52,5s}       & \multicolumn{1}{r}{74,4s}       & \multicolumn{1}{r}{128,0s}       & \multicolumn{1}{r}{156,0s}       & \multicolumn{1}{r}{582,7s}       & \multicolumn{1}{r}{537,1s}        \\
+\multicolumn{1}{r}{51,3s}       & \multicolumn{1}{r}{64,8s}       & \multicolumn{1}{r}{95,7s}        & \multicolumn{1}{r}{156,8s}       & \multicolumn{1}{r}{265,4s}       & \multicolumn{1}{r}{461,4s}        \\
+\multicolumn{1}{r}{61,7s}       & \multicolumn{1}{r}{65,9s}       & \multicolumn{1}{r}{84,2s}        & \multicolumn{1}{r}{160,3s}       & \multicolumn{1}{r}{251,6s}       & \multicolumn{1}{r}{441,2s}        \\
+\multicolumn{1}{r}{45,8s}       & \multicolumn{1}{r}{104,3s}      & \multicolumn{1}{r}{109,1s}       & \multicolumn{1}{r}{163,9s}       & \multicolumn{1}{r}{261,5s}       & \multicolumn{1}{r}{436,1s}        \\
+\multicolumn{1}{r}{46,2s}       & \multicolumn{1}{r}{69,7s}       & \multicolumn{1}{r}{86,4s}        & \multicolumn{1}{r}{166,9s}       & \multicolumn{1}{r}{253,3s}       & \multicolumn{1}{r}{438,3s}        \\
+\multicolumn{1}{r}{46,9s}       & \multicolumn{1}{r}{68,1s}       & \multicolumn{1}{r}{103,5s}       & \multicolumn{1}{r}{145,9s}       & \multicolumn{1}{r}{332,1s}       & \multicolumn{1}{r}{465,9s}        \\
+\multicolumn{1}{r}{48,3s}       & \multicolumn{1}{r}{69,6s}       & \multicolumn{1}{r}{88,0s}        & \multicolumn{1}{r}{185,9s}       & \multicolumn{1}{r}{535,8s}       & \multicolumn{1}{r}{409,4s}        \\
+\multicolumn{1}{r}{61,2s}       & \multicolumn{1}{r}{65,5s}       & \multicolumn{1}{r}{93,3s}        & \multicolumn{1}{r}{175,4s}       & \multicolumn{1}{r}{258,9s}       & \multicolumn{1}{r}{463,5s}        \\
+\multicolumn{1}{r}{54,1s}       & \multicolumn{1}{r}{70,6s}       & \multicolumn{1}{r}{138,8s}       & \multicolumn{1}{r}{202,8s}       & \multicolumn{1}{r}{259,4s}       & \multicolumn{1}{r}{466,5s}        \\
+\multicolumn{1}{r}{45,7s}       & \multicolumn{1}{r}{67,0s}       & \multicolumn{1}{r}{104,7s}       & \multicolumn{1}{r}{186,5s}       & \multicolumn{1}{r}{284,9s}       & \multicolumn{1}{r}{481,0s}        \\
+\multicolumn{1}{r}{42,7s}       & \multicolumn{1}{r}{74,4s}       & \multicolumn{1}{r}{110,8s}       & \multicolumn{1}{r}{165,1s}       & \multicolumn{1}{r}{260,2s}       & \multicolumn{1}{r}{451,8s}        \\
+\multicolumn{1}{r}{54,1s}       & \multicolumn{1}{r}{70,4s}       & \multicolumn{1}{r}{95,8s}        & \multicolumn{1}{r}{139,7s}       & \multicolumn{1}{r}{267,6s}       & \multicolumn{1}{r}{446,4s}        \\
+\multicolumn{1}{r}{45,9s}       & \multicolumn{1}{r}{69,5s}       & \multicolumn{1}{r}{99,8s}        & \multicolumn{1}{r}{146,3s}       & \multicolumn{1}{r}{247,6s}       & \multicolumn{1}{r}{448,0s}        \\ \bottomrule
+\end{tabular}
+\caption{Raw values of the benchmarks of Roadrunner in seconds.}
 \label{rawdata}
 \end{table}
 
