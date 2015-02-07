@@ -1,6 +1,6 @@
-In the digital world of today, malware is still a massive and growing problem. While back in the day it was used to annoy users and system administrators, nowadays it is used for extortion, cyber espionage and surveillance by criminal groups and rivalling governments. One of the main causes of getting infected with malware is a drive-by download while visiting a normal day-to-day website because, for example, the website got hacked and infected. 
+In the digital world of today, malware is still a massive and growing problem. While it was used to annoy users and system administrators in the early days, nowadays it is used for extortion, cyber espionage and surveillance by criminal groups and rivalling governments. One of the main causes of getting infected with malware is a drive-by download while visiting a normal day-to-day website because, for example, the website got hacked and infected. 
 
-In many cases \cite{proofpoint,foxittelegraaf,foxityahoo} however, it was not the actual website but one of the advertisement networks that was infiltrated and which subsequently started serving malicious code hidden in innocently looking advertisement code. This is also called malvertising \cite{Li2012}.
+In many cases \cite{proofpoint,foxittelegraaf,foxityahoo} however, it was not the actual website but one of the advertisement networks that was compromised and which subsequently started serving malicious code hidden in innocentl-looking advertisement code. This is also called malvertising \cite{Li2012}.
 
 National CERT organisations are interested in an early detection of such threats. While automated systems to scan websites already exist, like Cuckoo\footnote{http://cuckoosandbox.org} and Anubis\footnote{http://anubis.iseclab.org}, one of the main downsides is the time needed to analyse multiple websites.
 
@@ -29,19 +29,19 @@ To answer the research question, multiple sub-questions have been formulated:
 
 \subsection{Related work}
 
-The growing importance of malware resulted in many research projects in the last few years. The detection and analysis of malware has been researched from several different angles \cite{auto_malware,Chang2013} and resulted in many proposed static and dynamic analysis techniques.
+The growing threat of malware resulted in many research projects in the last few years. The detection and analysis of malware has been researched from several different angles \cite{auto_malware,Chang2013} and resulted in many proposed static and dynamic analysis techniques.
 
-In 2013, Le \textit{et al.} \cite{Le2013} presented a framework that describes the common stages and characteristics of a drive-by download attack. They described four stages from placing the malicious content on a webpage until the execution of the malicious activity.
+In 2013, Le \textit{et al.} \cite{Le2013} presented a framework that describes the common stages and characteristics of a drive-by download attack. They described four stages from placing the malicious content on a webpage to the execution of the malicious activity.
 
-In 2011, a paper from Canali \textit{et al.} \cite{Canali2011} was released about the problematic performance of dynamic analysis and with a solution proposed in the form of ``Prophiler''. Prophiler is a filter that deploys static analysis techniques and that is able to reduce the load with more than 85\% compared to dynamic analysis. This with a comparable amount of false negatives.
+In 2011, a paper from Canali \textit{et al.} \cite{Canali2011} was released about the problematic performance of dynamic analysis and with a solution proposed in the form of ``Prophiler''. Prophiler is a filter that deploys static analysis techniques and that is able to reduce the load by more than 85\% compared to dynamic analysis. This result was realised without a significant change in the amount of false negatives.
 
-In the same year Rajab \textit{et al.} \cite{Rajab11trendsin} gave an overview of the trends regarding web malware detection and how the malware tries to circumvent the detection. This research focused on the advantages and disadvantages of four techniques: Virtual Machine honeypots, Browser Emulation honeypots, Classification based on Domain Reputation and Anti-Virus Engines.
+In the same year Rajab \textit{et al.} \cite{Rajab11trendsin} gave an overview of the trends regarding web malware detection and how the malware tries to circumvent detection. This research focused on the advantages and disadvantages of four techniques: Virtual Machine honeypots, Browser Emulation honeypots, Classification based on Domain Reputation and Anti-Virus Engines.
 
-A different approach was taken by Rossow \textit{et al.} \cite{Rossow2011}; Cortjens and El Yassem \cite{Cortjens2012}; Kinkhorst and Van Kleij \cite{Kinkhorst2009}. During multiple research projects they focused on the ability to detect and identify malware on the network layer.
+A different approach was taken by Rossow \textit{et al.} \cite{Rossow2011}; Cortjens and El-Yassem \cite{Cortjens2012}; Kinkhorst and Van Kleij \cite{Kinkhorst2009}. During multiple research projects they focused on the ability to detect and identify malware on the network layer.
 
-The usage of graphs to detect malware has been proposed before. Park and Reeves proposed \cite{Park2011} the usage of graphs of system calls to detect the similarities and differences in behaviour between the variations of a malware family. By focusing on the common subgraph, new variants can be detected and categorized without prior knowledge of their existence. A recent paper \cite{Wuchner2014} from W\"{u}chner \textit{et al.} described the usage of generating graphs from API calls for a heuristic based malware detection system.
+The usage of graphs to detect malware has been proposed before. Park and Reeves proposed \cite{Park2011} the usage of graphs of system calls to detect the similarities and differences in behaviour between the variations of a malware family. By focusing on the common subgraph, new variants can be detected and categorized without prior knowledge of their existence. A recent paper  from W\"{u}chner \textit{et al.} \cite{Wuchner2014} described the usage of generating graphs from API calls for a heuristic-based malware detection system.
 
-The predecessor of NCSC-NL started in 2007 with the development of their own system, the Honeyspider network \cite{honeyspider}, for the dynamic analysis of websites. This system crawled the biggest and most important websites of the Netherlands on a daily base. The downside of this system is that it requires a lot of maintenance and therefore it started to become outdated.
+The predecessor of NCSC-NL (GOVCERT.NL), together with NASK/CERT Polska, started in 2007 with the development of their own system, the Honeyspider network \cite{honeyspider}, for the dynamic analysis of websites. This system crawled the biggest and most important websites of the Netherlands on a daily base. The downside of this system is that it requires a lot of maintenance and therefore it started to become outdated.
 
 \iffalse
 \subsection{Scope}
