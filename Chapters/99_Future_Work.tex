@@ -6,3 +6,8 @@ Additional intellectual effort should also be invested in the defining of relati
 
 % Alles over de implementatie van het algoritme boeit niet, dat is niet waarover onze paper gaat
 % detecting malware/drive-by downloads is dus niet echt future work
+\subsection{Future work PoC}
+
+The proof of concept in its current state is not ready for deployment. While tests during the development with real malware suggest that even a simplistic analyser is able to detect certain malware families, more advanced analysers should be developed. The current analyser also gives a false positive on a website that uses Java applets. While none of the tested websites use such applets, creating a whitelist of processes that can legitimately be started by browser plug-ins should be considered.
+
+Another limitation is the stability of the proof of concept. In up to twenty percent of the cases, the proof of concept would never go to a completed state. As this was not related to a specific website or malware sample, this is not seen as a fundamental mistake in the algorithm, but a bug in the implementation. No time was available to resolve this issue and a major update for Cuckoo is around the corner that resolves several known issues.
