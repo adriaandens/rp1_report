@@ -22,7 +22,7 @@ What follows is a short overview of how the algorithm was implemented, the actua
 
 \textbf{Working with JSON} was extremely slow in Cuckoo. After the virtual machine has done its work, BSON files are transferred to the host machine. These BSON files are then parsed by Cuckoo and analysed after which a JSON file is written. Our \texttt{mass-analyse.py} depended on this JSON, which made it very slow to use. A BSON parser was written to skip the whole JSON step and thus we were able to work earlier on the data, giving us a significant speedup.
 
-\subsection{Running the PoC}
+\subsection{Running the proof of concept}
 
 Running the proof of concept is as simple as running Cuckoo and running our Python script. Listing \ref{code:run} shows how the PoC is run. As explained in section \ref{sec:setup} the URL list contains the Top 20 most visited websites and one website with malware. Figure \ref{fig:graph} shows the full graph created in the process phase. Notice the red dots in the top left corner of the graph which indicate process spawns and the purple dots which indicate shell command executions. The analyser run in phase 3 successfully found this anomaly and reported it back to the user. A graph of the browsing context in which this anomaly occurred, was also shown to the user, as can be seen in Figure \ref{fig:subgraph}.
 
