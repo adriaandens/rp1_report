@@ -20,9 +20,11 @@ The current development version, \texttt{1.2-dev},  only accepts one URL at a ti
 
 To test the algorithm, we will use the adapted Cuckoo with Virtualbox as the sandbox environment. As the virtual machine's operating system, we will use Windows 7 as this is widely used and also frequently targeted by malware developers. As the browser, we will use Internet Explorer 8. This browser doesn't implement the latest vulnerability mitigations, but is still supported by the vendor. This makes it a relative easy and populair target for drive-by downloads.
 
-The adapted Cuckoo will be provisioned with the top 20 of most visited websites in the Netherlands\footnote{http://www.alexa.com/topsites/countries/NL} and one website who serves a drive-by download which spawns processes.
+\pagebreak
 
-The structure of the graph will be tree-like, as suggested in \ref{sec:algos2}. Figure \ref{fig:alg_tree} shows an example graph of a website with a drive-by download.
+The adapted Cuckoo will be provisioned with a subset of a list with the most visited websites of the world\footnote{http://www.alexa.com/topsites} and one website who serves a drive-by download which spawns processes.
+
+The structure of the graph will be a tree, as suggested in \ref{sec:algos2}. Figure \ref{fig:alg_tree} shows an example of how the graph should look for a website with a drive-by download.
 
 After confirming that the PoC works, a comparison will be made with two malware analysis systems: Cuckoo and Anubis.
 
