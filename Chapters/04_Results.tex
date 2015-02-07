@@ -82,7 +82,9 @@ Analyser 'Subprocess_from_tab': The URL 'http://unsuspicious.com' spawns a proce
 \pagenumbering{arabic}
 \setcounter{page}{\thesavepage}
 
+\newgeometry{bottom=3cm}
 \subsection{Comparison with other malware analysis systems}
+%\pagenumbering{gobble}
 
 To quantify the improvement that was made, several benchmarks were run against our improved version, henceforth called ``Roadrunner''\footnote{http://en.wikipedia.org/wiki/Geococcyx}. Those benchmarks were compared with a development snapshot of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis. %, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
 
@@ -96,6 +98,7 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 
 \setcounter{savepage}{\arabic{page}}
 \stepcounter{savepage}
+\restoregeometry
 \pagebreak
 
 \pagenumbering{gobble}
