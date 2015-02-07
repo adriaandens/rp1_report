@@ -4,7 +4,7 @@ For a better insight into the project, it is necessary to introduce certain theo
 
 Browsing the Internet with an unpatched system can be dangerous. Software contains mistakes and fixes for these mistakes are released on a daily basis. Part of those mistakes can be (ab)used to get control over a computer system and be used to run malicious software. Such mistakes are called vulnerabilities.
 
-If such a vulnerability is used to take control over the web browser (or one of its plug-ins like Flash or Java) and malicious software is downloaded to the system then this is called a drive-by download \cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website until the moment the system is infected with malware.
+If such a vulnerability is used to take control of the web browser (or one of its plug-ins like Flash or Java) and malicious software is downloaded to the system then this is called a drive-by download \cite{Le2013}. Figure \ref{fig:dbdownload} shows the steps involved from visiting a website to the moment the system is infected with malware.
 
 By compromising the web browser and injecting malicious code (called exploitation), the malware gets full control over the infected process, running with the same privileges as the web browser on the host system. Depending on the system configuration this either means that the system is now under the control of the attacker or that additional steps are required to escalate the privileges to the intended level.
 
@@ -14,15 +14,16 @@ By compromising the web browser and injecting malicious code (called exploitatio
     \caption{The anatomy of a drive-by download malware infection. \cite{dbdownload-anatomy}}
     \label{fig:dbdownload}
 \end{figure}
+\vspace{-2mm}
 
 \subsubsection{Behaviour}
 \label{sec:behavior}
 
-What happens after a malware infection depends on the malware and the goals of the attacker. Common goals are persistence of the malware and further exploitation. The former is achieved by writing executable code to the disk and optionally changing several configuration files to make sure the code is executed at certain events, for example after rebooting. The latter is achieved by dowloading further malicious components for the next stage. We thus expect to see file system operations and additional network traffic after the first exploit.
+What happens after a malware infection depends on the malware and the goals of the attacker. Common goals are persistence of the malware and further exploitation. The former is achieved by writing executable code to the disk and optionally changing several configuration files to make sure the code is executed at certain events, for example after rebooting. The latter is achieved by dowloading further malicious components for the next stage. %We thus expect to see file system operations and additional network traffic after the first exploit.
 
 While some malware communicates directly with the kernel (via so-called system calls), most malware \cite{MaliciousAPIs} behaves like a normal application and uses the installed, or with the operating system provided, libraries. The usage of such libraries can be detected when the access to them is monitored.
 
-A special class of malware \cite{ZeroAccess,Gameover} is formed by those that infiltrate the operating system kernel by loading malicious drivers. Such malware is called a rootkit and is very hard to detect and analyse as it runs with the highest possible privileges. From the moment the driver is loaded, it is able to hide itself, files, network connections and other applications from the user and normal applications.
+A special class of malware \cite{ZeroAccess,Gameover} is formed by those that infiltrate the operating system kernel by loading malicious drivers. Such kernel malware is usually used as part of a rootkit and is very hard to detect and analyse as it runs with the highest possible privileges. From the moment the driver is loaded, it is able to hide itself, files, network connections and other applications from the user and normal applications.
 
 \subsection{Libraries and APIs}
 
@@ -47,7 +48,9 @@ The technical implementation of API hooking is highly complex and platform speci
     \label{fig:apihooking}
 \end{figure}
 
-In this project, API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of the web browser and malware for later analysis.
+\vspace{-2mm}
+
+% In this project, API hooking will be used to reverse engineer the internal workings and API usage of web browsers and to log the behaviour of the web browser and malware for later analysis.
 
 %\subsubsection{Alternatives}
 

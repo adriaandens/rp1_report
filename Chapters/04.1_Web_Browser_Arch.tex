@@ -17,10 +17,11 @@ The network stack used in Internet Explorer is provided by the Windows operating
     \caption{The Internet Explorer process model starting from version 8. \cite{IE8LCIEP}}
     \label{fig:ie8proc}
 \end{figure}
+\vspace{-2mm}
 
 \textbf{Firefox} uses only a single process for web content and only runs plug-ins from a different process. A long-term project to change that is called Electrolysis\footnote{https://wiki.mozilla.org/Electrolysis} and has been developed since 2009. In the new architecture, the entire rendering is moved to a dedicated and sandboxed ``content'' process and the main process is used to host the user interface and serves as a proxy between the outside world and the content process. A long-term goal is to spread the rendering of tabs over more than one content process so that when a content process crashes, not all tabs are affected.
 
-To be platform independent, Firefox does not directly interface with the provided libraries of the operating system. Instead a platform-neutral API called ``NSPR'' (Netscape Portable Runtime, \cite{nspr}) is used. Together with the Network Security Services (NSS, \cite{nss}) library that provides the functionality to create SSL/TLS connections, they are used by the high-level network library called Necko. Necko provides the interface to perform HTTP and other protocol requests without revealing the underlying protocol, transport level or platform specific implementation details and is thus comparable to WinINet.
+To be platform independent, Firefox does not directly interface with the provided libraries of the operating system. Instead a platform-neutral API called ``NSPR'' (Netscape Portable Runtime, \cite{nspr}) is used. Together with the Network Security Services (NSS, \cite{nss}) library that provides the functionality to create SSL/TLS connections, they are used by the high-level network library called Necko. Necko provides the interface to perform HTTP and other protocol requests without revealing the underlying protocol, transport level or platform specific implementation details and is comparable to WinINet.
 
 \textbf{Chromium} is the open-source version of the Google Chrome browser and it is, except for a couple of proprietary components, identical to Chrome. The big innovation of Chrome \cite{ChromeMPA} was to use multiple processes instead of a single process. Besides its own process for every tab, it also has the plug-ins and audio subsystem in their respective processes. The subprocesses run in a sandbox with limited privileges and use the main process to communicate with the outside world.
 
@@ -35,7 +36,7 @@ The library used by Chromium for network access is custom developed and tightly 
 
 \textbf{Safari} is the last browser that was examined in this project. Since 2011\footnote{https://lists.webkit.org/pipermail/webkit-help/2011-July/002298.html} support for using multiple processes has been added. Safari is closed-source but built on top of many open-source components like JavaScriptCore and WebKit.
 
-Safari uses a dedicated process for every tab until a certain limit is reached. Once this limit is reached, multiple tabs are hosted in a single process. The network operations for the main and tab processes are concentrated in a dedicated process. Only this process will retrieve the webpages and uses the IPC subsystem to deliver the result to the correct process. 
+Safari uses a dedicated process for every tab until a certain limit is reached. Once this limit is reached, multiple tabs are hosted in a single process. The network operations for the main and tab processes are concentrated in a dedicated network process. Only this process will retrieve the webpages and uses the IPC subsystem to deliver the result to the correct process. 
 
 CFNetwork is the library that is used by Safari for its network access. This library is one of the core frameworks of the OS X operating system and available for all applications. It provides interfaces for all relevant web related protocols. A unified interface called NSUrl, similar as seen in other libraries, is also available. However, because of the closed-source nature of Safari it is not possible, without an extensive reverse engineering effort, to determine if it is used instead of directly using the provided APIs of the CFNetwork library.
 
