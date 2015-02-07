@@ -82,13 +82,12 @@ Analyser 'Subprocess_from_tab': The URL 'http://unsuspicious.com' spawns a proce
 \pagenumbering{arabic}
 \setcounter{page}{\thesavepage}
 
-\newgeometry{bottom=4cm}
+\newgeometry{bottom=4.8cm}
 \subsection{Comparison with other malware analysis systems}
-%\pagenumbering{gobble}
 
 To quantify the improvement that was made, several benchmarks were run against our improved version, henceforth called ``Roadrunner''\footnote{http://en.wikipedia.org/wiki/Geococcyx}. Those benchmarks were compared with a development snapshot of Cuckoo 1.2\footnote{\url{https://github.com/cuckoobox/cuckoo/commit/6177071cfd57500fbf1dc17a66f5aff39051c75e}} and Anubis. %, two malware analysis systems which visit URLs sequentially.% The development version of Cuckoo was also used as the base for our development.<-- dit is niet de goeie plaats om dat te zeggen....
 
-The benchmarks consist of provisioning the system with one or more URLs. With Cuckoo, the time is measured until the status changes to ``reported''. Anubis reports contain a parameter called ``time needed'' which was used as the benchmark time. The Roadrunner benchmark measures the time between submitting the URL list and the exit of the developed analysis script. Each benchmark was run 25 times to filter out anomalies.
+The benchmarks consist of provisioning the system with one or more URLs. With Cuckoo, the time is measured until the status changes to ``reported''. Anubis reports contain a ``time needed'' value which was used as the benchmark time. The Roadrunner benchmark measures the time between submitting the URL list and the exit of the developed analysis script. Each benchmark was run 25 times to filter out anomalies.
 
 For Roadrunner, benchmarks were executed with 1, 5, 10, 25, 50 and 100 URLs. If the benchmark crashed (or hit the critical time-out) the measurement was thrown away as this is a known issue\footnote{The monitor component of Cuckoo is under active development and a significant upgrade is expected in the coming months.} with no easy workaround. Cuckoo and Anubis do not allow for more than 1 URL being visited in one run. Cuckoo, however, can be provisioned with more than one URL after which Cuckoo visits them sequentially. However, not enough time available to benchmark Cuckoo with 50 and 100 URLs. Because Anubis is a hosted system outside our control, it was not possible to run the benchmark with high(er) URL counts without knowing the implications on performance. For this reason a maximum of 10 URLs was benchmarked.  Based on the fact that both systems visit the URLs sequentially and the benchmarks show an (almost) linear increase, extrapolation is possible with an acceptable margin of error.
 
@@ -114,11 +113,11 @@ Figure \ref{fig:chart-box} and figure \ref{fig:chart-trend} show these numbers i
 \begin{table}[h]
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-                                  & 1 URL                       & 5 URLs                     & 10 URLs                     & 25 URLs                     & 50 URLs                     & 100 URLs \\ \midrule
-Anubis                            & \multicolumn{1}{r}{274s}    & \multicolumn{1}{r}{1397s}  & \multicolumn{1}{r}{2793s}   & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\                                  
-Cuckoo                            & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{769,7s} & \multicolumn{1}{r}{1575,2s} & \multicolumn{1}{r}{tbd}     & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
-Roadrunner                        & \multicolumn{1}{r}{48,8s}   & \multicolumn{1}{r}{74,8s}  & \multicolumn{1}{r}{102,4s}  & \multicolumn{1}{r}{160,1s}  & \multicolumn{1}{r}{286,4s}  & \multicolumn{1}{r}{450,9s} \\
-Improvement                       & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x} & \multicolumn{1}{r}{33-60x}  \\ \bottomrule
+            & 1 URL                       & 5 URLs                     & 10 URLs                     & 25 URLs                     & 50 URLs                     & 100 URLs \\ \midrule
+Anubis      & \multicolumn{1}{r}{274s}    & \multicolumn{1}{r}{1397s}  & \multicolumn{1}{r}{2793s}   & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
+Cuckoo      & \multicolumn{1}{r}{152,8s}  & \multicolumn{1}{r}{769,7s} & \multicolumn{1}{r}{1575,2s} & \multicolumn{1}{r}{tbd}     & \multicolumn{1}{r}{-}       & \multicolumn{1}{r}{-}      \\
+Roadrunner  & \multicolumn{1}{r}{48,8s}   & \multicolumn{1}{r}{74,8s}  & \multicolumn{1}{r}{102,4s}  & \multicolumn{1}{r}{160,1s}  & \multicolumn{1}{r}{286,4s}  & \multicolumn{1}{r}{450,9s} \\
+Improvement & \multicolumn{1}{r}{3-6x}    & \multicolumn{1}{r}{14-27x} & \multicolumn{1}{r}{33-60x}  \\ \bottomrule
 \end{tabular}
 \caption{Mean runtime in seconds of Cuckoo, Roadrunner and Anubis. Limitations of available time prevented the benchmarking of Anubis and Cuckoo with higher URL counts.}
 \label{tbl:results}
@@ -128,6 +127,16 @@ Improvement                       & \multicolumn{1}{r}{3-6x}    & \multicolumn{1
     \centering
     \centerline{\includegraphics[width=15cm]{Images/chart-trend}}
     \caption{A line chart with the results of the benchmarks. To give an indication how long it would take for higher amounts of URLs, the data of Anubis and Cuckoo have been extrapolated for up to 100 URLs. Roadrunner is in all cases faster than both existing systems which run sequentially.}
+    \label{fig:chart-trend}
+\end{figure}
+
+\stepcounter{savepage}
+\pagebreak
+
+\restoregeometry
+\pagenumbering{arabic}
+\setcounter{page}{\thesavepage}
+ms which run sequentially.}
     \label{fig:chart-trend}
 \end{figure}
 
