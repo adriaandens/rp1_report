@@ -1,4 +1,4 @@
-The proposed algorithm takes a list of URLs as input, visits them and returns the URL(s) which behave(s) abnormally, if any. To be able to visit those URLs concurrently, thus providing large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{sec:prereq}). After gathering this data, the events are stored in a graph after which analysis can be run to detect drive-by downloads.
+The proposed algorithm takes a list of URLs as input, visits them and returns the URL(s) which behave(s) abnormally, if any. To be able to visit those URLs concurrently, thus enabling large-scale analysis, the algorithm has to be capable of linking events to a URL from the input. This is done by monitoring the network traffic and additional information (explained in \ref{sec:prereq}). After gathering this data, the events are stored in a graph after which analysis can be run to detect potential drive-by downloads.
 
 The algorithm is as follows:
 
@@ -14,18 +14,18 @@ The algorithm is as follows:
 \subsubsection{Prerequisites and considerations}
 \label{sec:prereq}
 
-To correctly associate API calls with a browsing context and analyse the machine's behaviour after visiting a URL, monitoring is needed as explained in \ref{sigh}. The question is what information should be monitored, aside from network calls, to detect drive-by downloads. According to Sami \textit{et al.} \cite{Sami:2010:MDB:1774088.1774303} process, file, registry and console operations are the top API categories when it comes to malware. These operations also score highly in a research \cite{MaliciousAPIs} where 550,000 malicious PE files were investigated. To track the behaviour of drive-by downloads, we thus consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}. These operations should only be tracked for processes in the process subtree of the browser as other system activity is not of interest for detecting drive-by downloads.
+To correctly associate API calls with a browsing context and analyse the machine's behaviour after visiting a URL, monitoring is needed as explained in \ref{sigh}. The question is what information should be monitored, aside from network calls, to detect drive-by downloads. According to Sami \textit{et al.} \cite{Sami:2010:MDB:1774088.1774303}, process, file, registry and console operations are the top API categories when it comes to malware. These operations also score highly in a research \cite{MaliciousAPIs} where 550,000 malicious PE files were investigated. To track the behaviour of drive-by downloads, we thus consider process spawns, shell commands and file operations\footnote{For Microsoft Windows, the Registry should also be considered.}. These operations should only be tracked for processes in the process subtree of the browser as other system activity is not of interest for detecting drive-by downloads.
 %\todo{Extra informatie is een research question! Leg uit}
 
 %The question is how this information can be retrieved and on which detail level should be worked. Although most information can be intercepted on the operating system level, most of the time the operation/API call misses some information to be linked to a browsing context and thus to a URL, making it often necessary to actually work at a browser level to be able to know from which tab/window the operation came.% Most, if not all, information can be retrieved on the operating system level. Only the 
 
-One of the major considerations that was made, is the fact that the algorithm should work on multiple operating systems and multiple web browsers. The second consideration is a reasonable running time, i.e. the algorithm should run in an acceptable time on normal commodity hardware.
+One of the major consideration that was made, is the fact that the algorithm should work on multiple operating systems and multiple web browsers. The second consideration is a reasonable running time, i.e. the algorithm should run in an acceptable time on normal commodity hardware.
 
 \subsubsection{Steps}
 
 \textbf{Step 1: Visit}
 
-After the monitoring is set up, potentially malicious websites can be visited. Due to this, the behaviour of a website can be tracked in such a way that multiple websites can be visited at one given time. This coincides with our research question of concurrently visiting websites.
+After the monitoring is set up, potentially malicious websites can be visited. The behaviour of a website can be tracked in such a way that multiple websites can be visited at one given time. This coincides with our research question of concurrently visiting websites.
 
 \textbf{Step 2: Process}
 \label{sec:algos2}
@@ -34,7 +34,7 @@ The API calls triggered by the visiting of the URLs are put into a directed acyc
 
 As an example of causally related events, say that a webpage is cached by a browser. Then the cached version of that webpage is stored on disk. The visiting of that webpage and the following cache write are causally related and hence a directed edge should be created between the calls.
 
-Although no specific structure of the DAG is required, a tree like structure seems the most fitting for the problem of tracking events to a browsing context. In this structure each browsing context has its own subtree of events. 
+Although no specific structure of the DAG is required, a tree structure seems the most fitting for the problem of tracking events to a browsing context. In this structure each browsing context has its own subtree of events.
 
 \textbf{Step 3: Analyse}
 
